@@ -32,9 +32,9 @@ function quincem_theme_setup() {
 	add_action( 'init', 'quincem_build_taxonomies', 0 );
 
 	// Extra meta boxes in editor
-	//add_filter( 'cmb_meta_boxes', 'quincem_metaboxes' );
+	add_filter( 'cmb_meta_boxes', 'quincem_metaboxes' );
 	// Initialize the metabox class
-	//add_action( 'init', 'quincem_init_metaboxes', 9999 );
+	add_action( 'init', 'quincem_init_metaboxes', 9999 );
 
 	// excerpt support in pages
 	add_post_type_support( 'page', 'excerpt' );
@@ -186,5 +186,153 @@ function quincem_build_taxonomies() {
 //		'rewrite' => array( 'slug' => 'type', 'with_front' => false ),
 //	) );
 } // end register taxonomies
+
+// get all posts from a post type to be used in select or multicheck forms
+function quincem_get_list($post_type) {
+	$posts = get_posts(array(
+		'posts_per_page' => -1,
+		'post_type' => $post_type,
+	));
+	foreach ( $posts as $post ) {
+		$list[$post->ID] = $post->post_title;
+	}
+	return $list;
+}
+
+//Add metaboxes to several post types edit screen
+function quincem_metaboxes( $meta_boxes ) {
+	$prefix = '_quincem_'; // Prefix for all fields
+
+	// CUSTOM FIELDS FOR MODULOS
+	///
+
+	// get data for select and multicheck fields
+	$itinerarios = quincem_get_list("itinerario");
+	$actividades = quincem_get_list("actividad");
+	$dependencias = quincem_get_list("modulo");
+
+	// itienerarios multicheckbox
+	$meta_boxes[] = array(
+		'id' => 'quincem_itinerario',
+		'title' => 'Itinerarios',
+		'pages' => array('modulo'), // post type
+		'context' => 'side', //  'normal', 'advanced', or 'side'
+		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
+		'show_names' => false, // Show field names on the left
+		'fields' => array(
+				array(
+					'name' => 'Itinerarios',
+					'id' => $prefix . 'itinerarios',
+					'type' => 'multicheck',
+					'options' => $itinerarios
+				),
+		),
+	);
+
+	// actividades multicheckbox
+	$meta_boxes[] = array(
+		'id' => 'quincem_actividades',
+		'title' => 'Actividades',
+		'pages' => array('modulo'), // post type
+		'context' => 'side', //  'normal', 'advanced', or 'side'
+		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
+		'show_names' => false, // Show field names on the left
+		'fields' => array(
+				array(
+					'name' => 'Actividades',
+					'id' => $prefix . 'actividades',
+					'type' => 'multicheck',
+					'options' => $actividades
+				),
+		),
+	);
+
+	// modulos multicheckbox
+	$meta_boxes[] = array(
+		'id' => 'quincem_dependencias',
+		'title' => 'Dependencias (otros módulos)',
+		'pages' => array('modulo'), // post type
+		'context' => 'side', //  'normal', 'advanced', or 'side'
+		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
+		'show_names' => false, // Show field names on the left
+		'fields' => array(
+				array(
+					'name' => 'Dependencias',
+					'id' => $prefix . 'dependencias',
+					'type' => 'multicheck',
+					'options' => $dependencias
+				),
+		),
+	);
+
+	// Cómo ganar el badge
+	$meta_boxes[] = array(
+		'id' => 'quincem_badge_como',
+		'title' => 'Cómo ganar el badge',
+		'pages' => array('modulo'), // post type
+		'context' => 'normal', //  'normal', 'advanced', or 'side'
+		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
+		'show_names' => false, // Show field names on the left
+		'fields' => array(
+				array(
+					'name' => 'Cómo ganar el badge',
+					'id' => $prefix . 'badge_como',
+					'type' => 'wysiwyg',
+					'options' => array(),
+				),
+		),
+	);
+
+	// Material de trabajo
+	$meta_boxes[] = array(
+		'id' => 'quincem_material',
+		'title' => 'Material de trabajo',
+		'pages' => array('modulo'), // post type
+		'context' => 'normal', //  'normal', 'advanced', or 'side'
+		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
+		'show_names' => false, // Show field names on the left
+		'fields' => array(
+				array(
+					'name' => 'Material de trabajo',
+					'id' => $prefix . 'material',
+					'type' => 'wysiwyg',
+					'options' => array(),
+				),
+		),
+	);
+
+	// CUSTOM FIELDS FOR ACTIVIDADES
+	///
+
+	// On/Off line for actividades
+	$meta_boxes[] = array(
+		'id' => 'quincem_onoffline',
+		'title' => 'Tipo de actividades',
+		'pages' => array('actividad'), // post type
+		'context' => 'side', //  'normal', 'advanced', or 'side'
+		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
+		'show_names' => false, // Show field names on the left
+		'fields' => array(
+				array(
+					'name' => 'On/off',
+					'id' => $prefix . 'onoff',
+					'type' => 'multicheck',
+					'options' => array(
+						'on' => 'Online',
+						'off' => 'Offline',
+					)
+				),
+		),
+	);
+
+	return $meta_boxes;
+} // end Add metaboxes
+
+// Initialize the metabox class
+function quincem_init_metaboxes() {
+	if ( !class_exists( 'cmb_Meta_Box' ) ) {
+		require_once( 'lib/metabox/init.php' );
+	}
+} // end Init metaboxes
 
 ?>
