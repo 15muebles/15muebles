@@ -15,11 +15,11 @@
 	wp_title( '|', true, 'right' );
 
 	// Add the blog name.
-	echo 15M_BLOGNAME;
+	echo QUINCEM_BLOGNAME;
 
 	// Add the blog description for the home/front page.
-	if ( 15M_BLOGDESC && ( is_home() || is_front_page() ) )
-		echo " | " . 15M_BLOGDESC;
+	if ( QUINCEM_BLOGDESC && ( is_home() || is_front_page() ) )
+		echo " | " . QUINCEM_BLOGDESC;
 
 	// Add a page number if necessary:
 	if ( $paged >= 2 || $page >= 2 )
@@ -41,19 +41,19 @@ if ( is_single() || is_page() ) {
 	$metatit = $post->post_title;
 	$metatype = "article";
 } else {
-	$metadesc = 15M_BLOGDESC;
-	$metadesc_tw = 15M_BLOGDESC;
-	$metadesc_fb = 15M_BLOGDESC;
-	$metatit = "montera34";
+	$metadesc = QUINCEM_BLOGDESC;
+	$metadesc_tw = QUINCEM_BLOGDESC;
+	$metadesc_fb = QUINCEM_BLOGDESC;
+	$metatit = QUINCEM_BLOGNAME;
 	$metatype = "blog";
 }
 	$metaperma = get_permalink();
 ?>
 
 <!-- generic meta -->
-<meta content="montera34" name="author" />
-<meta name="title" content="<?php echo 15M_BLOGNAME ?>" />
-<meta content="<?php echo 15M_BLOGDESC ?>" name="description" />
+<meta content="15muebles" name="author" />
+<meta name="title" content="<?php echo QUINCEM_BLOGNAME ?>" />
+<meta content="<?php echo QUINCEM_BLOGDESC ?>" name="description" />
 <meta content="" name="keywords" />
 <!-- facebook meta -->
 <meta property="og:title" content="<?php echo $metatit ?>" />
@@ -64,8 +64,8 @@ if ( is_single() || is_page() ) {
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
 
-<link rel="alternate" type="application/rss+xml" title="<?php echo 15M_BLOGNAME; ?> RSS Feed suscription" href="<?php bloginfo('rss2_url'); ?>" />
-<link rel="alternate" type="application/atom+xml" title="<?php echo 15M_BLOGNAME; ?> Atom Feed suscription" href="<?php bloginfo('atom_url'); ?>" /> 
+<link rel="alternate" type="application/rss+xml" title="<?php echo QUINCEM_BLOGNAME; ?> RSS Feed suscription" href="<?php bloginfo('rss2_url'); ?>" />
+<link rel="alternate" type="application/atom+xml" title="<?php echo QUINCEM_BLOGNAME; ?> Atom Feed suscription" href="<?php bloginfo('atom_url'); ?>" /> 
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
 <?php

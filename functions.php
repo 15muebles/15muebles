@@ -1,50 +1,50 @@
 <?php
 // theme setup main function
-add_action( 'after_setup_theme', '15m_theme_setup' );
-function montera_theme_setup() {
+add_action( 'after_setup_theme', 'quincem_theme_setup' );
+function quincem_theme_setup() {
 
 	// theme global vars
-	if (!defined('15M_BLOGNAME'))
-	    define('15M_BLOGNAME', get_bloginfo('name'));
+	if (!defined('QUINCEM_BLOGNAME'))
+	    define('QUINCEM_BLOGNAME', get_bloginfo('name'));
 
-	if (!defined('15M_BLOGDESC'))
-	    define('15M_BLOGDESC', get_bloginfo('description','display'));
+	if (!defined('QUINCEM_BLOGDESC'))
+	    define('QUINCEM_BLOGDESC', get_bloginfo('description','display'));
 
-	if (!defined('15M_BLOGURL'))
-	    define('15M_BLOGURL', get_bloginfo('url'));
+	if (!defined('QUINCEM_BLOGURL'))
+	    define('QUINCEM_BLOGURL', get_bloginfo('url'));
 
-	if (!defined('15M_BLOGTHEME'))
-	    define('15M_BLOGTHEME', get_bloginfo('template_directory'));
+	if (!defined('QUINCEM_BLOGTHEME'))
+	    define('QUINCEM_BLOGTHEME', get_bloginfo('template_directory'));
 
 	/* Set up media options: sizes, featured images... */
-	add_action( 'init', '15m_media_options' );
+	add_action( 'init', 'quincem_media_options' );
 
 	/* Add your nav menus function to the 'init' action hook. */
-	add_action( 'init', '15m_register_menus' );
+	add_action( 'init', 'quincem_register_menus' );
 
 	/* Load JavaScript files on the 'wp_enqueue_scripts' action hook. */
-	add_action( 'wp_enqueue_scripts', '15m_load_scripts' );
+	add_action( 'wp_enqueue_scripts', 'quincem_load_scripts' );
 
 	// Custom post types
-	add_action( 'init', '15m_create_post_type', 0 );
+	add_action( 'init', 'quincem_create_post_type', 0 );
 
 	// Custom Taxonomies
-	add_action( 'init', '15m_build_taxonomies', 0 );
+	add_action( 'init', 'quincem_build_taxonomies', 0 );
 
 	// Extra meta boxes in editor
-	//add_filter( 'cmb_meta_boxes', '15m_metaboxes' );
+	//add_filter( 'cmb_meta_boxes', 'quincem_metaboxes' );
 	// Initialize the metabox class
-	//add_action( 'init', '15m_init_metaboxes', 9999 );
+	//add_action( 'init', 'quincem_init_metaboxes', 9999 );
 
 	// excerpt support in pages
 	add_post_type_support( 'page', 'excerpt' );
 
-	// 15m shortcodes
+	// quincem shortcodes
 
-} // end 15m theme setup function
+} // end quincem theme setup function
 
 // set up media options
-function 15m_media_options() {
+function quincem_media_options() {
 	/* Add theme support for post thumbnails (featured images). */
 	add_theme_support( 'post-thumbnails', array( 'post','page','modulo','itinerario') );
 	set_post_thumbnail_size( 231, 0 ); // default Post Thumbnail dimensions
@@ -58,7 +58,7 @@ function 15m_media_options() {
 } // end set up media options
 
 // register custom menus
-function 15m_register_menus() {
+function quincem_register_menus() {
         if ( function_exists( 'register_nav_menus' ) ) {
                 register_nav_menus(
                 array(
@@ -70,7 +70,7 @@ function 15m_register_menus() {
 } // end register custom menus
 
 // load js scripts to avoid conflicts
-function 15m_load_scripts() {
+function quincem_load_scripts() {
 	wp_enqueue_script('jquery');
 //	wp_enqueue_script(
 //		'bootstrap.min',
@@ -83,7 +83,7 @@ function 15m_load_scripts() {
 } // end load js scripts to avoid conflicts
 
 // register post types
-function 15m_create_post_type() {
+function quincem_create_post_type() {
 	// Módulo post type
 	register_post_type( 'modulo', array(
 		'labels' => array(
@@ -177,7 +177,7 @@ function 15m_create_post_type() {
 } // end register post types
 
 // register taxonomies
-function 15m_build_taxonomies() {
+function quincem_build_taxonomies() {
 //	register_taxonomy( 'type', 'project', array( // type taxonomy
 //		'hierarchical' => true,
 //		'label' => __( 'Type' ),
