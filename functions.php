@@ -39,9 +39,15 @@ function quincem_theme_setup() {
 	// excerpt support in pages
 	add_post_type_support( 'page', 'excerpt' );
 
-	// quincem shortcodes
+	// remove unused items from dashboard
+	add_action( 'admin_menu', 'quincem_remove_dashboard_item' );
 
 } // end quincem theme setup function
+
+// remove item from wordpress dashboard
+function quincem_remove_dashboard_item() {
+	remove_menu_page('edit.php');	
+}
 
 // set up media options
 function quincem_media_options() {
@@ -108,7 +114,7 @@ function quincem_create_post_type() {
 		//'menu_icon' => get_template_directory_uri() . '/images/icon-post.type-integrantes.png',
 		'hierarchical' => false, // if true this post type will be as pages
 		'query_var' => true,
-		'supports' => array('title', 'editor','excerpt','author','comments','trackbacks' ),
+		'supports' => array('title', 'editor','excerpt','author','comments','trackbacks','thumbnail'),
 		'rewrite' => array('slug'=>'modulo','with_front'=>false),
 		'can_export' => true,
 		'_builtin' => false,
@@ -138,7 +144,7 @@ function quincem_create_post_type() {
 		//'menu_icon' => get_template_directory_uri() . '/images/icon-post.type-integrantes.png',
 		'hierarchical' => false, // if true this post type will be as pages
 		'query_var' => true,
-		'supports' => array('title', 'editor','excerpt','author','comments','trackbacks' ),
+		'supports' => array('title', 'editor','excerpt','author','comments','trackbacks','thumbnail' ),
 		'rewrite' => array('slug'=>'itinerario','with_front'=>false),
 		'can_export' => true,
 		'_builtin' => false,
