@@ -209,31 +209,34 @@ function quincem_get_list($post_type) {
 function quincem_metaboxes( $meta_boxes ) {
 	$prefix = '_quincem_'; // Prefix for all fields
 
-	// CUSTOM FIELDS FOR MODULOS
+	// get data for select and multicheck fields
+	//$itinerarios = quincem_get_list("itinerario");
+	$actividades = quincem_get_list("actividad");
+	$modulos = quincem_get_list("modulo");
+
+	// CUSTOM FIELDS FOR ITINERARIOS
 	///
 
-	// get data for select and multicheck fields
-	$itinerarios = quincem_get_list("itinerario");
-	$actividades = quincem_get_list("actividad");
-	$dependencias = quincem_get_list("modulo");
-
-	// itienerarios multicheckbox
+	// modulos multicheckbox
 	$meta_boxes[] = array(
-		'id' => 'quincem_itinerario',
-		'title' => 'Itinerarios',
-		'pages' => array('modulo'), // post type
+		'id' => 'quincem_modulos',
+		'title' => 'Módulos en el itinerario',
+		'pages' => array('itinerario'), // post type
 		'context' => 'side', //  'normal', 'advanced', or 'side'
 		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
 		'show_names' => false, // Show field names on the left
 		'fields' => array(
 				array(
-					'name' => 'Itinerarios',
-					'id' => $prefix . 'itinerarios',
+					'name' => 'Módulos',
+					'id' => $prefix . 'modulos',
 					'type' => 'multicheck',
-					'options' => $itinerarios
+					'options' => $modulos
 				),
 		),
 	);
+
+	// CUSTOM FIELDS FOR MODULOS
+	///
 
 	// actividades multicheckbox
 	$meta_boxes[] = array(
@@ -266,7 +269,7 @@ function quincem_metaboxes( $meta_boxes ) {
 					'name' => 'Dependencias',
 					'id' => $prefix . 'dependencias',
 					'type' => 'multicheck',
-					'options' => $dependencias
+					'options' => $modulos
 				),
 		),
 	);
