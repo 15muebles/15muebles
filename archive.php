@@ -1,9 +1,13 @@
 <?php get_header(); ?>
 
 <?php
-if ( have_posts() ) { ?>
+if ( have_posts() ) {
+$pt = $wp_query->query_vars['post_type'];
+$pt_object = get_post_type_object( $pt );
+$tit = $pt_object->label;
+?>
 		<header>
-		<h1><?php echo $wp_query->queried_object->name; ?></h1>
+		<h1><?php echo $tit; ?></h1>
 		</header>
 		<div class="row">
 			<section>
