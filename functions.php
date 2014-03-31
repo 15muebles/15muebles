@@ -103,19 +103,19 @@ function quincem_load_scripts() {
 // register post types
 function quincem_create_post_type() {
 	// Módulo post type
-	register_post_type( 'modulo', array(
+	register_post_type( 'badge', array(
 		'labels' => array(
-			'name' => __( 'Módulos' ),
-			'singular_name' => __( 'Módulo' ),
-			'add_new_item' => __( 'Añadir módulo' ),
+			'name' => __( 'Badges' ),
+			'singular_name' => __( 'Badge' ),
+			'add_new_item' => __( 'Añadir badge' ),
 			'edit' => __( 'Editar' ),
-			'edit_item' => __( 'Editar este módulo' ),
-			'new_item' => __( 'Nuevo módulo' ),
-			'view' => __( 'Ver módulo' ),
-			'view_item' => __( 'Ver este módulo' ),
-			'search_items' => __( 'Buscar módulos' ),
-			'not_found' => __( 'Ningún módulo encontrado' ),
-			'not_found_in_trash' => __( 'Ningún módulo en la papelera' ),
+			'edit_item' => __( 'Editar este badge' ),
+			'new_item' => __( 'Nuevo badge' ),
+			'view' => __( 'Ver badge' ),
+			'view_item' => __( 'Ver este badge' ),
+			'search_items' => __( 'Buscar badges' ),
+			'not_found' => __( 'Ningún badge encontrado' ),
+			'not_found_in_trash' => __( 'Ningún badge en la papelera' ),
 			'parent' => __( 'Superior' )
 		),
 		'has_archive' => true,
@@ -127,7 +127,7 @@ function quincem_create_post_type() {
 		'hierarchical' => false, // if true this post type will be as pages
 		'query_var' => true,
 		'supports' => array('title', 'editor','excerpt','author','comments','trackbacks','thumbnail'),
-		'rewrite' => array('slug'=>'modulo','with_front'=>false),
+		'rewrite' => array('slug'=>'badge','with_front'=>false),
 		'can_export' => true,
 		'_builtin' => false,
 	));
