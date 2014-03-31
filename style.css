@@ -18,5 +18,18 @@ Tags: HTML5, CSS3
 
 */
 
+/* jokers */
+.aligncenter { text-align: center; }
+
 /* header navbar */
 body { padding-top: 70px; }
+
+/* home bands */
+#top {
+	background-color: #9cc;
+}
+
+.bg-rombo {
+	background-image: url('images/quincem-bg-rombo.png');
+	background-repeat: no-repeat;
+}
