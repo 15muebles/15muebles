@@ -52,7 +52,7 @@ function quincem_remove_dashboard_item() {
 // set up media options
 function quincem_media_options() {
 	/* Add theme support for post thumbnails (featured images). */
-	add_theme_support( 'post-thumbnails', array( 'post','page','modulo','itinerario') );
+	add_theme_support( 'post-thumbnails', array( 'page','badge','itinerario','actividad') );
 	set_post_thumbnail_size( 231, 0 ); // default Post Thumbnail dimensions
 	/* set up image sizes*/
 	update_option('thumbnail_size_w', 231);
@@ -87,16 +87,6 @@ function quincem_load_scripts() {
 		'3.1.1',
 		FALSE
 	);
-
-
-//	wp_enqueue_script('jquery');
-//	wp_enqueue_script(
-//		'bootstrap.min',
-//		get_template_directory_uri() . '/bootstrap/js/bootstrap.min.js',
-//		array( 'jquery' ),
-//		'2.3.2',
-//		FALSE
-//	);
 
 } // end load js scripts to avoid conflicts
 
@@ -224,7 +214,7 @@ function quincem_metaboxes( $meta_boxes ) {
 	// get data for select and multicheck fields
 	//$itinerarios = quincem_get_list("itinerario");
 	$actividades = quincem_get_list("actividad");
-	$modulos = quincem_get_list("modulo");
+	$badges = quincem_get_list("badge");
 
 	// CUSTOM FIELDS FOR ITINERARIOS
 	///
@@ -239,22 +229,22 @@ function quincem_metaboxes( $meta_boxes ) {
 		'show_names' => false, // Show field names on the left
 		'fields' => array(
 				array(
-					'name' => 'Módulos',
-					'id' => $prefix . 'modulos',
+					'name' => 'Badges',
+					'id' => $prefix . 'badges',
 					'type' => 'multicheck',
-					'options' => $modulos
+					'options' => $badges
 				),
 		),
 	);
 
-	// CUSTOM FIELDS FOR MODULOS
+	// CUSTOM FIELDS FOR BADGES
 	///
 
 	// actividades multicheckbox
 	$meta_boxes[] = array(
 		'id' => 'quincem_actividades',
 		'title' => 'Actividades',
-		'pages' => array('modulo'), // post type
+		'pages' => array('badge'), // post type
 		'context' => 'side', //  'normal', 'advanced', or 'side'
 		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
 		'show_names' => false, // Show field names on the left
@@ -271,8 +261,8 @@ function quincem_metaboxes( $meta_boxes ) {
 	// modulos multicheckbox
 	$meta_boxes[] = array(
 		'id' => 'quincem_dependencias',
-		'title' => 'Dependencias (otros módulos)',
-		'pages' => array('modulo'), // post type
+		'title' => 'Dependencias (otros badges)',
+		'pages' => array('badge'), // post type
 		'context' => 'side', //  'normal', 'advanced', or 'side'
 		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
 		'show_names' => false, // Show field names on the left
@@ -281,7 +271,7 @@ function quincem_metaboxes( $meta_boxes ) {
 					'name' => 'Dependencias',
 					'id' => $prefix . 'dependencias',
 					'type' => 'multicheck',
-					'options' => $modulos
+					'options' => $badges
 				),
 		),
 	);
@@ -290,7 +280,7 @@ function quincem_metaboxes( $meta_boxes ) {
 	$meta_boxes[] = array(
 		'id' => 'quincem_badge_como',
 		'title' => 'Cómo ganar el badge',
-		'pages' => array('modulo'), // post type
+		'pages' => array('badge'), // post type
 		'context' => 'normal', //  'normal', 'advanced', or 'side'
 		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
 		'show_names' => false, // Show field names on the left
@@ -308,7 +298,7 @@ function quincem_metaboxes( $meta_boxes ) {
 	$meta_boxes[] = array(
 		'id' => 'quincem_material',
 		'title' => 'Material de trabajo',
-		'pages' => array('modulo'), // post type
+		'pages' => array('badge'), // post type
 		'context' => 'normal', //  'normal', 'advanced', or 'side'
 		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
 		'show_names' => false, // Show field names on the left

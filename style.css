@@ -33,3 +33,10 @@ body { padding-top: 70px; }
 	background-image: url('images/quincem-bg-rombo.png');
 	background-repeat: no-repeat;
 }
+
+.sec-tit {
+	display: inline-table;
+}
+.sec-desc {
+	display: inline-table;
+}
