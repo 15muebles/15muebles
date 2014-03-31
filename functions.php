@@ -77,7 +77,19 @@ function quincem_register_menus() {
 
 // load js scripts to avoid conflicts
 function quincem_load_scripts() {
+	wp_enqueue_style( 'bootstrap-css', get_template_directory_uri() . '/bootstrap/css/bootstrap.min.css' );
+	wp_enqueue_style( 'bootstrap-theme-css', get_template_directory_uri() . '/bootstrap/css/bootstrap-theme.min.css' );
 	wp_enqueue_script('jquery');
+	wp_enqueue_script(
+		'bootstrap-js',
+		get_template_directory_uri() . '/bootstrap/js/bootstrap.min.js',
+		array( 'jquery' ),
+		'3.1.1',
+		FALSE
+	);
+
+
+//	wp_enqueue_script('jquery');
 //	wp_enqueue_script(
 //		'bootstrap.min',
 //		get_template_directory_uri() . '/bootstrap/js/bootstrap.min.js',
