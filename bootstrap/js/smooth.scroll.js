@@ -16,5 +16,12 @@ jQuery(document).ready(function($) {
 				// (default click behaviour)
 				window.location.hash = hash;
 			});
+
+		// active link
+		if ( $(this).parent().hasClass('active') ) {}
+		else {
+			$('#pre-navbar .active').removeClass('active');
+			$(this).parent().toggleClass('active');
+		}
 	});
 });

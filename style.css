@@ -48,6 +48,10 @@ h3 {
 	margin: 0 auto;
 	padding: 40px 0;
 }
+.thumbnail, .img-thumbnail {
+	box-shadow: none;
+	-webkit-box-shadow: none;
+}
 
 /* header navbar */
 body { padding-top: 50px; }
@@ -61,7 +65,9 @@ body { padding-top: 50px; }
 	box-shadow: none;
 	-webkit-box-shadow: none;
 }
-
+.navbar-brand {
+	padding: 7px 15px 15px;
+}
 
 /* home bands */
 #top {
