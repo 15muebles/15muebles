@@ -51,7 +51,11 @@ $band_ids = array("descubre","aprende","haz");
 $band_bgs = array("#a8d4d4","#b8dbdb","#c7e3e3");
 $band_cols = array(5,5,4);
 $band_tits = array("Descubre","Aprende","Haz");
-$band_descs = array("Description...","Description...","Description...");
+$band_subtits = array("Itinerarios","Badges","Actividades");
+$band_descs = array(
+		"En 15Muebles hemos usado los Open Badges para diseñar cinco itinerarios pedagógicos en torno a la ciudad. Con los itinerarios queremos mostrar otros relatos sobre la ciudad posible. Ensayamos imaginarios, herramientas, juegos y lenguajes urbanos que nos gustaría sirvieran para empoderar otras políticas. Así planteamos cada itinerario como una suerte de viaje de descubrimiento: a lugares, prácticas, recursos, infraestructuras o formas de asociación que trabajan ya por una ciudad común.",
+		"Description...",
+		"Description...");
 
 // BEGIN bands loop
 $band_count = 0;
@@ -70,9 +74,12 @@ foreach ( $band_pts as $band_pt ) {
 		<div id="<?php echo $band_ids[$band_count] ?>" class="container-full">
 		<div class="container">
 		<section>
-			<header>
-				<h2 class="sec-tit"><?php echo $band_tits[$band_count]; ?></h2>
-				<div class="sec-desc"><?php echo $band_descs[$band_count]; ?></div>
+			<header class="sec-header">
+				<div class="sec-tit">
+					<h2><?php echo $band_tits[$band_count]; ?></h2>
+					<div class="sec-subtit"><?php echo $band_subtits[$band_count]; ?></div>
+				</div>
+				<div class="sec-desc"><p><?php echo $band_descs[$band_count]; ?></p></div>
 			</header>
 		<?php
 		// BEGIN *THIS* band loop

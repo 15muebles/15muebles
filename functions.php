@@ -100,6 +100,13 @@ function quincem_load_scripts() {
 		FALSE
 	);
 	}
+	wp_enqueue_script(
+		'tit-position-js',
+		get_template_directory_uri() . '/bootstrap/js/tit.position.js',
+		array( 'bootstrap-js' ),
+		'0.1',
+		FALSE
+	);
 
 
 } // end load js scripts to avoid conflicts

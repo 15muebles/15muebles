@@ -34,10 +34,12 @@ strong { font-family: 'museo700'; }
 /* typo headers */
 h1, h2 {
 	font-family: 'museo700';
+	text-transform: uppercase;
 }
 
 h3 {
 	font-family: 'amatic_scbold';
+	text-transform: uppercase;
 }
 
 /* common styles */
@@ -65,7 +67,15 @@ body { padding-top: 50px; }
 #top {
 	background-color: #9cc;
 }
-
+#descubre {
+	background-color: #a8d4d4;
+}
+#aprende {
+	background-color: #b8dbdb;
+}
+#haz {
+	background-color: #c7e3e3;
+}
 .rombo {
 	background-image: url('images/quincem-bg-rombo.png');
 	background-repeat: no-repeat;
@@ -76,7 +86,6 @@ body { padding-top: 50px; }
 .rombo-tit {
 	color: #fff;
 	font-size: 16px;
-	text-transform: uppercase;
 	line-height: 40px;
 	margin-top: 40px;
 	margin-bottom: 0;
@@ -111,8 +120,22 @@ body { padding-top: 50px; }
 }
 
 .sec-tit {
-	display: inline-table;
+	float: left;
+}
+.sec-tit h2 {
+	font-size: 60px;
+	line-height: 1em;
+	color: #fff;
+	margin: 0;
+	display: inline;
+}
+.sec-subtit {
+	font-family: 'amatic_scbold';
+	font-size: 34px;
+	line-height: 1em;
+	text-transform: uppercase;
 }
 .sec-desc {
-	display: inline-table;
+	padding-top: 3px;
+	color: #fff;
 }
