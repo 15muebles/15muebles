@@ -35,8 +35,14 @@ h3 {
 	font-family: 'amatic_scbold';
 }
 
+/* common styles */
+.container-full {
+  width: 100%;
+  margin: 0 auto;
+}
+
 /* header navbar */
-body { padding-top: 70px; }
+body { padding-top: 50px; }
 
 /* home bands */
 #top {

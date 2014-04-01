@@ -1,22 +1,27 @@
 <?php get_header(); ?>
 
-<section id="top" class="aligncenter">
+<div class="container">
+<header class="aligncenter">
 	<div class="row">
 		<div class="col-md-4 col-md-offset-3">
 			<img class="img-responsive" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-imago.png" alt="<?php echo QUINCEM_BLOGNAME. " | " . QUINCEM_BLOGDESC; ?>" />
+			<h1><?php echo QUINCEM_BLOGNAME ?></h1>
+			<strong><?php echo QUINCEM_BLOGDESC ?></strong>
 		</div>
 	</div>
+</header>
+<section class="aligncenter">
 	<div class="row">
 		<div class="bg-rombo col-md-2 col-md-offset-2">
 			<h2>Descubre</h2>
 			<p>Textito</p>
 		</div>
 		<div class="bg-rombo col-md-2">
-			<h2>Descubre</h2>
+			<h2>Aprende</h2>
 			<p>Textito</p>
 		</div>
 		<div class="bg-rombo col-md-2">
-			<h2>Descubre</h2>
+			<h2>Haz</h2>
 			<p>Textito</p>
 		</div>
 	</div>
@@ -35,7 +40,9 @@
 		</div>
 	</div>
 </section>
+</div><!-- .container -->
 
+</div><!-- .container-full -->
 
 <?php
 // descubre, aprende, haz bands
@@ -60,7 +67,9 @@ foreach ( $band_pts as $band_pt ) {
 
 	if ( $the_query->have_posts() ) { ?>
 
-		<section id="<?php echo $band_ids[$band_count] ?>">
+		<div id="<?php echo $band_ids[$band_count] ?>" class="container-full">
+		<div class="container">
+		<section>
 			<header>
 				<h2 class="sec-tit"><?php echo $band_tits[$band_count]; ?></h2>
 				<div class="sec-desc"><?php echo $band_descs[$band_count]; ?></div>
@@ -92,6 +101,8 @@ foreach ( $band_pts as $band_pt ) {
 		if ( $thisband_count != $band_cols[$band_count] ) { echo "</div>"; }
 		?>
 		</section>
+		</div><!-- .container -->
+		</div><!-- .container-full -->
 
 	<?php } // end if have posts
 	$band_count++;

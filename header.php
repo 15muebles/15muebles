@@ -78,7 +78,8 @@ wp_head(); ?>
 
 <?php // better to use body tag as the main container ?>
 <body <?php body_class(); ?>>
-<div class="container">
+
+<div id="top" class="container-full">
 
 	<nav id="pre-navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -100,23 +101,3 @@ wp_head(); ?>
 			</div>
 		</div>
 	</nav>
-
-<div class="row">
-	<div id="pre">
-		<div>
-			<a href="<?php echo QUINCEM_BLOGURL ?>" title="Ir a la portada">
-			<img src="<?php echo QUINCEM_BLOGTHEME . "/images/15muebles_logo.png"; ?>" alt="Inicio" /><br>
-			<strong><?php echo QUINCEM_BLOGNAME ?></strong>
-			</a>
-		</div>
-		<div><?php echo QUINCEM_BLOGDESC ?></div>
-		<?php $defaults = array(
-				'theme_location'  => 'menu-sidebar',
-				'menu_id' => 'menu-sidebar',
-				);
-			wp_nav_menu( $defaults );?>	
-
-		<?php get_search_form(); ?>
-	</div><!-- #pre -->
-	
-	<div id="content">
