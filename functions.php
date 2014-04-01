@@ -42,6 +42,9 @@ function quincem_theme_setup() {
 	// remove unused items from dashboard
 	add_action( 'admin_menu', 'quincem_remove_dashboard_item' );
 
+	// disable admin bar in front end
+	add_filter('show_admin_bar', '__return_false');
+
 } // end quincem theme setup function
 
 // remove item from wordpress dashboard
