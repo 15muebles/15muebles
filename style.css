@@ -18,6 +18,11 @@ Tags: HTML5, CSS3
 
 */
 
+/* tmp css rules: while developing */
+#wpadminbar {
+	display: none;
+}
+
 /* jokers */
 .aligncenter { text-align: center; }
 
