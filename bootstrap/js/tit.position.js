@@ -1,9 +1,9 @@
-jQuery(window).ready(function($) {
-	$('.sec-header .sec-tit').each(
+jQuery(window).load(function() {
+	jQuery('.sec-header .sec-tit').each(
 		function() {
-			titWidth = $(this).children('h2').width() + 10;
-			$(this).css({"width": titWidth +"px"});
-			$(this).next().css({"margin-left": titWidth +"px"});
+			titWidth = jQuery(this).children('h2').width() + 10;
+			jQuery(this).css({"width": titWidth +"px"});
+			jQuery(this).next().css({"margin-left": titWidth +"px"});
 		}
 	);
 });
