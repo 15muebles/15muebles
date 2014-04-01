@@ -21,6 +21,15 @@ Tags: HTML5, CSS3
 /* jokers */
 .aligncenter { text-align: center; }
 
+/* typo headers */
+h1, h2 {
+	font-family: 'museo700';
+}
+
+h3 {
+	font-family: 'amatic_scbold';
+}
+
 /* header navbar */
 body { padding-top: 70px; }
 
