@@ -88,6 +88,16 @@ function quincem_load_scripts() {
 		'3.1.1',
 		FALSE
 	);
+	if ( is_home() ) {
+	wp_enqueue_script(
+		'smooth-scroll-js',
+		get_template_directory_uri() . '/bootstrap/js/smooth.scroll.js',
+		array( 'bootstrap-js' ),
+		'0.1',
+		FALSE
+	);
+	}
+
 
 } // end load js scripts to avoid conflicts
 

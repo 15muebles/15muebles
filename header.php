@@ -80,7 +80,7 @@ wp_head(); ?>
 <body <?php body_class(); ?>>
 <div class="container">
 
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<nav id="pre-navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#quincem-pre-navbar-collapse">
@@ -94,8 +94,8 @@ wp_head(); ?>
 			<div class="collapse navbar-collapse" id="quincem-pre-navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#descubre">Descubre</a></li>
-					<li><a href="#haz">Haz</a></li>
 					<li><a href="#aprende">Aprende</a></li>
+					<li><a href="#haz">Haz</a></li>
 				</ul>
 			</div>
 		</div>
