@@ -19,7 +19,17 @@ Tags: HTML5, CSS3
 */
 
 /* jokers */
+strong { font-family: 'museo700'; }
 .aligncenter { text-align: center; }
+.hideout {
+	text-indent: -9999px;
+	height: 0;
+	margin: 0;
+	padding: 0;
+}
+.hair {
+	padding-bottom: 30px;
+}
 
 /* typo headers */
 h1, h2 {
@@ -32,21 +42,72 @@ h3 {
 
 /* common styles */
 .container-full {
-  width: 100%;
-  margin: 0 auto;
+	width: 100%;
+	margin: 0 auto;
+	padding: 40px 0;
 }
 
 /* header navbar */
 body { padding-top: 50px; }
+#pre-navbar {
+	font-family: 'museo700';
+	text-transform: uppercase;
+}
+.navbar-default,
+.navbar-default .navbar-nav>.active>a {
+	background-image: none;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
 
 /* home bands */
 #top {
 	background-color: #9cc;
 }
 
-.bg-rombo {
+.rombo {
 	background-image: url('images/quincem-bg-rombo.png');
 	background-repeat: no-repeat;
+	background-position: center top;
+	background-size: 150px;
+	height: 180px;
+}
+.rombo-tit {
+	color: #fff;
+	font-size: 16px;
+	text-transform: uppercase;
+	line-height: 40px;
+	margin-top: 40px;
+	margin-bottom: 0;
+	background-image: url('images/quincem-bg-band.png');
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-size: contain;
+}
+.rombo p {
+	line-height: 1em;
+}
+
+.border-band {
+	color: #fff;
+	font-size: 20px;
+	text-transform: uppercase;
+	font-family: "museo700";
+	line-height: 33px;
+	height: 30px;
+	display: block;
+	background-image: url('images/quincem-bg-band-border.png');
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-size: contain;
+}
+.border-band:hover {
+	text-decoration: none;
+}
+
+#patrocina img {
+	width: 100px;
 }
 
 .sec-tit {

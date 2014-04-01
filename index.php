@@ -2,40 +2,40 @@
 
 <div class="container">
 <header class="aligncenter">
-	<div class="row">
+	<div class="row hair">
 		<div class="col-md-4 col-md-offset-3">
 			<img class="img-responsive" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-imago.png" alt="<?php echo QUINCEM_BLOGNAME. " | " . QUINCEM_BLOGDESC; ?>" />
-			<h1><?php echo QUINCEM_BLOGNAME ?></h1>
-			<strong><?php echo QUINCEM_BLOGDESC ?></strong>
+			<h1 class="hideout"><?php echo QUINCEM_BLOGNAME ?></h1>
+			<div class="hideout"><strong><?php echo QUINCEM_BLOGDESC ?></strong></div>
 		</div>
 	</div>
 </header>
 <section class="aligncenter">
-	<div class="row">
-		<div class="bg-rombo col-md-2 col-md-offset-2">
-			<h2>Descubre</h2>
-			<p>Textito</p>
+	<div class="row hair">
+		<div class="rombo col-md-2 col-md-offset-2">
+			<h2 class="rombo-tit">Descubre</h2>
+			<p><small>Cada itinerario como una suerte de viaje de <strong>descubrimiento</strong>: lugares, prácticas, infraestructuras o formas de asociación que trabajan ya por una ciudad común.</small></p>
 		</div>
-		<div class="bg-rombo col-md-2">
-			<h2>Aprende</h2>
-			<p>Textito</p>
+		<div class="rombo col-md-2">
+			<h2 class="rombo-tit">Aprende</h2>
+			<p><small>Cada itinerario se compone a su vez de una serie de unidades de <strong>aprendizaje</strong>. Éstos son nuestros badges.</small></p>
 		</div>
-		<div class="bg-rombo col-md-2">
-			<h2>Haz</h2>
-			<p>Textito</p>
+		<div class="rombo col-md-2">
+			<h2 class="rombo-tit">Haz</h2>
+			<p><small>La consecución de un badge requiere la participación en una serie de actividades. El denominador común en todas será que estaremos <strong>haciendo</strong> ciudad.</small></p>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row hair">
 		<div class="col-md-2 col-md-offset-4">
-			<a href="">About</a>
+			<a class="border-band" href="">About</a>
 		</div>
 	</div>
-	<div class="row">
+	<div id ="patrocina" class="row">
 		<div class="col-md-4 col-md-offset-3">
 			<ul class="list-inline">
-				<li>Patrocina</li>
-				<li>Patrocina</li>
-				<li>Patrocina</li>
+				<li><img src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-mozilla.png" alt="Mozilla Foundation" /></li>
+				<li><img src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-mncars.png" alt="Museo Nacional Centro de Arte Reina Sofia" /></li>
+				<li><img src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-15muebles.png" alt="Proyecto 15 muebles" /></li>
 			</ul>
 		</div>
 	</div>
