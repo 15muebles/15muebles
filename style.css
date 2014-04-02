@@ -86,14 +86,59 @@ body { padding-top: 50px; }
 	background-image: url('images/quincem-bg-rombo.png');
 	background-repeat: no-repeat;
 	background-position: center top;
-	background-size: 150px;
-	height: 180px;
 }
+
+
+@media (min-width: 992px) {
+/* styles just for desktop */
+	.rombo {
+		background-size: 150px;
+		min-height: 180px;
+	}
+	.rombo-tit {
+		font-size: 16px;
+		line-height: 40px;
+		margin-top: 40px;
+	}
+
+/* END
+styles just for desktop */
+}
+
+
+@media (min-width: 768px) and (max-width: 992px) {
+/* styles just for tablets */
+	.rombo {
+		background-size: 110px;
+		min-height: 180px;
+	}
+	.rombo-tit {
+		font-size: 14px;
+		line-height: 30px;
+		margin-top: 25px;
+	}
+
+/* END
+styles just for tablets */
+}
+
+@media (max-width: 767px) {
+/* styles just for tablets */
+	.rombo {
+		background: none;
+	}
+	.rombo-tit {
+		font-size: 14px;
+		line-height: 30px;
+		margin-top: 25px;
+	}
+
+/* END
+styles just for tablets */
+}
+
 .rombo-tit {
 	color: #fff;
-	font-size: 16px;
-	line-height: 40px;
-	margin-top: 40px;
 	margin-bottom: 0;
 	background-image: url('images/quincem-bg-band.png');
 	background-repeat: no-repeat;

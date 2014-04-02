@@ -3,7 +3,7 @@
 <div class="container">
 <header class="aligncenter">
 	<div class="row hair">
-		<div class="col-md-4 col-md-offset-3">
+		<div class="col-md-4 col-md-offset-3 col-sm-4 col-sm-offset-3 col-xs-6 col-xs-offset-2">
 			<img class="img-responsive" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-imago.png" alt="<?php echo QUINCEM_BLOGNAME. " | " . QUINCEM_BLOGDESC; ?>" />
 			<h1 class="hideout"><?php echo QUINCEM_BLOGNAME ?></h1>
 			<div class="hideout"><strong><?php echo QUINCEM_BLOGDESC ?></strong></div>
@@ -12,15 +12,15 @@
 </header>
 <section class="aligncenter">
 	<div class="row hair">
-		<div class="rombo col-md-2 col-md-offset-2">
+		<div class="rombo col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2">
 			<h2 class="rombo-tit">Descubre</h2>
 			<p><small>Cada itinerario como una suerte de viaje de <strong>descubrimiento</strong>: lugares, prácticas, infraestructuras o formas de asociación que trabajan ya por una ciudad común.</small></p>
 		</div>
-		<div class="rombo col-md-2">
+		<div class="rombo col-md-2 col-sm-2">
 			<h2 class="rombo-tit">Aprende</h2>
 			<p><small>Cada itinerario se compone a su vez de una serie de unidades de <strong>aprendizaje</strong>. Éstos son nuestros badges.</small></p>
 		</div>
-		<div class="rombo col-md-2">
+		<div class="rombo col-md-2 col-sm-2">
 			<h2 class="rombo-tit">Haz</h2>
 			<p><small>La consecución de un badge requiere la participación en una serie de actividades. El denominador común en todas será que estaremos <strong>haciendo</strong> ciudad.</small></p>
 		</div>
@@ -54,8 +54,8 @@ $band_tits = array("Descubre","Aprende","Haz");
 $band_subtits = array("Itinerarios","Badges","Actividades");
 $band_descs = array(
 		"En 15Muebles hemos usado los Open Badges para diseñar cinco itinerarios pedagógicos en torno a la ciudad. Con los itinerarios queremos mostrar otros relatos sobre la ciudad posible. Ensayamos imaginarios, herramientas, juegos y lenguajes urbanos que nos gustaría sirvieran para empoderar otras políticas. Así planteamos cada itinerario como una suerte de viaje de descubrimiento: a lugares, prácticas, recursos, infraestructuras o formas de asociación que trabajan ya por una ciudad común.",
-		"Description...",
-		"Description...");
+		"Cada itinerario se compone a su vez de una serie de unidades de aprendizaje. Éstos son nuestros badges. Hay badges que son específicos de un itinerario; los hay que se repiten en varios itinerarios.",
+		"La consecución de un badge requiere la participación en una serie de actividades, muy a menudo participando de procesos e iniciativas ciudadanas ya en marcha. Las actividades son muchas y muy variopintas: desde talleres a paseos, pasando por sesiones de auto-construcción o seminarios online. El denominador común en todas será que estaremos haciendo ciudad, amueblando directamente (conceptual, infraestructural y políticamente) nuestro entorno urbano.");
 
 // BEGIN bands loop
 $band_count = 0;
@@ -95,8 +95,7 @@ foreach ( $band_pts as $band_pt ) {
 	<img data-src="holder.js/300x200" alt="..." />
 	<div class="caption">
 		<h3><?php the_title(); ?></h3>
-		<p><?php the_excerpt(); ?></p>
-		<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+		<p><small><?php the_excerpt(); ?></small></p>
 	</div>
 </div>
 </div>
