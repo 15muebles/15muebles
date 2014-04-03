@@ -8,7 +8,7 @@ else { $epi_bg = "#c7e3e3"; }
 <div class="container">
 <footer class="aligncenter">
 	<div class="row hair">
-		<div class="col-md-2 col-md-offset-4">
+		<div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-4 col-xs-offset-3">
 			<img class="img-responsive" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-logo-detalle.png" alt="<?php echo QUINCEM_BLOGNAME; ?>" />
 		</div>
 	</div><!-- .row -->
