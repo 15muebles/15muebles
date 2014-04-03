@@ -68,9 +68,19 @@ body { padding-top: 50px; }
 	background-image: none;
 	box-shadow: none;
 	-webkit-box-shadow: none;
+	border: none;
 }
 .navbar-brand {
 	padding: 7px 15px 15px;
+}
+#pre-navbar .active a[href="#descubre"] {
+	background-color: #a8d4d4;
+}
+#pre-navbar .active a[href="#aprende"] {
+	background-color: #b8dbdb;
+}
+#pre-navbar .active a[href="#haz"] {
+	background-color: #c7e3e3;
 }
 
 /* home bands */

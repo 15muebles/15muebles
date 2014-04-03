@@ -94,7 +94,7 @@ wp_head(); ?>
 			</div>
 			<div class="collapse navbar-collapse" id="quincem-pre-navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#descubre">Descubre</a></li>
+					<li><a href="#descubre">Descubre</a></li>
 					<li><a href="#aprende">Aprende</a></li>
 					<li><a href="#haz">Haz</a></li>
 				</ul>
