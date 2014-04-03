@@ -249,12 +249,29 @@ function quincem_metaboxes( $meta_boxes ) {
 		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
 		'show_names' => false, // Show field names on the left
 		'fields' => array(
-				array(
-					'name' => 'Subtítulo',
-					'desc' => 'Únicamente el subtítulo, sin paréntesis.',
-					'id' => $prefix . 'subtit',
-					'type' => 'text',
-				),
+			array(
+				'name' => 'Subtítulo',
+				'desc' => 'Únicamente el subtítulo, sin paréntesis.',
+				'id' => $prefix . 'subtit',
+				'type' => 'text',
+			),
+		),
+	);
+	$meta_boxes[] = array(
+		'id' => 'quincem_icono',
+		'title' => 'Icono',
+		'pages' => array('itinerario','badge'), // post type
+		'context' => 'side', //  'normal', 'advanced', or 'side'
+		'priority' => 'default',  //  'high', 'core', 'default' or 'low'
+		'show_names' => false, // Show field names on the left
+		'fields' => array(
+			array(
+				'name' => 'Icono',
+				'desc' => '',
+				'id' => $prefix . 'icono',
+				'type' => 'file',
+				'allow' => array( 'url', 'attachment' )
+			),
 		),
 	);
 
@@ -269,12 +286,12 @@ function quincem_metaboxes( $meta_boxes ) {
 		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
 		'show_names' => false, // Show field names on the left
 		'fields' => array(
-				array(
-					'name' => 'Badges',
-					'id' => $prefix . 'badges',
-					'type' => 'multicheck',
-					'options' => $badges
-				),
+			array(
+				'name' => 'Badges',
+				'id' => $prefix . 'badges',
+				'type' => 'multicheck',
+				'options' => $badges
+			),
 		),
 	);
 
