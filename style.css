@@ -157,7 +157,8 @@ body { padding-top: 50px; }
 	font-family: "amatic_scregular";
 	font-weight: normal;
 }
-.itinerario .mosac-item-subtit {
+.itinerario .mosac-item-subtit,
+.actividad .mosac-item-subtit {
 	font-size: 21px;
 }
 .badge .mosac-item-subtit {
@@ -174,10 +175,10 @@ body { padding-top: 50px; }
 	font-size: 85%;
 	margin-top: 1em;
 }
-.mosac-item-iconos {
+.mosac-item-icons {
 	margin-top: 20px;
 }
-.mosac-item-iconos img {
+.mosac-item-icons img {
 	width: 32px;
 }
 

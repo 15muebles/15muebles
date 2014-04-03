@@ -375,22 +375,41 @@ function quincem_metaboxes( $meta_boxes ) {
 
 	// On/Off line for actividades
 	$meta_boxes[] = array(
-		'id' => 'quincem_onoffline',
-		'title' => 'Tipo de actividades',
+		'id' => 'quincem_actividad_meta',
+		'title' => 'Información sobre la actividad',
 		'pages' => array('actividad'), // post type
 		'context' => 'side', //  'normal', 'advanced', or 'side'
 		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
 		'show_names' => false, // Show field names on the left
 		'fields' => array(
-				array(
-					'name' => 'On/off',
-					'id' => $prefix . 'onoff',
-					'type' => 'multicheck',
-					'options' => array(
-						'on' => 'Online',
-						'off' => 'Offline',
-					)
+			array(
+				'name' => 'Tipo: On/offline',
+				'id' => $prefix . 'onoff',
+				'type' => 'multicheck',
+				'options' => array(
+					'on' => 'Online',
+					'off' => 'Offline',
 				),
+			),
+			array(
+				'name' => 'Escenario',
+				'id' => $prefix . 'escenario',
+				'type' => 'text'
+			),
+			array(
+				'name' => 'Fecha inicio',
+				'id'   => $prefix . 'date_begin',
+				'type' => 'text_date_timestamp',
+				// 'timezone_meta_key' => $prefix . 'timezone', // Optionally make this field honor the timezone selected in the [`select_timezone`](/WebDevStudios/Custom-Metaboxes-and-Fields-for-WordPress/wiki/Field-Types#select_timezone) field specified above
+				'repeatable' => false,
+			),
+			array(
+				'name' => 'Fecha fin',
+				'id'   => $prefix . 'date_end',
+				'type' => 'text_date_timestamp',
+				// 'timezone_meta_key' => $prefix . 'timezone', // Optionally make this field honor the timezone selected in the [`select_timezone`](/WebDevStudios/Custom-Metaboxes-and-Fields-for-WordPress/wiki/Field-Types#select_timezone) field specified above
+				'repeatable' => false,
+			),
 		),
 	);
 

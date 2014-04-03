@@ -122,6 +122,7 @@ foreach ( $band_pts as $band_pt ) {
 
 }
 // END bands loop
+
 ?>
 
 
