@@ -140,7 +140,7 @@ function quincem_create_post_type() {
 		//'menu_icon' => get_template_directory_uri() . '/images/icon-post.type-integrantes.png',
 		'hierarchical' => false, // if true this post type will be as pages
 		'query_var' => true,
-		'supports' => array('title', 'editor','excerpt','author','comments','trackbacks','thumbnail'),
+		'supports' => array('title', 'editor','excerpt','author','trackbacks','thumbnail'),
 		'rewrite' => array('slug'=>'badge','with_front'=>false),
 		'can_export' => true,
 		'_builtin' => false,
@@ -170,7 +170,7 @@ function quincem_create_post_type() {
 		//'menu_icon' => get_template_directory_uri() . '/images/icon-post.type-integrantes.png',
 		'hierarchical' => false, // if true this post type will be as pages
 		'query_var' => true,
-		'supports' => array('title', 'editor','excerpt','author','comments','trackbacks','thumbnail' ),
+		'supports' => array('title', 'editor','excerpt','author','trackbacks','thumbnail' ),
 		'rewrite' => array('slug'=>'itinerario','with_front'=>false),
 		'can_export' => true,
 		'_builtin' => false,
@@ -200,7 +200,7 @@ function quincem_create_post_type() {
 		//'menu_icon' => get_template_directory_uri() . '/images/icon-post.type-integrantes.png',
 		'hierarchical' => false, // if true this post type will be as pages
 		'query_var' => true,
-		'supports' => array('title', 'editor','excerpt','author','comments','trackbacks' ),
+		'supports' => array('title', 'editor','excerpt','author','trackbacks','thumbnail' ),
 		'rewrite' => array('slug'=>'actividad','with_front'=>false),
 		'can_export' => true,
 		'_builtin' => false,
