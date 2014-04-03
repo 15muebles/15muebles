@@ -122,7 +122,7 @@ body { padding-top: 50px; }
 	text-decoration: none;
 }
 
-#patrocina img {
+.patrocina img {
 	width: 100px;
 }
 
@@ -149,6 +149,9 @@ body { padding-top: 50px; }
 }
 
 /* mosac loop */
+#haz .mosac-item {
+	height: 500px;
+}
 .mosac-item h3 {
 	margin: 0;
 }

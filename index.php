@@ -30,7 +30,7 @@
 			<a class="border-band" href="">About</a>
 		</div>
 	</div>
-	<div id ="patrocina" class="row">
+	<div class="row patrocina">
 		<div class="col-md-4 col-md-offset-3">
 			<ul class="list-inline">
 				<li><img src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-mozilla.png" alt="Mozilla Foundation" /></li>
@@ -51,15 +51,15 @@ $band_ids = array("descubre","aprende","haz");
 $band_bgs = array("#a8d4d4","#b8dbdb","#c7e3e3");
 $band_cols = array(
 	array(
-		'desktop' => 2,
+		'desktop' => 5,
 		'tablet' => 3
 	),
 	array(
-		'desktop' => 2,
+		'desktop' => 5,
 		'tablet' => 3
 	),
 	array(
-		'desktop' => 2,
+		'desktop' => 5,
 		'tablet' => 3
 	),
 );
@@ -75,8 +75,8 @@ $band_count = 0;
 foreach ( $band_pts as $band_pt ) {
 
 	//$col = intval(10 / $band_cols[$band_count]);
-	$col_desktop = $band_cols[$band_count]['desktop'];
-	$col_tablet = $band_cols[$band_count]['tablet'];
+	$col_desktop = intval(10 / $band_cols[$band_count]['desktop']);
+	$col_tablet = intval(10 / $band_cols[$band_count]['tablet']);
 
 	$args = array(
 		'posts_per_page' => -1,
@@ -101,16 +101,16 @@ foreach ( $band_pts as $band_pt ) {
 		// BEGIN *THIS* band loop
 //		$thisband_count = 0;
 		while ( $the_query->have_posts() ) : $the_query->the_post();
-//			if ( $thisband_count == 0 || $thisband_count == $band_cols[$band_count] ) { $thisband_count = 0; echo '<div class="row">';  }
-//			$thisband_count++;
+//			if ( $thisband_count == 0 || $thisband_count == $band_cols[$band_count]['desktop'] ) { $thisband_count = 0; echo '<div class="row">';  }
+			$thisband_count++;
 
 			include "loop-mosac.php";
 
-//			if ( $thisband_count == $band_cols[$band_count] ) { echo "</div>"; }
+//			if ( $thisband_count == $band_cols[$band_count]['desktop'] ) { echo "</div>"; }
 		endwhile;
 		// END *THIS* band loop
 
-//		if ( $thisband_count != $band_cols[$band_count] ) { echo "</div>"; }
+//		if ( $thisband_count != $band_cols[$band_count]['desktop'] ) { echo "</div>"; }
 		?>
 			</div><!-- .mosac -->
 		</section>
