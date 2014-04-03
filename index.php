@@ -49,7 +49,20 @@
 $band_pts = array("itinerario","badge","actividad");
 $band_ids = array("descubre","aprende","haz");
 $band_bgs = array("#a8d4d4","#b8dbdb","#c7e3e3");
-$band_cols = array(5,5,4);
+$band_cols = array(
+	array(
+		'desktop' => 2,
+		'tablet' => 3
+	),
+	array(
+		'desktop' => 2,
+		'tablet' => 3
+	),
+	array(
+		'desktop' => 2,
+		'tablet' => 3
+	),
+);
 $band_tits = array("Descubre","Aprende","Haz");
 $band_subtits = array("Itinerarios","Badges","Actividades");
 $band_descs = array(
@@ -61,7 +74,9 @@ $band_descs = array(
 $band_count = 0;
 foreach ( $band_pts as $band_pt ) {
 
-	$col = intval(10 / $band_cols[$band_count]);
+	//$col = intval(10 / $band_cols[$band_count]);
+	$col_desktop = $band_cols[$band_count]['desktop'];
+	$col_tablet = $band_cols[$band_count]['tablet'];
 
 	$args = array(
 		'posts_per_page' => -1,
@@ -81,31 +96,23 @@ foreach ( $band_pts as $band_pt ) {
 				</div>
 				<div class="sec-desc"><p><?php echo $band_descs[$band_count]; ?></p></div>
 			</header>
+			<div class="mosac">
 		<?php
 		// BEGIN *THIS* band loop
-		$thisband_count = 0;
+//		$thisband_count = 0;
 		while ( $the_query->have_posts() ) : $the_query->the_post();
-			if ( $thisband_count == 0 ) { echo '<div class="row">'; }
-			if ( $thisband_count == $band_cols[$band_count] ) { $thisband_count == 0; }
-			$thisband_count++;
-		?>
+//			if ( $thisband_count == 0 || $thisband_count == $band_cols[$band_count] ) { $thisband_count = 0; echo '<div class="row">';  }
+//			$thisband_count++;
 
-<div class="aligncenter col-md-<?php echo $col ?>">
-<div class="thumbnail">
-	<img data-src="holder.js/300x200" alt="..." />
-	<div class="caption">
-		<h3><?php the_title(); ?></h3>
-		<p><small><?php the_excerpt(); ?></small></p>
-	</div>
-</div>
-</div>
-		<?php
-		if ( $thisband_count == $band_cols[$band_count] ) { echo "</div>"; }
+			include "loop-mosac.php";
+
+//			if ( $thisband_count == $band_cols[$band_count] ) { echo "</div>"; }
 		endwhile;
 		// END *THIS* band loop
 
-		if ( $thisband_count != $band_cols[$band_count] ) { echo "</div>"; }
+//		if ( $thisband_count != $band_cols[$band_count] ) { echo "</div>"; }
 		?>
+			</div><!-- .mosac -->
 		</section>
 		</div><!-- .container -->
 		</div><!-- .container-full -->

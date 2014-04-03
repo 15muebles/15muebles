@@ -45,6 +45,9 @@ function quincem_theme_setup() {
 	// disable admin bar in front end
 	add_filter('show_admin_bar', '__return_false');
 
+	// adding classes to post_class()
+	add_filter('post_class', 'quincem_classes');
+
 } // end quincem theme setup function
 
 // remove item from wordpress dashboard
@@ -237,9 +240,26 @@ function quincem_metaboxes( $meta_boxes ) {
 	$actividades = quincem_get_list("actividad");
 	$badges = quincem_get_list("badge");
 
+	// CUSTOM FIELDS FOR ITINERARIOS AND BADGES
+	$meta_boxes[] = array(
+		'id' => 'quincem_subtit',
+		'title' => 'Subtítulo',
+		'pages' => array('itinerario','badge'), // post type
+		'context' => 'normal', //  'normal', 'advanced', or 'side'
+		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
+		'show_names' => false, // Show field names on the left
+		'fields' => array(
+				array(
+					'name' => 'Subtítulo',
+					'desc' => 'Únicamente el subtítulo, sin paréntesis.',
+					'id' => $prefix . 'subtit',
+					'type' => 'text',
+				),
+		),
+	);
+
 	// CUSTOM FIELDS FOR ITINERARIOS
 	///
-
 	// modulos multicheckbox
 	$meta_boxes[] = array(
 		'id' => 'quincem_modulos',
@@ -366,5 +386,16 @@ function quincem_init_metaboxes() {
 		require_once( 'lib/metabox/init.php' );
 	}
 } // end Init metaboxes
+
+// adding classes to post_class()
+function quincem_classes($classes) {
+	// add bootstrap classes to post elements
+	global $post;
+	$new_classes = array("thumbnail");
+	foreach( $new_classes as $class ) {
+	        $classes[] = $class;
+	        return $classes;
+	}
+} // end adding classes to post_class()
 
 ?>

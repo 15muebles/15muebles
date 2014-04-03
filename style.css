@@ -48,6 +48,10 @@ h3 {
 	margin: 0 auto;
 	padding: 40px 0;
 }
+.mosac {
+	clear: both;
+	padding: 30px 0;
+}
 .thumbnail, .img-thumbnail {
 	box-shadow: none;
 	-webkit-box-shadow: none;
@@ -82,13 +86,96 @@ body { padding-top: 50px; }
 #haz {
 	background-color: #c7e3e3;
 }
+
 .rombo {
 	background-image: url('images/quincem-bg-rombo.png');
 	background-repeat: no-repeat;
 	background-position: center top;
 }
 
+.rombo-tit {
+	color: #fff;
+	margin-bottom: 0;
+	background-image: url('images/quincem-bg-band.png');
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-size: contain;
+}
+.rombo p {
+	line-height: 1em;
+}
 
+.border-band {
+	color: #fff;
+	font-size: 20px;
+	text-transform: uppercase;
+	font-family: "museo700";
+	line-height: 33px;
+	height: 30px;
+	display: block;
+	background-image: url('images/quincem-bg-band-border.png');
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-size: contain;
+}
+.border-band:hover {
+	text-decoration: none;
+}
+
+#patrocina img {
+	width: 100px;
+}
+
+/* main content */
+.sec-tit {
+	float: left;
+}
+.sec-tit h2 {
+	font-size: 60px;
+	line-height: 1em;
+	color: #fff;
+	margin: 0;
+	display: inline;
+}
+.sec-subtit {
+	font-family: 'amatic_scbold';
+	font-size: 34px;
+	line-height: 1em;
+	text-transform: uppercase;
+}
+.sec-desc {
+	padding-top: 3px;
+	color: #fff;
+}
+
+/* mosac loop */
+.mosac-item h3 {
+	margin: 0;
+}
+.mosac-item-subtit {
+	margin: 0;
+	font-family: "amatic_scregular";
+	font-weight: normal;
+}
+.itinerario .mosac-item-subtit {
+	font-size: 21px;
+}
+.badge .mosac-item-subtit {
+	font-size: 19px;
+}
+
+.itinerario .mosac-item-subtit:before {
+	content: "(";
+}
+.itinerario .mosac-item-subtit:after {
+	content: ")";
+}
+.mosac-item-desc {
+	font-size: 85%;
+	margin-top: 1em;
+}
+
+/* media queries */
 @media (min-width: 992px) {
 /* styles just for desktop */
 	.rombo {
@@ -137,56 +224,3 @@ styles just for tablets */
 styles just for tablets */
 }
 
-.rombo-tit {
-	color: #fff;
-	margin-bottom: 0;
-	background-image: url('images/quincem-bg-band.png');
-	background-repeat: no-repeat;
-	background-position: center top;
-	background-size: contain;
-}
-.rombo p {
-	line-height: 1em;
-}
-
-.border-band {
-	color: #fff;
-	font-size: 20px;
-	text-transform: uppercase;
-	font-family: "museo700";
-	line-height: 33px;
-	height: 30px;
-	display: block;
-	background-image: url('images/quincem-bg-band-border.png');
-	background-repeat: no-repeat;
-	background-position: center top;
-	background-size: contain;
-}
-.border-band:hover {
-	text-decoration: none;
-}
-
-#patrocina img {
-	width: 100px;
-}
-
-.sec-tit {
-	float: left;
-}
-.sec-tit h2 {
-	font-size: 60px;
-	line-height: 1em;
-	color: #fff;
-	margin: 0;
-	display: inline;
-}
-.sec-subtit {
-	font-family: 'amatic_scbold';
-	font-size: 34px;
-	line-height: 1em;
-	text-transform: uppercase;
-}
-.sec-desc {
-	padding-top: 3px;
-	color: #fff;
-}
