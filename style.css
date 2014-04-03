@@ -174,6 +174,12 @@ body { padding-top: 50px; }
 	font-size: 85%;
 	margin-top: 1em;
 }
+.mosac-item-iconos {
+	margin-top: 20px;
+}
+.mosac-item-iconos img {
+	width: 32px;
+}
 
 /* media queries */
 @media (min-width: 992px) {
