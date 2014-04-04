@@ -78,10 +78,32 @@ foreach ( $band_pts as $band_pt ) {
 	$col_desktop = intval(10 / $band_cols[$band_count]['desktop']);
 	$col_tablet = intval(10 / $band_cols[$band_count]['tablet']);
 
-	$args = array(
-		'posts_per_page' => -1,
-		'post_type' => $band_pt,
-	);
+	// loop args
+	if ( $band_pt == 'actividad' ) {
+		$current = time();
+		$args = array(
+			'posts_per_page' => -1,
+			'post_type' => $band_pt,
+			'orderby' => 'meta_value_num',
+			'meta_key' => '_quincem_date_begin',
+			'order' => 'ASC',
+			'meta_query' => array(
+				array(
+					'key' => '_quincem_date_end',
+					'value' => $current,
+					'compare' => '>'
+				)
+			)
+		);
+
+	} else {
+		$args = array(
+			'posts_per_page' => -1,
+			'post_type' => $band_pt,
+		);
+
+	}
+
 	$the_query = new WP_Query( $args );
 
 	if ( $the_query->have_posts() ) { ?>
