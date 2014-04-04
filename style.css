@@ -137,15 +137,11 @@ body { padding-top: 50px; }
 }
 
 /* main content */
-.sec-tit {
-	float: left;
-}
 .sec-tit h2 {
 	font-size: 60px;
 	line-height: 1em;
 	color: #fff;
 	margin: 0;
-	display: inline;
 }
 .sec-subtit {
 	font-family: 'amatic_scbold';
@@ -159,9 +155,6 @@ body { padding-top: 50px; }
 }
 
 /* mosac loop */
-#haz .mosac-item {
-	height: 500px;
-}
 .mosac-item h3 {
 	margin: 0;
 }
@@ -207,6 +200,16 @@ body { padding-top: 50px; }
 		line-height: 40px;
 		margin-top: 40px;
 	}
+	#haz .mosac-item {
+		height: 500px;
+	}
+
+	.sec-tit {
+		float: left;
+	}
+	.sec-tit h2 {
+		display: inline;
+	}
 
 /* END
 styles just for desktop */
@@ -223,6 +226,16 @@ styles just for desktop */
 		font-size: 14px;
 		line-height: 30px;
 		margin-top: 25px;
+	}
+	#haz .mosac-item {
+		height: 500px;
+	}
+
+	.sec-tit {
+		float: left;
+	}
+	.sec-tit h2 {
+		display: inline;
 	}
 
 /* END
