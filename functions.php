@@ -132,7 +132,8 @@ function quincem_create_post_type() {
 			'not_found_in_trash' => __( 'Ningún badge en la papelera' ),
 			'parent' => __( 'Superior' )
 		),
-		'has_archive' => true,
+		'description' => 'Estos son nuestros 15 badges: unidades de aprendizaje sobre las habilidades, saberes y herramientas que creemos importante poner en juego para construir una ciudad mejor.',
+		'has_archive' => false,
 		'public' => true,
 		'publicly_queryable' => true,
 		'exclude_from_search' => false,
@@ -162,7 +163,8 @@ function quincem_create_post_type() {
 			'not_found_in_trash' => __( 'Ningún itinerario en la papelera' ),
 			'parent' => __( 'Superior' )
 		),
-		'has_archive' => true,
+		'description' => 'Estos son nuestros 5 itinerarios pedagógicos. Cada itinerario ensaya un recorrido práctico y teórico sobre otra ciudad posible: imaginarios, herramientas, juegos y lenguajes urbanos que nos gustaría sirvieran para empoderar otras políticas.',
+		'has_archive' => false,
 		'public' => true,
 		'publicly_queryable' => true,
 		'exclude_from_search' => false,
@@ -192,7 +194,8 @@ function quincem_create_post_type() {
 			'not_found_in_trash' => __( 'Ningún actividad en la papelera' ),
 			'parent' => __( 'Superior' )
 		),
-		'has_archive' => true,
+		'description' => 'Echa un vistazo a todas las actividades en las que puedes inscribirte y participar: desde talleres de auto-construcción a seminarios teóricos, pasando por debates virtuales o recorridos de abastecimiento.',
+		'has_archive' => false,
 		'public' => true,
 		'publicly_queryable' => true,
 		'exclude_from_search' => false,
