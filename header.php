@@ -79,30 +79,42 @@ wp_head(); ?>
 <?php // better to use body tag as the main container ?>
 <body <?php body_class(); ?>>
 
-<?php // inavbar links
-	if ( !is_home() ) { $link_prefix = QUINCEM_BLOGURL; }
-	else { $link_prefix = ""; }
+<?php
+// inavbar links
+if ( !is_home() ) { $link_prefix = QUINCEM_BLOGURL. "/"; }
+else { $link_prefix = ""; }
+
+// custom post types info
+global $wp_post_types;
+
+// descubre, aprende, haz bands
+$band_pts = array("itinerario","badge","actividad");
+$band_tits = array("Descubre","Aprende","Haz");
 ?>
 
-<div id="top" class="container-full">
-
-	<nav id="pre-navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#quincem-pre-navbar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="<?php echo $link_prefix; ?>#top" title="<?php echo QUINCEM_BLOGNAME; ?>"><img src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-logo.png" alt="<?php echo QUINCEM_BLOGNAME; ?>" /></a>
-			</div>
-			<div class="collapse navbar-collapse" id="quincem-pre-navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li><a href="<?php echo $link_prefix; ?>#descubre">Descubre</a></li>
-					<li><a href="<?php echo $link_prefix; ?>#aprende">Aprende</a></li>
-					<li><a href="<?php echo $link_prefix; ?>#haz">Haz</a></li>
-				</ul>
-			</div>
+<nav id="pre-navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#quincem-pre-navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="<?php echo $link_prefix; ?>#top" title="<?php echo QUINCEM_BLOGNAME; ?>"><img src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-logo.png" alt="<?php echo QUINCEM_BLOGNAME; ?>" /></a>
 		</div>
-	</nav>
+		<div class="collapse navbar-collapse" id="quincem-pre-navbar-collapse">
+			<ul class="nav navbar-nav">
+				<?php $nav_count = 0;
+				foreach ( $band_pts as $pt ) {
+					if ( is_single() && $wp_query->query_vars['post_type'] == $pt ) {
+						echo "<li class='active'><a class='" .$pt. "' href='" .$link_prefix. "#" .$pt. "'>" .$band_tits[$nav_count]. "</a></li>";
+					} else {
+						echo "<li><a href='" .$link_prefix. "#" .$pt. "'>" .$band_tits[$nav_count]. "</a></li>";
+					}
+					$nav_count++;
+				} ?>
+			</ul>
+		</div>
+	</div>
+</nav>

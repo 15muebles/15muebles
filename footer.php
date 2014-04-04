@@ -1,9 +1,9 @@
 <?php
-if ( is_home() ) { $epi_bg = "#c7e3e3"; }
-else { $epi_bg = "#c7e3e3"; }
+if ( is_home() ) { $epi_class = "home"; }
+elseif ( is_single() && $wp_query->query_vars['post_type'] != 'page' ) { $epi_class = $wp_query->query_vars['post_type']; }
 ?>
 
-<div id="epi" class="container-full" style="background-color: <?php echo $epi_bg; ?>;">
+<div id="epi" class="container-full epi-<?php echo $epi_class; ?>">
 
 <div class="container">
 <footer class="aligncenter">

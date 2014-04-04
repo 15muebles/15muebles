@@ -26,6 +26,7 @@ $band_cols = array(
 $rombo_classes = array("rombo col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2","rombo col-md-2 col-sm-2","rombo col-md-2 col-sm-2");
 ?>
 
+<div id="top" class="container-full">
 <div class="container">
 <header class="aligncenter">
 	<div class="row hair">
@@ -110,7 +111,7 @@ foreach ( $band_pts as $band_pt ) {
 
 	if ( $the_query->have_posts() ) { ?>
 
-		<div id="<?php echo $band_ids[$band_count] ?>" class="container-full">
+		<div id="<?php echo $band_pt; ?>" class="container-full">
 		<div class="container">
 		<section>
 			<header class="sec-header">

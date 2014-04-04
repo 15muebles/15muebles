@@ -57,7 +57,7 @@ h3 {
 	-webkit-box-shadow: none;
 }
 
-/* header navbar */
+/* header navbar & footer */
 body { padding-top: 50px; }
 #pre-navbar {
 	font-family: 'museo700';
@@ -73,13 +73,22 @@ body { padding-top: 50px; }
 .navbar-brand {
 	padding: 7px 15px 15px;
 }
-#pre-navbar .active a[href="#descubre"] {
+#pre-navbar .active a[href="#itinerario"],
+#pre-navbar .active .itinerario,
+.epi-itinerario {
 	background-color: #a8d4d4;
 }
-#pre-navbar .active a[href="#aprende"] {
+#pre-navbar .active a[href="#badge"],
+#pre-navbar .active .badge,
+.epi-badge {
 	background-color: #b8dbdb;
 }
-#pre-navbar .active a[href="#haz"] {
+#pre-navbar .active a[href="#actividad"],
+#pre-navbar .active .actividad,
+.epi-actividad {
+	background-color: #c7e3e3;
+}
+.epi-home {
 	background-color: #c7e3e3;
 }
 
@@ -87,13 +96,13 @@ body { padding-top: 50px; }
 #top {
 	background-color: #9cc;
 }
-#descubre {
+#itinerario {
 	background-color: #a8d4d4;
 }
-#aprende {
+#badge {
 	background-color: #b8dbdb;
 }
-#haz {
+#actividad {
 	background-color: #c7e3e3;
 }
 
@@ -200,7 +209,7 @@ body { padding-top: 50px; }
 		line-height: 40px;
 		margin-top: 40px;
 	}
-	#haz .mosac-item {
+	#actividad .mosac-item {
 		height: 500px;
 	}
 
@@ -227,7 +236,7 @@ styles just for desktop */
 		line-height: 30px;
 		margin-top: 25px;
 	}
-	#haz .mosac-item {
+	#actividad .mosac-item {
 		height: 500px;
 	}
 
