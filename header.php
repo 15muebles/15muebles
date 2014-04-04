@@ -79,6 +79,11 @@ wp_head(); ?>
 <?php // better to use body tag as the main container ?>
 <body <?php body_class(); ?>>
 
+<?php // inavbar links
+	if ( !is_home() ) { $link_prefix = QUINCEM_BLOGURL; }
+	else { $link_prefix = ""; }
+?>
+
 <div id="top" class="container-full">
 
 	<nav id="pre-navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -90,13 +95,13 @@ wp_head(); ?>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#top" title="<?php echo QUINCEM_BLOGNAME; ?>"><img src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-logo.png" alt="<?php echo QUINCEM_BLOGNAME; ?>" /></a>
+				<a class="navbar-brand" href="<?php echo $link_prefix; ?>#top" title="<?php echo QUINCEM_BLOGNAME; ?>"><img src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-logo.png" alt="<?php echo QUINCEM_BLOGNAME; ?>" /></a>
 			</div>
 			<div class="collapse navbar-collapse" id="quincem-pre-navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="#descubre">Descubre</a></li>
-					<li><a href="#aprende">Aprende</a></li>
-					<li><a href="#haz">Haz</a></li>
+					<li><a href="<?php echo $link_prefix; ?>#descubre">Descubre</a></li>
+					<li><a href="<?php echo $link_prefix; ?>#aprende">Aprende</a></li>
+					<li><a href="<?php echo $link_prefix; ?>#haz">Haz</a></li>
 				</ul>
 			</div>
 		</div>
