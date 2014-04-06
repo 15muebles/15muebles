@@ -15,7 +15,7 @@
 
 <div id="<?php echo $band_class; ?>" class="container-full">
 <div class="container">
-	<div class="sec-header row">
+	<div class="sec-header row hair">
 		<div class="sec-tit">
 			<h2><?php echo $band_tit; ?></h2>
 			<div class="sec-subtit"><?php echo $band_subtit; ?></div>

@@ -1,12 +1,15 @@
 <?php
-$rel_tit = $rel->post_title;
-$rel_subtit = get_post_meta( $rel->ID, '_quincem_subtit', true );;
+$rel_perma = get_permalink();
+$rel_name = get_the_title();
+$rel_tit = "<h3 class='rel-item-tit'><a href='" .$rel_perma. "' title='" .$rel_name. "' rel='bookmark'>" .$rel_name. "</a></h3>";
+$rel_subtit = get_post_meta( $rel->ID, '_quincem_subtit', true );
+if ( has_post_thumbnail() ) { $rel_logo = "<a href='" .$rel_perma. "' title='" .$rel_name. "' rel='bookmark'>" .get_the_post_thumbnail($rel->ID,'thumbnail',array('class' => 'img-responsive')). "</a>"; } else { $rel_logo = ""; }
 ?>
 	<div class="rel-item aligncenter col-md-3">
 		<div class="thumbnail">
-			<?php echo get_the_post_thumbnail($rel->ID,'thumbnail',array('class' => 'img-responsive')); ?>
+			<?php echo $rel_logo; ?>
 			<div class="caption">
-				<h3 class="rel-item-tit"><?php echo $rel_tit ?></h3>
+				<?php echo $rel_tit; ?>
 				<?php // subtitle
 				if ( $rel_subtit != '' ) { echo "<div class='rel-item-subtit'>" .$rel_subtit. "</div>"; }
 

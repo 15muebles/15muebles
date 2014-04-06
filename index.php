@@ -5,10 +5,7 @@ global $wp_post_types;
 
 // descubre, aprende, haz bands
 $band_pts = array("itinerario","badge","actividad");
-//$band_ids = array("descubre","aprende","haz");
 $band_tits = array("Descubre","Aprende","Haz");
-//$band_subtits = array("Itinerarios","Badges","Actividades");
-//$band_bgs = array("#a8d4d4","#b8dbdb","#c7e3e3");
 $band_cols = array(
 	array(
 		'desktop' => 5,
@@ -78,7 +75,6 @@ foreach ( $band_pts as $band_pt ) {
 	$band_subtit = $wp_post_types[$band_pt]->labels->name;
 	$band_desc = $wp_post_types[$band_pt]->description;
 
-	//$col = intval(10 / $band_cols[$band_count]);
 	$col_desktop = intval(10 / $band_cols[$band_count]['desktop']);
 	$col_tablet = intval(10 / $band_cols[$band_count]['tablet']);
 

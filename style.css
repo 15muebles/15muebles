@@ -168,9 +168,21 @@ body { padding-top: 50px; }
 }
 
 /* mosac loop */
-.mosac-item h1,
-.mosac-item h3 {
+.home .mosac-item:hover img {
+	opacity: 0.7;
+}
+.home .mosac-item:hover a {
+	color: #bd1622;
+}
+.home .mosac-item:hover .mosac-item-desc {
+	color: #fff;
+}
+.mosac-item-tit {
 	margin: 0;
+}
+.mosac-item-tit a {
+	text-decoration: none;
+	color: inherit;
 }
 .mosac-item-subtit {
 	margin: 0;
@@ -211,12 +223,25 @@ body { padding-top: 50px; }
 .rel-item-tit {
 	margin: 0;
 }
+.rel-item-tit a {
+	text-decoration: none;
+	color: inherit;
+}
 .rel-item-subtit {
 	margin: 0;
 	font-family: "amatic_scregular";
 	font-weight: normal;
 	font-size: 18px;
 	white-space: nowrap;
+}
+.rel-item:hover img {
+	opacity: 0.7;
+}
+.rel-item:hover a {
+	color: #bd1622;
+}
+.rel.mosac-item:hover .mosac-item-desc {
+	color: #fff;
 }
 
 /* single */

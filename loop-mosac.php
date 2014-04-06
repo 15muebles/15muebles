@@ -1,9 +1,13 @@
 <?php
 // common vars for all custom post types
 if ( is_single() ) {
-	$item_tit = "<h1>" .get_the_title(). "</h1>";
+	$item_tit = "<h1 class='mosac-item-tit'>" .get_the_title(). "</h1>";
+	if ( has_post_thumbnail() ) { $item_logo = get_the_post_thumbnail($post->ID,'thumbnail',array('class' => 'img-responsive')); } else { $item_logo = ""; }
 } else {
-	$item_tit = "<h3>" .get_the_title(). "</h3>";
+	$item_perma = get_permalink();
+	$item_name = get_the_title();
+	$item_tit = "<h3 class='mosac-item-tit'><a href='" .$item_perma. "' title='" .$item_name. "' rel='bookmark'>" .$item_name. "</a></h3>";
+	if ( has_post_thumbnail() ) { $item_logo = "<a href='" .$item_perma. "' title='" .$item_name. "' rel='bookmark'>" .get_the_post_thumbnail($post->ID,'thumbnail',array('class' => 'img-responsive')). "</a>"; } else { $item_logo = ""; }
 }
 
 // vars depending on the custom post type
@@ -12,7 +16,7 @@ if ( $band_pts[$band_count] == 'itinerario' || $pt == 'itinerario' ) {
 	$item_date_begin = "";
 	$item_date_end = "";
 	$item_icon = get_post_meta( $post->ID, '_quincem_icono',true );
-	$item_icons_out = "<ul class='list-inline'><li><img src='" .$item_icon. "' alt='" .$item_tit. ". " .$item_subtit. "' /></li></ul>";
+	$item_icons_out = "<ul class='list-inline'><li><img src='" .$item_icon. "' alt='" .$item_name. ". " .$item_subtit. "' /></li></ul>";
 	if ( is_single() ) { $item_desc = get_the_content(); }
 	else { $item_desc = get_the_excerpt(); }
 
@@ -59,7 +63,7 @@ if ( $band_pts[$band_count] == 'itinerario' || $pt == 'itinerario' ) {
 
 <article class="mosac-item aligncenter col-md-<?php echo $col_desktop ?> col-sm-<?php echo $col_tablet ?>">
 <div <?php post_class(); ?>>
-	<?php the_post_thumbnail('thumbnail',array('class' => 'img-responsive')); ?>
+	<?php echo $item_logo; ?>
 	<div class="caption">
 		<?php echo $item_tit; ?>
 		<?php // subtitle
