@@ -5,7 +5,7 @@ global $wp_post_types;
 
 // descubre, aprende, haz bands
 $band_pts = array("itinerario","badge","actividad");
-$band_ids = array("descubre","aprende","haz");
+//$band_ids = array("descubre","aprende","haz");
 $band_tits = array("Descubre","Aprende","Haz");
 //$band_subtits = array("Itinerarios","Badges","Actividades");
 //$band_bgs = array("#a8d4d4","#b8dbdb","#c7e3e3");
@@ -43,7 +43,7 @@ $rombo_classes = array("rombo col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2"
 		$rombo_count = 0;
 		foreach ( $band_pts as $band_pt ) { ?>
 		<div class="<?echo $rombo_classes[$rombo_count]; ?>">
-			<h2 class="rombo-tit"><?php echo $band_tits[$rombo_count]; ?></h2>
+			<h2 class="rombo-tit"><?php echo $wp_post_types[$band_pt]->labels->parent; ?></h2>
 			<p><small><?php echo $wp_post_types[$band_pt]->description; ?></small></p>
 		</div>
 		<?php $rombo_count++;
@@ -74,8 +74,9 @@ $band_count = 0;
 foreach ( $band_pts as $band_pt ) {
 
 	// pt vars
-	$band_desc = $wp_post_types[$band_pt]->description;
+	$band_tit = $wp_post_types[$band_pt]->labels->parent; 
 	$band_subtit = $wp_post_types[$band_pt]->labels->name;
+	$band_desc = $wp_post_types[$band_pt]->description;
 
 	//$col = intval(10 / $band_cols[$band_count]);
 	$col_desktop = intval(10 / $band_cols[$band_count]['desktop']);
@@ -116,7 +117,7 @@ foreach ( $band_pts as $band_pt ) {
 		<section>
 			<header class="sec-header row hair">
 				<div class="sec-tit">
-					<h2><?php echo $band_tits[$band_count]; ?></h2>
+					<h2><?php echo $band_tit; ?></h2>
 					<div class="sec-subtit"><?php echo $band_subtit; ?></div>
 				</div>
 				<div class="sec-desc"><p><?php echo $band_desc; ?></p></div>

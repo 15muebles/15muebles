@@ -3,7 +3,7 @@
 	// pt vars
 	//global $pt;
 	$pt = $wp_query->query_vars['post_type'];
-	$band_tit = "Descubre";
+	$band_tit = $wp_post_types[$pt]->labels->parent;
 	$band_subtit = $wp_post_types[$pt]->labels->name;
 	$band_desc = $wp_post_types[$pt]->description;
 	$band_class = $pt;
