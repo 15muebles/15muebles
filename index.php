@@ -114,14 +114,14 @@ foreach ( $band_pts as $band_pt ) {
 		<div id="<?php echo $band_pt; ?>" class="container-full">
 		<div class="container">
 		<section>
-			<header class="sec-header">
+			<header class="sec-header row hair">
 				<div class="sec-tit">
 					<h2><?php echo $band_tits[$band_count]; ?></h2>
 					<div class="sec-subtit"><?php echo $band_subtit; ?></div>
 				</div>
 				<div class="sec-desc"><p><?php echo $band_desc; ?></p></div>
-			</header>
-			<div class="mosac">
+			</header><!-- .sec-header .row .hair-->
+			<div class="mosac row hair">
 		<?php
 		// BEGIN *THIS* band loop
 //		$thisband_count = 0;
@@ -137,7 +137,7 @@ foreach ( $band_pts as $band_pt ) {
 
 //		if ( $thisband_count != $band_cols[$band_count]['desktop'] ) { echo "</div>"; }
 		?>
-			</div><!-- .mosac -->
+			</div><!-- .mosac .row .hair -->
 		</section>
 		</div><!-- .container -->
 		</div><!-- .container-full -->

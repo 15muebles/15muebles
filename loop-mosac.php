@@ -1,15 +1,22 @@
 <?php
-if ( $band_pts[$band_count] == 'itinerario' ) {
-	$item_tit = get_the_title();
+// common vars for all custom post types
+if ( is_single() ) {
+	$item_tit = "<h1>" .get_the_title(). "</h1>";
+} else {
+	$item_tit = "<h3>" .get_the_title(). "</h3>";
+}
+
+// vars depending on the custom post type
+if ( $band_pts[$band_count] == 'itinerario' || $pt == 'itinerario' ) {
 	$item_subtit = get_post_meta( $post->ID, '_quincem_subtit', true );
 	$item_date_begin = "";
 	$item_date_end = "";
-	$item_desc = get_the_excerpt();
 	$item_icon = get_post_meta( $post->ID, '_quincem_icono',true );
 	$item_icons_out = "<ul class='list-inline'><li><img src='" .$item_icon. "' alt='" .$item_tit. ". " .$item_subtit. "' /></li></ul>";
+	if ( is_single() ) { $item_desc = get_the_content(); }
+	else { $item_desc = get_the_excerpt(); }
 
-} elseif ( $band_pts[$band_count] == 'badge' ) {
-	$item_tit = get_the_title();
+} elseif ( $band_pts[$band_count] == 'badge' || $pt == 'badge' ) {
 	$item_subtit = get_post_meta( $post->ID, '_quincem_subtit', true );
 
 	$item_date_begin = "";
@@ -17,8 +24,7 @@ if ( $band_pts[$band_count] == 'itinerario' ) {
 	$item_desc = "";
 	$item_icons_out = "";
 
-} elseif ( $band_pts[$band_count] == 'actividad' ) {
-	$item_tit = get_the_title();
+} elseif ( $band_pts[$band_count] == 'actividad' || $pt == 'actividad' ) {
 	$item_subtit = get_post_meta( $post->ID, '_quincem_escenario', true );
 
 	$item_date_begin = get_post_meta( $post->ID, '_quincem_date_begin', true );
@@ -26,7 +32,6 @@ if ( $band_pts[$band_count] == 'itinerario' ) {
 	$item_date_out = date('d\/m',$item_date_begin). "-" .date('d\/m',$item_date_end);
 
 	$item_desc = get_the_excerpt();
-
 
 	$second_loop_args = array(
 		'post_type' => 'badge',
@@ -56,7 +61,7 @@ if ( $band_pts[$band_count] == 'itinerario' ) {
 <div <?php post_class(); ?>>
 	<?php the_post_thumbnail('thumbnail',array('class' => 'img-responsive')); ?>
 	<div class="caption">
-		<h3><?php echo $item_tit; ?></h3>
+		<?php echo $item_tit; ?>
 		<?php // subtitle
 		if ( $item_subtit != '' ) { echo "<div class='mosac-item-subtit'>" .$item_subtit. "</div>"; }
 

@@ -32,12 +32,12 @@ strong { font-family: 'museo700'; }
 }
 
 /* typo headers */
-h1, h2 {
+h2 {
 	font-family: 'museo700';
 	text-transform: uppercase;
 }
 
-h3 {
+h1, h3 {
 	font-family: 'amatic_scbold';
 	text-transform: uppercase;
 }
@@ -49,8 +49,6 @@ h3 {
 	padding: 40px 0;
 }
 .mosac {
-	clear: both;
-	padding: 30px 0;
 }
 .thumbnail, .img-thumbnail {
 	box-shadow: none;
@@ -164,6 +162,7 @@ body { padding-top: 50px; }
 }
 
 /* mosac loop */
+.mosac-item h1,
 .mosac-item h3 {
 	margin: 0;
 }
@@ -195,6 +194,28 @@ body { padding-top: 50px; }
 }
 .mosac-item-icons img {
 	width: 32px;
+}
+
+/* related loop */
+.rel-tit {
+	margin: 100px 0 0 0;
+	font-size: 18px;
+	color: #fff;
+}
+.rel-item-tit {
+	margin: 0;
+}
+.rel-item-subtit {
+	margin: 0;
+	font-family: "amatic_scregular";
+	font-weight: normal;
+	font-size: 18px;
+	white-space: nowrap;
+}
+
+/* single */
+.single .hentry {
+	clear: both;
 }
 
 /* media queries */
