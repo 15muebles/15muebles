@@ -86,6 +86,12 @@ body { padding-top: 50px; }
 .epi-actividad {
 	background-color: #c7e3e3;
 }
+#pre-navbar .active .badge {
+	font-size: inherit;
+	font-weight: normal;
+	border-radius: 0;
+}
+
 .epi-home {
 	background-color: #c7e3e3;
 }
