@@ -100,6 +100,8 @@ foreach ( $band_pts as $band_pt ) {
 		$args = array(
 			'posts_per_page' => -1,
 			'post_type' => $band_pt,
+			'orderby' => 'title',
+			'order' => 'ASC',
 		);
 
 	} elseif ( $band_pt == 'itinerario' ) {
