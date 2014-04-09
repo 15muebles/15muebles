@@ -37,13 +37,12 @@ jQuery(document).ready(function($) {
 		);
 	});
 
-	// navbar item click event
-	$("#pre-navbar a[href^='#']").on('click', function(e) {
+	// rombo and navbar items click event
+	$(".quincem-smooth a[href^='#']").on('click', function(e) {
 		// prevent default anchor click behavior
 		e.preventDefault();
 
 		// store hash and offset
-		var active = this;
 		var hash = this.hash;
 		offset = $(this.hash).offset().top;
 
@@ -54,12 +53,6 @@ jQuery(document).ready(function($) {
 				// when done, add hash to url
 				// (default click behaviour)
 				window.location.hash = hash;
-				// active link
-				if ( $(active).parent().hasClass('active') ) {}
-				else {
-					$('#pre-navbar .active').removeClass('active');
-					$(active).parent().toggleClass('active');
-				}
 			}
 		);
 	});

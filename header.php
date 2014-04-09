@@ -94,7 +94,7 @@ $band_tits = array("Descubre","Aprende","Haz");
 
 <nav id="pre-navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="container">
-		<div class="navbar-header">
+		<div class="navbar-header quincem-smooth">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#quincem-pre-navbar-collapse">
 				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
@@ -104,7 +104,7 @@ $band_tits = array("Descubre","Aprende","Haz");
 			<a class="navbar-brand" href="<?php echo $link_prefix; ?>#top" title="<?php echo QUINCEM_BLOGNAME; ?>"><img src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-logo.png" alt="<?php echo QUINCEM_BLOGNAME; ?>" /></a>
 		</div>
 		<div class="collapse navbar-collapse" id="quincem-pre-navbar-collapse">
-			<ul class="nav navbar-nav">
+			<ul id="navbar-main" class="nav navbar-nav quincem-smooth">
 				<?php $nav_count = 0;
 				foreach ( $band_pts as $pt ) {
 					if ( is_single() && $wp_query->query_vars['post_type'] == $pt ) {
@@ -114,6 +114,9 @@ $band_tits = array("Descubre","Aprende","Haz");
 					}
 					$nav_count++;
 				} ?>
+			</ul>
+			<ul id="navbar-sec" class="nav navbar-nav navbar-left">
+				<li><a class="border-band-black" href="">About</a></li>
 			</ul>
 		</div>
 	</div>

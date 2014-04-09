@@ -30,6 +30,9 @@ strong { font-family: 'museo700'; }
 .hair {
 	padding-bottom: 30px;
 }
+#top .hair {
+	padding-bottom: 15px;
+}
 
 /* typo headers */
 h2 {
@@ -47,8 +50,6 @@ h1, h3 {
 	width: 100%;
 	margin: 0 auto;
 	padding: 70px 0;
-}
-.mosac {
 }
 .thumbnail, .img-thumbnail {
 	box-shadow: none;
@@ -91,7 +92,18 @@ body { padding-top: 50px; }
 	font-weight: normal;
 	border-radius: 0;
 }
+#navbar-main a:hover,
+#navbar-main .active a {
+	color: #fff;
+}
 
+#navbar-sec {
+	margin-left: 50px;
+}
+#navbar-sec a:hover {
+	color: #000;
+	background-image: url('images/quincem-bg-band-border-black-hover.png');
+}
 .epi-home {
 	background-color: #c7e3e3;
 }
@@ -110,44 +122,65 @@ body { padding-top: 50px; }
 	background-color: #c7e3e3;
 }
 
+#quincem-imago {
+	width: 233px;
+}
 .rombo {
 	background-image: url('images/quincem-bg-rombo.png');
 	background-repeat: no-repeat;
 	background-position: center top;
 }
 
-.rombo-tit {
+.rombo-tit a {
+	display: block;
 	color: #fff;
 	margin-bottom: 0;
-	background-image: url('images/quincem-bg-band.png');
+/*	background-image: url('images/quincem-bg-band.png');*/
+	background-image: url('images/quincem-bg-band-hover.png');
 	background-repeat: no-repeat;
 	background-position: center top;
 	background-size: contain;
+	opacity: 0.7;
+}
+.rombo-tit a:hover {
+	text-decoration: none;
+	opacity: 1;
 }
 .rombo p,
 .home .mosac-item-desc {
 	line-height: 1.1em;
 }
-
-.border-band {
-	color: #fff;
-	font-size: 20px;
+.border-band-black {
+	display: block;
+	background-image: url('images/quincem-bg-band-border-black.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: contain;
+}
+.border-band-white {
+	font-size: 24px;
 	text-transform: uppercase;
 	font-family: "museo700";
-	line-height: 33px;
-	height: 30px;
+	line-height: 37px;
+	height: 34px;
+	color: #fff;
 	display: block;
 	background-image: url('images/quincem-bg-band-border.png');
 	background-repeat: no-repeat;
-	background-position: center top;
+	background-position: center center;
 	background-size: contain;
 }
-.border-band:hover {
+.border-band-white:hover {
 	text-decoration: none;
+	color: #000;
+	background-image: url('images/quincem-bg-band-border-hover.png');
 }
 
-.patrocina img {
-	width: 100px;
+img.patrocina-main {
+	width: 160px;
+}
+img.patrocina-sec {
+	width: 60px;
 }
 
 /* main content */
@@ -258,7 +291,7 @@ body { padding-top: 50px; }
 		min-height: 180px;
 	}
 	.rombo-tit {
-		font-size: 16px;
+		font-size: 18px;
 		line-height: 40px;
 		margin-top: 40px;
 	}

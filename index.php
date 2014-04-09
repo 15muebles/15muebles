@@ -28,7 +28,7 @@ $rombo_classes = array("rombo col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2"
 <header class="aligncenter">
 	<div class="row hair">
 		<div class="col-md-4 col-md-offset-3 col-sm-4 col-sm-offset-3 col-xs-6 col-xs-offset-2">
-			<img class="img-responsive" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-imago.png" alt="<?php echo QUINCEM_BLOGNAME. " | " . QUINCEM_BLOGDESC; ?>" />
+			<img id="quincem-imago" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-imago.png" alt="<?php echo QUINCEM_BLOGNAME. " | " . QUINCEM_BLOGDESC; ?>" />
 			<h1 class="hideout"><?php echo QUINCEM_BLOGNAME ?></h1>
 			<div class="hideout"><strong><?php echo QUINCEM_BLOGDESC ?></strong></div>
 		</div>
@@ -40,7 +40,7 @@ $rombo_classes = array("rombo col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2"
 		$rombo_count = 0;
 		foreach ( $band_pts as $band_pt ) { ?>
 		<div class="<?echo $rombo_classes[$rombo_count]; ?>">
-			<h2 class="rombo-tit"><?php echo $wp_post_types[$band_pt]->labels->parent; ?></h2>
+			<h2 class="rombo-tit quincem-smooth"><a href="#<?php echo $band_pt; ?>"><?php echo $wp_post_types[$band_pt]->labels->parent; ?></a></h2>
 			<p><small><?php echo $wp_post_types[$band_pt]->description; ?></small></p>
 		</div>
 		<?php $rombo_count++;
@@ -48,15 +48,15 @@ $rombo_classes = array("rombo col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2"
 	</div>
 	<div class="row hair">
 		<div class="col-md-2 col-md-offset-4">
-			<a class="border-band" href="">About</a>
+			<a class="border-band-white" href="">About</a>
 		</div>
 	</div>
 	<div class="row patrocina">
 		<div class="col-md-4 col-md-offset-3">
 			<ul class="list-inline">
-				<li><img src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-mozilla.png" alt="Mozilla Foundation" /></li>
-				<li><img src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-mncars.png" alt="Museo Nacional Centro de Arte Reina Sofia" /></li>
-				<li><img src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-15muebles.png" alt="Proyecto 15 muebles" /></li>
+				<li><img class="patrocina-sec" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-mozilla.png" alt="Mozilla Foundation" /></li>
+				<li><img class="patrocina-main" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-15muebles.png" alt="Proyecto 15 muebles" /></li>
+				<li><img class="patrocina-sec" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-mncars.png" alt="Museo Nacional Centro de Arte Reina Sofia" /></li>
 			</ul>
 		</div>
 	</div>
