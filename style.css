@@ -46,7 +46,7 @@ h1, h3 {
 .container-full {
 	width: 100%;
 	margin: 0 auto;
-	padding: 40px 0;
+	padding: 70px 0;
 }
 .mosac {
 }
@@ -124,8 +124,9 @@ body { padding-top: 50px; }
 	background-position: center top;
 	background-size: contain;
 }
-.rombo p {
-	line-height: 1em;
+.rombo p,
+.home .mosac-item-desc {
+	line-height: 1.1em;
 }
 
 .border-band {
@@ -271,6 +272,9 @@ body { padding-top: 50px; }
 	.sec-tit h2 {
 		display: inline;
 	}
+	.sec-desc {
+		width: 40%;
+	}
 
 /* END
 styles just for desktop */
@@ -298,7 +302,9 @@ styles just for desktop */
 	.sec-tit h2 {
 		display: inline;
 	}
-
+	.sec-desc {
+		width: 50%;
+	}
 /* END
 styles just for tablets */
 }

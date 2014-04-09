@@ -9,7 +9,7 @@ jQuery(document).ready(function($) {
 		$("#pre-navbar a[href^='#']").each(
 			function() {
 				hash = this.hash;
-				offset = Number($(this.hash).offset().top) - 40;
+				offset = Number($(this.hash).offset().top);
 				if ( hashNow == hash ) {
 					var active = this;
 					// animate
@@ -45,7 +45,7 @@ jQuery(document).ready(function($) {
 		// store hash and offset
 		var active = this;
 		var hash = this.hash;
-		var offset = Number($(this.hash).offset().top) - 40;
+		offset = $(this.hash).offset().top;
 
 		// animate
 		toAnimate.animate({
