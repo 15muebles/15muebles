@@ -39,6 +39,9 @@ function quincem_theme_setup() {
 	// excerpt support in pages
 	add_post_type_support( 'page', 'excerpt' );
 
+	// add page order to itinerarios
+	add_post_type_support( 'itinerarios', 'page-attributes' );
+
 	// remove unused items from dashboard
 	add_action( 'admin_menu', 'quincem_remove_dashboard_item' );
 
@@ -170,9 +173,9 @@ function quincem_create_post_type() {
 		'exclude_from_search' => false,
 		'menu_position' => 5,
 		//'menu_icon' => get_template_directory_uri() . '/images/icon-post.type-integrantes.png',
-		'hierarchical' => false, // if true this post type will be as pages
+		'hierarchical' => true, // if true this post type will be as pages
 		'query_var' => true,
-		'supports' => array('title', 'editor','excerpt','author','trackbacks','thumbnail' ),
+		'supports' => array('title', 'editor','excerpt','author','trackbacks','thumbnail','page-attributes' ),
 		'rewrite' => array('slug'=>'itinerario','with_front'=>false),
 		'can_export' => true,
 		'_builtin' => false,

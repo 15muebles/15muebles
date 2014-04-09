@@ -96,12 +96,19 @@ foreach ( $band_pts as $band_pt ) {
 			)
 		);
 
-	} else {
+	} elseif ( $band_pt == 'badge' )  {
 		$args = array(
 			'posts_per_page' => -1,
 			'post_type' => $band_pt,
 		);
 
+	} elseif ( $band_pt == 'itinerario' ) {
+		$args = array(
+			'posts_per_page' => -1,
+			'post_type' => $band_pt,
+			'orderby' => 'menu_order',
+			'order' => 'ASC',
+		);
 	}
 
 	$the_query = new WP_Query( $args );
@@ -112,11 +119,13 @@ foreach ( $band_pts as $band_pt ) {
 		<div class="container">
 		<section>
 			<header class="sec-header row hair">
+			<div class="col-md-10 col-sm-10">
 				<div class="sec-tit">
 					<h2><?php echo $band_tit; ?></h2>
 					<div class="sec-subtit"><?php echo $band_subtit; ?></div>
 				</div>
 				<div class="sec-desc"><p><?php echo $band_desc; ?></p></div>
+			</div>
 			</header><!-- .sec-header .row .hair-->
 			<div class="mosac row hair">
 		<?php
