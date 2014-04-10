@@ -18,6 +18,7 @@ function quincem_theme_setup() {
 
 	/* Set up media options: sizes, featured images... */
 	add_action( 'init', 'quincem_media_options' );
+	add_filter( 'image_size_names_choose', 'quincem_custom_sizes' );
 
 	/* Add your nav menus function to the 'init' action hook. */
 	add_action( 'init', 'quincem_register_menus' );
@@ -62,15 +63,27 @@ function quincem_remove_dashboard_item() {
 function quincem_media_options() {
 	/* Add theme support for post thumbnails (featured images). */
 	add_theme_support( 'post-thumbnails', array( 'page','badge','itinerario','actividad') );
-	set_post_thumbnail_size( 231, 0 ); // default Post Thumbnail dimensions
+	//set_post_thumbnail_size( 231, 0 ); // default Post Thumbnail dimensions
+
+	// add icon size
+	add_image_size( 'icon', '32', '32', true );
+//	add_theme_support( 'icon', array( 'badge','itinerario') );
+
+
 	/* set up image sizes*/
-	update_option('thumbnail_size_w', 231);
+	update_option('thumbnail_size_w', 117);
 	update_option('thumbnail_size_h', 0);
-	update_option('medium_size_w', 474);
+	update_option('medium_size_w', 234);
 	update_option('medium_size_h', 0);
-	update_option('large_size_w', 717);
+	update_option('large_size_w', 468);
 	update_option('large_size_h', 0);
 } // end set up media options
+
+function quincem_custom_sizes( $sizes ) {
+    return array_merge( $sizes, array(
+        'icon' => __('Icon'),
+    ) );
+}
 
 // register custom menus
 function quincem_register_menus() {
@@ -276,7 +289,7 @@ function quincem_metaboxes( $meta_boxes ) {
 				'desc' => '',
 				'id' => $prefix . 'icono',
 				'type' => 'file',
-				'allow' => array( 'url', 'attachment' )
+				'allow' => array( 'attachment' )
 			),
 		),
 	);
