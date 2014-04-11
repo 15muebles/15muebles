@@ -72,7 +72,7 @@ if ( is_single() ) {
 
 ?>
 
-<article class="mosac-item aligncenter col-md-<?php echo $col_desktop ?> col-sm-<?php echo $col_tablet ?>">
+<article class="mosac-item aligncenter col-md-5 col-sm-3">
 <div <?php post_class(); ?>>
 	<?php echo $item_logo; ?>
 	<div class="caption">

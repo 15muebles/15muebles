@@ -6,20 +6,6 @@ global $wp_post_types;
 // descubre, aprende, haz bands
 $band_pts = array("itinerario","badge","actividad");
 $band_tits = array("Descubre","Aprende","Haz");
-$band_cols = array(
-	array(
-		'desktop' => 5,
-		'tablet' => 3
-	),
-	array(
-		'desktop' => 5,
-		'tablet' => 3
-	),
-	array(
-		'desktop' => 5,
-		'tablet' => 3
-	),
-);
 $rombo_classes = array("rombo col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2","rombo col-md-2 col-sm-2","rombo col-md-2 col-sm-2");
 ?>
 
@@ -74,9 +60,6 @@ foreach ( $band_pts as $band_pt ) {
 	$band_tit = $wp_post_types[$band_pt]->labels->parent; 
 	$band_subtit = $wp_post_types[$band_pt]->labels->name;
 	$band_desc = $wp_post_types[$band_pt]->description;
-
-	$col_desktop = intval(10 / $band_cols[$band_count]['desktop']);
-	$col_tablet = intval(10 / $band_cols[$band_count]['tablet']);
 
 	// loop args
 	if ( $band_pt == 'actividad' ) {
