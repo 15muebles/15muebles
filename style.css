@@ -100,7 +100,8 @@ body { padding-top: 50px; }
 #navbar-sec {
 	margin-left: 50px;
 }
-#navbar-sec a:hover {
+#navbar-sec a:hover,
+#navbar-sec .active a {
 	color: #000;
 	background-image: url('images/quincem-bg-band-border-black-hover.png');
 }
@@ -312,6 +313,40 @@ img.patrocina-sec {
 .single-itinerario .single-desc,
 .single-badge .single-desc {
 	padding: 30px 0;
+}
+
+/* About page */
+.page-template-page-about-php .container-full {
+	color: #fff;
+	padding: 70px 0 0;
+	background-color: #9fcfcf;
+}
+.epi-about {
+	background-color: #9fcfcf;
+}
+.parent-tit {
+	font-family: 'museo700';
+	margin-top: 0;
+	display: inline-block;
+}
+.child-tit {
+	font-size: 36px;
+	margin-top: 0;
+}
+.page-desc {
+	font-size: 18px;
+	line-height: 1.4em;
+}
+#about-nav {
+	display: inline-block;
+}
+#about-nav a {
+	font-size: 20px;
+	text-transform: uppercase;
+	color: #fff;
+	font-family: 'museo700';
+	text-decoration: none;
+	display: block;
 }
 
 /* media queries */

@@ -1,6 +1,7 @@
 <?php
 if ( is_home() ) { $epi_class = "home"; }
-elseif ( is_single() && $wp_query->query_vars['post_type'] != 'page' ) { $epi_class = $wp_query->query_vars['post_type']; }
+elseif ( is_single() ) { $epi_class = $wp_query->query_vars['post_type']; }
+elseif ( is_page_template('about.php') ) { $epi_class = "about"; }
 ?>
 
 <div id="epi" class="container-full epi-<?php echo $epi_class; ?>">

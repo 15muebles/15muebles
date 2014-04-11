@@ -34,7 +34,7 @@ $rombo_classes = array("rombo col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2"
 	</div>
 	<div class="row hair">
 		<div class="col-md-2 col-md-offset-4">
-			<a class="border-band-white" href="">About</a>
+			<a class="border-band-white" href="/about">About</a>
 		</div>
 	</div>
 	<div class="row patrocina">

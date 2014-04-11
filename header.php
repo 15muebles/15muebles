@@ -116,7 +116,11 @@ $band_tits = array("Descubre","Aprende","Haz");
 				} ?>
 			</ul>
 			<ul id="navbar-sec" class="nav navbar-nav navbar-left">
-				<li><a class="border-band-black" href="">About</a></li>
+				<?php if ( $wp_query->query_vars['pagename'] == 'about' ) { ?>
+					<li class="active"><a class="border-band-black" href="">About</a></li>
+				<?php } else { ?>
+					<li><a class="border-band-black" href="">About</a></li>
+				<?php } ?>
 			</ul>
 		</div>
 	</div>
