@@ -200,6 +200,12 @@ img.patrocina-sec {
 	padding-top: 3px;
 	color: #fff;
 }
+.sec-part-tit {
+	font-size: 34px;
+	line-height: 1em;
+	margin-top: 0;
+}
+
 
 /* mosac loop */
 .home .mosac-item:hover img {
