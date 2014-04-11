@@ -22,14 +22,13 @@ if ( $pt == 'itinerario' ) {
 		$single_icons_out = "<ul class='list-inline'><li>" .$single_icon. "</li></ul>";
 	}
 	$single_img_size = "small";
+	$single_material_out = "";
 
 } elseif ( $pt == 'badge' ) {
 	$single_subtit = get_post_meta( $post->ID, '_quincem_subtit', true );
 	$single_date_begin = "";
 	$single_date_end = "";
 	$single_info = "";
-	$single_desc = "";
-	$single_img_size = "small";
 
 	$second_loop_args = array(
 		'post_type' => 'itinerario',
@@ -54,6 +53,13 @@ if ( $pt == 'itinerario' ) {
 		}
 		$single_icons_out .= "</ul>";
 	 } else { $single_icons_out = ""; }
+	$single_img_size = "small";
+	$single_material = get_post_meta( $post->ID, '_quincem_material',true );
+	if ( $single_material != '' ) {
+		$single_material_out = "<h2>Material de trabajo</h2>" .apply_filters( 'the_content', $single_material );
+	}
+	else { $single_material_out = ""; }
+
 
 } elseif ( $pt == 'actividad' ) {
 	$single_subtit = get_post_meta( $post->ID, '_quincem_escenario', true );
@@ -64,12 +70,9 @@ if ( $pt == 'itinerario' ) {
 	$single_info = get_post_meta( $post->ID, '_quincem_contacto', true );
 	if ( $single_info != '' ) { $single_info_out = apply_filters( 'the_content', $single_info ); }
 	else { $single_info_out = ""; }
-
-	$single_desc = get_the_excerpt();
-
 	$single_icons_out = "";
-
 	$single_img_size = "medium";
+	$single_material_out = "";
 
 }
 
@@ -196,8 +199,10 @@ if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$s
 
 	<div class="col-md-5 col-sm-6">
 		<section class="single-desc">
-		<?php the_content(); ?>
+		<?php the_content();
+		echo $single_material_out; ?>
 		</section>
+
 	</div><!-- .col-md-4 .col-md-offset-1 -->
 
 	</article><!-- .mosac .row .hair -->
