@@ -132,10 +132,12 @@ foreach ( $band_pts as $band_pt ) {
 			<div class="mosac row hair">
 		<?php
 		// BEGIN *THIS* band loop
-//		$thisband_count = 0;
+		$tablet_count = 0;
+		$desktop_count = 0;
 		while ( $the_query->have_posts() ) : $the_query->the_post();
-//			if ( $thisband_count == 0 || $thisband_count == $band_cols[$band_count]['desktop'] ) { $thisband_count = 0; echo '<div class="row">';  }
-			$thisband_count++;
+			if ( $tablet_count == 3 ) { $tablet_count = 0; echo '<div class="clearfix visible-sm"></div>';  }
+			if ( $desktop_count == 5 ) { $desktop_count = 0; echo '<div class="clearfix visible-md visible-lg"></div>';  }
+			$tablet_count++; $desktop_count++;
 
 			include "loop-mosac.php";
 

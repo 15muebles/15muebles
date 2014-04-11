@@ -249,6 +249,12 @@ img.patrocina-sec {
 }
 
 /* related loop */
+.rel-item .thumbnail {
+	padding: 4px 0;
+}
+.rel-item .thumbnail .caption {
+	padding: 9px 0;
+}
 .rel-tit {
 	margin: 100px 0 0 0;
 	font-size: 18px;
@@ -256,6 +262,7 @@ img.patrocina-sec {
 }
 .rel-item-tit {
 	margin: 0;
+	font-size: 18px;
 }
 .rel-item-tit a {
 	text-decoration: none;
@@ -265,8 +272,8 @@ img.patrocina-sec {
 	margin: 0;
 	font-family: "amatic_scregular";
 	font-weight: normal;
-	font-size: 18px;
-	white-space: nowrap;
+	font-size: 16px;
+	line-height: 1em;
 }
 .rel-item:hover img {
 	opacity: 0.7;
@@ -282,6 +289,17 @@ img.patrocina-sec {
 .single .hentry {
 	clear: both;
 }
+.single-tit {
+	margin: 0;
+}
+.single .hentry h2 {
+	color: #fff;
+	font-size: 24px;
+	line-height: 1em;
+}
+.single-desc {
+	padding: 30px 0;
+}
 
 /* media queries */
 @media (min-width: 992px) {
@@ -294,9 +312,6 @@ img.patrocina-sec {
 		font-size: 18px;
 		line-height: 40px;
 		margin-top: 40px;
-	}
-	#actividad .mosac-item {
-		height: 500px;
 	}
 
 	.sec-tit {
@@ -324,9 +339,6 @@ styles just for desktop */
 		font-size: 14px;
 		line-height: 30px;
 		margin-top: 25px;
-	}
-	#actividad .mosac-item {
-		height: 500px;
 	}
 
 	.sec-tit {
