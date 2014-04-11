@@ -286,18 +286,25 @@ img.patrocina-sec {
 }
 
 /* single */
-.single .hentry {
-	clear: both;
-}
 .single-tit {
 	margin: 0;
+}
+.single-subtit {
+	font-family: "amatic_scregular";
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 1em;
+}
+.single-icons {
+	margin-top: 10px;
 }
 .single .hentry h2 {
 	color: #fff;
 	font-size: 24px;
 	line-height: 1em;
 }
-.single-desc {
+.single-itinerario .single-desc,
+.single-badge .single-desc {
 	padding: 30px 0;
 }
 
@@ -350,6 +357,16 @@ styles just for desktop */
 	.sec-desc {
 		width: 50%;
 	}
+	.single-tit {
+		font-size: 30px;
+	}
+	.single-subtit {
+		font-size: 18px;
+	}
+	.single .hentry h2 {
+		font-size: 18px;
+	}
+
 /* END
 styles just for tablets */
 }

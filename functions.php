@@ -63,17 +63,17 @@ function quincem_remove_dashboard_item() {
 function quincem_media_options() {
 	/* Add theme support for post thumbnails (featured images). */
 	add_theme_support( 'post-thumbnails', array( 'page','badge','itinerario','actividad') );
-	//set_post_thumbnail_size( 231, 0 ); // default Post Thumbnail dimensions
 
-	// add icon size
+	// add icon and extra sizes
 	add_image_size( 'icon', '32', '32', true );
-//	add_theme_support( 'icon', array( 'badge','itinerario') );
+	add_image_size( 'small', '234', '0', false );
+	add_image_size( 'extralarge', '819', '0', false );
 
 
 	/* set up image sizes*/
 	update_option('thumbnail_size_w', 117);
 	update_option('thumbnail_size_h', 0);
-	update_option('medium_size_w', 234);
+	update_option('medium_size_w', 351);
 	update_option('medium_size_h', 0);
 	update_option('large_size_w', 468);
 	update_option('large_size_h', 0);
@@ -82,6 +82,8 @@ function quincem_media_options() {
 function quincem_custom_sizes( $sizes ) {
     return array_merge( $sizes, array(
         'icon' => __('Icon'),
+        'small' => __('Small'),
+        'extralarge' => __('Extra Large'),
     ) );
 }
 
@@ -392,7 +394,7 @@ function quincem_metaboxes( $meta_boxes ) {
 	// CUSTOM FIELDS FOR ACTIVIDADES
 	///
 
-	// On/Off line for actividades
+	// On/Off, escenario, fechas for actividades
 	$meta_boxes[] = array(
 		'id' => 'quincem_actividad_meta',
 		'title' => 'Información sobre la actividad',
@@ -431,6 +433,23 @@ function quincem_metaboxes( $meta_boxes ) {
 			),
 		),
 	);
+	// Info de contacto for actividades
+	$meta_boxes[] = array(
+		'id' => 'quincem_contact',
+		'title' => 'Contacto',
+		'pages' => array('actividad'), // post type
+		'context' => 'normal', //  'normal', 'advanced', or 'side'
+		'priority' => 'default',  //  'high', 'core', 'default' or 'low'
+		'show_names' => false, // Show field names on the left
+		'fields' => array(
+				array(
+					'name' => 'Contacto',
+					'id' => $prefix . 'contacto',
+					'type' => 'wysiwyg',
+					'options' => array(),
+				),
+		),
+	);
 
 	return $meta_boxes;
 } // end Add metaboxes
@@ -446,11 +465,12 @@ function quincem_init_metaboxes() {
 function quincem_classes($classes) {
 	// add bootstrap classes to post elements
 	global $post;
-	$new_classes = array("thumbnail");
-	foreach( $new_classes as $class ) {
-	        $classes[] = $class;
-	        return $classes;
-	}
+	if ( is_home() ) { $new_classes = array("thumbnail");}
+	elseif ( is_single() ) { $new_classes = array("row");}
+		foreach( $new_classes as $class ) {
+		        $classes[] = $class;
+		        return $classes;
+		}
 } // end adding classes to post_class()
 
 ?>

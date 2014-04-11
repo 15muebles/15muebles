@@ -12,7 +12,7 @@ if ( $band_pts[$band_count] == 'itinerario' || $pt == 'itinerario' ) {
 	}
 	if ( is_single() ) { $item_desc = get_the_content(); }
 	else { $item_desc = get_the_excerpt(); }
-	$item_img_size = "medium";
+	$item_img_size = "small";
 
 } elseif ( $band_pts[$band_count] == 'badge' || $pt == 'badge' ) {
 	$item_subtit = get_post_meta( $post->ID, '_quincem_subtit', true );
@@ -53,7 +53,7 @@ if ( $band_pts[$band_count] == 'itinerario' || $pt == 'itinerario' ) {
 		$item_icons_out .= "</ul>";
 	 } else { $item_icons_out = ""; }
 
-	$item_img_size = "medium";
+	$item_img_size = "small";
 
 }
 
