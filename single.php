@@ -15,7 +15,7 @@ if ( $pt == 'itinerario' ) {
 	$single_subtit = "";
 	$single_date_begin = "";
 	$single_date_end = "";
-	$single_info = "";
+	$single_info_out = "";
 	$single_icon_id = get_post_meta( $post->ID, '_quincem_icono_id',true );	
 	if ( $single_icon_id != '' ) {
 		$single_icon = wp_get_attachment_image( $single_icon_id, 'icon' );
@@ -59,7 +59,7 @@ if ( $pt == 'itinerario' ) {
 		$single_material_out = "<h2>Material de trabajo</h2>" .apply_filters( 'the_content', $single_material );
 	}
 	else { $single_material_out = ""; }
-
+	$single_info_out = "";
 
 } elseif ( $pt == 'actividad' ) {
 	$single_subtit = get_post_meta( $post->ID, '_quincem_escenario', true );
@@ -124,46 +124,53 @@ if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$s
 		if ( $pt == 'itinerario' ) {
 			$rel_tit = "Badges del itinerario";
 			$rel_array = get_post_meta( $post->ID, '_quincem_badges', false );
-			$rel_ids = implode(",",$rel_array[0]);
-			$args = array(
-				'post_type' => 'badge',
-				'posts_per_page' => -1,
-				'orderby' => 'title',
-				'include' => $rel_ids
-			);
+			if ( count($rel_array) > 0 ) {
+				$rel_ids = implode(",",$rel_array[0]);
+				$args = array(
+					'post_type' => 'badge',
+					'posts_per_page' => -1,
+					'orderby' => 'title',
+					'include' => $rel_ids
+				);
+			}
 			$rel_item_class = "col-md-3 col-md-offset-0 col-sm-4 col-sm-offset-1 col-xs-5";
 			$rel_item_img_size = "thumbnail";
 
 		} elseif ( $pt == 'badge' ) {
 			$rel_tit = "Actividades posibles";
 			$rel_array = get_post_meta( $post->ID, '_quincem_actividades', false );
-			$rel_ids = implode(",",$rel_array[0]);
-			$args = array(
-				'post_type' => 'actividad',
-				'posts_per_page' => -1,
-				'orderby' => 'title',
-				'include' => $rel_ids
-			);
+			if ( count($rel_array) > 0 ) {
+				$rel_ids = implode(",",$rel_array[0]);
+				$args = array(
+					'post_type' => 'actividad',
+					'posts_per_page' => -1,
+					'orderby' => 'title',
+					'include' => $rel_ids
+				);
+			}
 			$rel_item_class = "col-md-5 col-sm-5";
 			$rel_item_img_size = "small";
 
 		} elseif ( $pt == 'actividad' ) {
 			$rel_tit = "Badges de la actividad";
 			$rel_array = get_post_meta( $post->ID, '_quincem_badges', false );
-			$rel_ids = implode(",",$rel_array[0]);
-			$args = array(
-				'post_type' => 'badge',
-				'posts_per_page' => -1,
-				'orderby' => 'title',
-				'include' => $rel_ids
-			);
+			if ( count($rel_array) > 0 ) {
+				$rel_ids = implode(",",$rel_array[0]);
+				$args = array(
+					'post_type' => 'badge',
+					'posts_per_page' => -1,
+					'orderby' => 'title',
+					'include' => $rel_ids
+				);
+			}
 			$rel_item_class = "col-md-3 col-md-offset-0 col-sm-4 col-sm-offset-1 col-xs-5";
 			$rel_item_img_size = "thumbnail";
 
 		}
 
-		$rel_items = get_posts($args);
-		if ( count($rel_items) > 0 ) { ?>
+		if ( count($rel_array) > 0 ) {
+			$rel_items = get_posts($args);
+//		if ( count($rel_items) > 0 ) { ?>
 
 		<section>
 			<header>
