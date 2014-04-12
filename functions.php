@@ -36,6 +36,7 @@ function quincem_theme_setup() {
 
 	// add page order to itinerarios
 	add_post_type_support( 'itinerarios', 'page-attributes' );
+	add_post_type_support( 'badge', 'page-attributes' );
 
 	// remove unused items from dashboard
 	add_action( 'admin_menu', 'quincem_remove_dashboard_item' );

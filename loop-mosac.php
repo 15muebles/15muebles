@@ -1,7 +1,7 @@
 <?php
 
 // vars depending on the custom post type
-if ( $band_pts[$band_count] == 'itinerario' || $pt == 'itinerario' ) {
+if ( $band_pts[$band_count] == 'itinerario' ) {
 	$item_subtit = "";
 	$item_date_begin = "";
 	$item_date_end = "";
@@ -9,12 +9,12 @@ if ( $band_pts[$band_count] == 'itinerario' || $pt == 'itinerario' ) {
 	if ( $item_icon_id != '' ) {
 		$item_icon = wp_get_attachment_image( $item_icon_id, 'icon' );
 		$item_icons_out = "<ul class='list-inline'><li>" .$item_icon. "</li></ul>";
-	}
+	} else { $item_icons_out = ""; }
 	if ( is_single() ) { $item_desc = get_the_content(); }
 	else { $item_desc = get_the_excerpt(); }
 	$item_img_size = "small";
 
-} elseif ( $band_pts[$band_count] == 'badge' || $pt == 'badge' ) {
+} elseif ( $band_pts[$band_count] == 'badge' ) {
 	$item_subtit = get_post_meta( $post->ID, '_quincem_subtit', true );
 
 	$item_date_begin = "";
@@ -23,7 +23,7 @@ if ( $band_pts[$band_count] == 'itinerario' || $pt == 'itinerario' ) {
 	$item_icons_out = "";
 	$item_img_size = array(75,75);
 
-} elseif ( $band_pts[$band_count] == 'actividad' || $pt == 'actividad' ) {
+} elseif ( $band_pts[$band_count] == 'actividad' ) {
 	$item_subtit = get_post_meta( $post->ID, '_quincem_escenario', true );
 
 	$item_date_begin = get_post_meta( $post->ID, '_quincem_date_begin', true );
