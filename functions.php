@@ -20,17 +20,11 @@ function quincem_theme_setup() {
 	add_action( 'init', 'quincem_media_options' );
 	add_filter( 'image_size_names_choose', 'quincem_custom_sizes' );
 
-	/* Add your nav menus function to the 'init' action hook. */
-	add_action( 'init', 'quincem_register_menus' );
-
 	/* Load JavaScript files on the 'wp_enqueue_scripts' action hook. */
 	add_action( 'wp_enqueue_scripts', 'quincem_load_scripts' );
 
 	// Custom post types
 	add_action( 'init', 'quincem_create_post_type', 0 );
-
-	// Custom Taxonomies
-	add_action( 'init', 'quincem_build_taxonomies', 0 );
 
 	// Extra meta boxes in editor
 	add_filter( 'cmb_meta_boxes', 'quincem_metaboxes' );
@@ -86,18 +80,6 @@ function quincem_custom_sizes( $sizes ) {
         'extralarge' => __('Extra Large'),
     ) );
 }
-
-// register custom menus
-function quincem_register_menus() {
-        if ( function_exists( 'register_nav_menus' ) ) {
-                register_nav_menus(
-                array(
-                        'menu-sidebar' => 'Menú sidebar',
-                        'menu-footer' => 'Menú footer',
-                )
-                );
-        }
-} // end register custom menus
 
 // load js scripts to avoid conflicts
 function quincem_load_scripts() {
@@ -229,27 +211,18 @@ function quincem_create_post_type() {
 
 } // end register post types
 
-// register taxonomies
-function quincem_build_taxonomies() {
-//	register_taxonomy( 'type', 'project', array( // type taxonomy
-//		'hierarchical' => true,
-//		'label' => __( 'Type' ),
-//		'name' => __( 'Types' ),
-//		'query_var' => 'type',
-//		'rewrite' => array( 'slug' => 'type', 'with_front' => false ),
-//	) );
-} // end register taxonomies
-
 // get all posts from a post type to be used in select or multicheck forms
 function quincem_get_list($post_type) {
 	$posts = get_posts(array(
 		'posts_per_page' => -1,
 		'post_type' => $post_type,
 	));
-	foreach ( $posts as $post ) {
-		$list[$post->ID] = $post->post_title;
+	if ( count($posts) > 0 ) {
+		foreach ( $posts as $post ) {
+			$list[$post->ID] = $post->post_title;
+		}
+		return $list;
 	}
-	return $list;
 }
 
 //Add metaboxes to several post types edit screen
@@ -421,14 +394,12 @@ function quincem_metaboxes( $meta_boxes ) {
 				'name' => 'Fecha inicio',
 				'id'   => $prefix . 'date_begin',
 				'type' => 'text_date_timestamp',
-				// 'timezone_meta_key' => $prefix . 'timezone', // Optionally make this field honor the timezone selected in the [`select_timezone`](/WebDevStudios/Custom-Metaboxes-and-Fields-for-WordPress/wiki/Field-Types#select_timezone) field specified above
 				'repeatable' => false,
 			),
 			array(
 				'name' => 'Fecha fin',
 				'id'   => $prefix . 'date_end',
 				'type' => 'text_date_timestamp',
-				// 'timezone_meta_key' => $prefix . 'timezone', // Optionally make this field honor the timezone selected in the [`select_timezone`](/WebDevStudios/Custom-Metaboxes-and-Fields-for-WordPress/wiki/Field-Types#select_timezone) field specified above
 				'repeatable' => false,
 			),
 		),
