@@ -33,6 +33,9 @@ strong { font-family: 'museo700'; }
 #top .hair {
 	padding-bottom: 15px;
 }
+.thumbnail .caption {
+	padding: 9px 0;
+}
 
 /* typo headers */
 h2 {
@@ -220,6 +223,7 @@ img.patrocina-sec {
 }
 .mosac-item-tit {
 	margin: 0;
+	white-space: normal;
 }
 .mosac-item-tit a {
 	text-decoration: none;
@@ -229,6 +233,8 @@ img.patrocina-sec {
 	margin: 0;
 	font-family: "amatic_scregular";
 	font-weight: normal;
+	white-space: normal;
+	line-height: 1em;
 }
 .itinerario .mosac-item-subtit,
 .actividad .mosac-item-subtit {
@@ -258,9 +264,6 @@ img.patrocina-sec {
 /* related loop */
 .rel-item .thumbnail {
 	padding: 4px 0;
-}
-.rel-item .thumbnail .caption {
-	padding: 9px 0;
 }
 .rel-tit {
 	margin: 100px 0 0 0;
@@ -359,7 +362,7 @@ img.patrocina-sec {
 	.rombo-tit {
 		font-size: 18px;
 		line-height: 40px;
-		margin-top: 40px;
+		margin: 40px 0 0;
 	}
 
 	.sec-tit {
@@ -386,7 +389,7 @@ styles just for desktop */
 	.rombo-tit {
 		font-size: 14px;
 		line-height: 30px;
-		margin-top: 25px;
+		margin-top: 25px 0 0;
 	}
 
 	.sec-tit {
@@ -420,7 +423,7 @@ styles just for tablets */
 	.rombo-tit {
 		font-size: 14px;
 		line-height: 30px;
-		margin-top: 25px;
+		margin-top: 25px 0 0;
 	}
 
 /* END
