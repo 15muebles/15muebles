@@ -119,7 +119,7 @@ $band_tits = array("Descubre","Aprende","Haz");
 				<?php if ( $wp_query->query_vars['pagename'] == 'about' ) { ?>
 					<li class="active"><a class="border-band-black" href="">About</a></li>
 				<?php } else { ?>
-					<li><a class="border-band-black" href="">About</a></li>
+					<li><a class="border-band-black" href="/about">About</a></li>
 				<?php } ?>
 			</ul>
 		</div>

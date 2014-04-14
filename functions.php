@@ -104,6 +104,16 @@ function quincem_load_scripts() {
 		FALSE
 	);
 	}
+	if ( is_page_template("page-about.php") ) {
+	wp_enqueue_script(
+		'smooth-scroll-page-js',
+		get_template_directory_uri() . '/bootstrap/js/smooth.scroll.page.js',
+		array( 'bootstrap-js' ),
+		'0.1',
+		FALSE
+	);
+	}
+	if ( !is_page() ) {
 	wp_enqueue_script(
 		'tit-position-js',
 		get_template_directory_uri() . '/bootstrap/js/tit.position.js',
@@ -111,6 +121,7 @@ function quincem_load_scripts() {
 		'0.1',
 		FALSE
 	);
+	}
 
 
 } // end load js scripts to avoid conflicts

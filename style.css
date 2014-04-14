@@ -331,6 +331,7 @@ img.patrocina-sec {
 	font-family: 'museo700';
 	margin-top: 0;
 	display: inline-block;
+	font-size: 60px;
 }
 .child-tit {
 	font-size: 36px;
@@ -350,6 +351,21 @@ img.patrocina-sec {
 	font-family: 'museo700';
 	text-decoration: none;
 	display: block;
+}
+#about-nav .active,
+#about-nav li:hover {
+}
+#about-nav .active a,
+#about-nav a:hover {
+	background-image: url(images/quincem-star.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-size: 19px;
+	padding-left: 25px;
+}
+.menutotop {
+	position: fixed;
+	top: 70px;
 }
 
 /* media queries */
@@ -410,6 +426,14 @@ styles just for desktop */
 	.single .hentry h2 {
 		font-size: 18px;
 	}
+	#about-nav a {
+		font-size: 13px;
+	}
+	#about-nav .active a,
+	#about-nav a:hover {
+		background-size: 15px;
+		padding-left: 20px;
+	}
 
 /* END
 styles just for tablets */
@@ -425,7 +449,6 @@ styles just for tablets */
 		line-height: 30px;
 		margin-top: 25px 0 0;
 	}
-
 /* END
 styles just for tablets */
 }

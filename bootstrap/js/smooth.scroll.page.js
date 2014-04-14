@@ -3,10 +3,21 @@ jQuery(document).ready(function($) {
 	var win = $(window);
 	var hashNow = location.hash;
 	var toAnimate = $('html, body');
+	var $header_h = $('#pre-navbar').height();
+	var $pos = 70+$header_h;
+
+	// fix right menu when scroll
+	win.scroll(function () {
+		if (win.scrollTop() <= $pos)
+			$('#about-nav').removeClass('menutotop');
+		else {
+			$('#about-nav').addClass('menutotop');
+		}
+	});
 
 	// change active element if there is a hash in the url
 	win.load(function() {
-		$("#pre-navbar a[href^='#']").each(
+		$("#about-nav a[href^='#']").each(
 			function() {
 				hash = this.hash;
 				offset = Number($(this.hash).offset().top);
@@ -26,11 +37,11 @@ jQuery(document).ready(function($) {
 
 	// change active element when scroll
 	win.scroll(function () {
-		$("#pre-navbar a[href^='#']").each(
+		$("#about-nav a[href^='#']").each(
 			function() {
 				offset = Number($(this.hash).offset().top) - 50;
 				if ( win.scrollTop() > offset ) {
-					$('#pre-navbar .active').removeClass('active');
+					$('#about-nav .active').removeClass('active');
 					$(this).parent().addClass('active');
 				}
 			}
@@ -54,6 +65,8 @@ jQuery(document).ready(function($) {
 				// when done, add hash to url
 				// (default click behaviour)
 				window.location.hash = hash;
+				$('#about-nav .active').removeClass('active');
+				active.parent().addClass('active');
 			}
 		);
 	});

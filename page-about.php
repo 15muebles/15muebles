@@ -7,7 +7,7 @@ while ( have_posts() ) : the_post();
 
 	// containers
 	$pages_loop = "";
-	$pages_nav = "<ul id='about-nav' class='list-inline'>";
+	$pages_nav = "<ul class='list-unstyled quincem-smooth'>";
 
 	// children pages query
 	$args = array(
@@ -21,6 +21,8 @@ while ( have_posts() ) : the_post();
 
 	// parent page
 	$parent_slug = $wp_query->query_vars['pagename'];
+	$parent_tit = get_the_title();
+	$pages_nav .= "<li><a href='#" .$parent_slug. "'>" .$parent_tit. "</a></li>";
 
 	// children pages
 	if( count($children) > 0 ) {
@@ -46,15 +48,17 @@ while ( have_posts() ) : the_post();
 <div class="container">
 	<header class="row">
 		<div class="col-md-10 col-sm-10">
-			<h1 class="parent-tit"><?php the_title(); ?></h1>
-			<?php echo $pages_nav; ?>
+			<h1 class="parent-tit"><?php echo $parent_tit; ?></h1>
 		</div>
 	</header>
 
 	<section class="row page-desc">
-		<div class="col-md-6 col-sm-6">
+		<div class="col-md-6 col-sm-7">
 			<?php the_content(); ?>
 		</div>
+		<nav id="about-nav" class="col-md-4 col-sm-3 hidden-xs">
+			<?php echo $pages_nav; ?>
+		</nav>
 	</section><!-- #<?php echo $parent_slug; ?> -->
 
 </div><!-- .container -->
