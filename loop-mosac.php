@@ -14,6 +14,8 @@ if ( $band_pts[$band_count] == 'itinerario' ) {
 	else { $item_desc = get_the_excerpt(); }
 	$item_img_size = "small";
 
+
+
 } elseif ( $band_pts[$band_count] == 'badge' ) {
 	$item_subtit = get_post_meta( $post->ID, '_quincem_subtit', true );
 
@@ -22,6 +24,8 @@ if ( $band_pts[$band_count] == 'itinerario' ) {
 	$item_desc = "";
 	$item_icons_out = "";
 	$item_img_size = array(75,75);
+
+
 
 } elseif ( $band_pts[$band_count] == 'actividad' ) {
 	$item_subtit = get_post_meta( $post->ID, '_quincem_escenario', true );
@@ -58,17 +62,12 @@ if ( $band_pts[$band_count] == 'itinerario' ) {
 }
 
 // common vars for all custom post types
-if ( is_single() ) {
-	$item_tit = "<h1 class='mosac-item-tit'>" .get_the_title(). "</h1>";
-	if ( has_post_thumbnail() ) { $item_logo = get_the_post_thumbnail($post->ID,'thumbnail',array('class' => 'img-responsive')); } else { $item_logo = ""; }
-} else {
 	$item_perma = get_permalink();
 	$item_name = get_the_title();
 	$item_tit = "<h3 class='mosac-item-tit'><a href='" .$item_perma. "' title='" .$item_name. "' rel='bookmark'>" .$item_name. "</a></h3>";
 	if ( has_post_thumbnail() ) {
 		$item_logo = "<a href='" .$item_perma. "' title='" .$item_name. "' rel='bookmark'>" .get_the_post_thumbnail($post->ID,$item_img_size,array('class' => 'img-responsive')). "</a>"; } else { $item_logo = "";
 	}
-}
 
 ?>
 
