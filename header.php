@@ -42,7 +42,7 @@ if ( is_single() || is_page() ) {
 	$metatype = "article";
 	$img_id = get_post_thumbnail_id();
 	if ( $img_id != '' ) {
-		$img_array = wp_get_attachment_image_src($img_id,'large', true);
+		$img_array = wp_get_attachment_image_src($img_id,'extralarge', true);
 		$metaimg = $img_array[0];
 	} else {
 		$metaimg = "http://ciudad-escuela.org/wp-content/themes/15muebles/images/quincem-logo-detalle.png";
@@ -71,6 +71,13 @@ if ( is_single() || is_page() ) {
 <meta property="og:description" content="<?php echo $metadesc_fb ?>" />
 <meta property="og:url" content="<?php echo $metaperma ?>" />
 <meta property="og:image" content="<?php echo $metaimg; ?>" />
+<!-- twitter meta -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@15muebles">
+<meta name="twitter:title" content="<?php echo $metatit ?>">
+<meta name="twitter:description" content="<?php echo $metadesc_tw ?>">
+<meta name="twitter:creator" content="@15muebles">
+<meta name="twitter:image:src" content="<?php echo $metaimg ?>">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
