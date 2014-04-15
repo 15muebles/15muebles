@@ -40,26 +40,37 @@ if ( is_single() || is_page() ) {
 	$metadesc = substr( $metadesc, 0, 154 );
 	$metatit = $post->post_title;
 	$metatype = "article";
+	$img_id = get_post_thumbnail_id();
+	if ( $img_id != '' ) {
+		$img_array = wp_get_attachment_image_src($img_id,'large', true);
+		$metaimg = $img_array[0];
+	} else {
+		$metaimg = "http://ciudad-escuela.org/wp-content/themes/15muebles/images/quincem-logo-detalle.png";
+	}
+	$metaperma = get_permalink();
+	
 } else {
 	$metadesc = QUINCEM_BLOGDESC;
 	$metadesc_tw = QUINCEM_BLOGDESC;
 	$metadesc_fb = QUINCEM_BLOGDESC;
 	$metatit = QUINCEM_BLOGNAME;
-	$metatype = "blog";
+	$metatype = "website";
+	$metaimg = "http://ciudad-escuela.org/wp-content/themes/15muebles/images/quincem-imago.png";
+	$metaperma = QUINCEM_BLOGURL;
 }
-	$metaperma = get_permalink();
 ?>
 
 <!-- generic meta -->
 <meta content="15muebles" name="author" />
-<meta name="title" content="<?php echo QUINCEM_BLOGNAME ?>" />
-<meta content="<?php echo QUINCEM_BLOGDESC ?>" name="description" />
-<meta content="" name="keywords" />
+<meta name="title" content="<?php echo $metatit ?>" />
+<meta content="<?php echo $metadesc ?>" name="description" />
+<meta content="Pedagogía abierta, pedagogía urbana, pedagogía opensource, pedagogía urbana abierta, escuela abierta, Ciudad Escuela, 15muebles, Open Badges, aprendizaje no reglado, Madrid, Zuloark, Basurama, Domenico Di Siena, Alberto Corsín, Adolfo Estalella, Alfonso Sánchez Uzábal" name="keywords" />
 <!-- facebook meta -->
 <meta property="og:title" content="<?php echo $metatit ?>" />
 <meta property="og:type" content="<?php echo $metatype ?>" />
 <meta property="og:description" content="<?php echo $metadesc_fb ?>" />
 <meta property="og:url" content="<?php echo $metaperma ?>" />
+<meta property="og:image" content="<?php echo $metaimg; ?>" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -70,7 +81,7 @@ if ( is_single() || is_page() ) {
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
 <?php
-if ( is_singular() ) wp_enqueue_script( 'comment-reply' );
+//if ( is_singular() ) wp_enqueue_script( 'comment-reply' );
 wp_head(); ?>
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
 
@@ -80,7 +91,7 @@ wp_head(); ?>
 <body <?php body_class(); ?>>
 
 <?php
-// inavbar links
+// navbar links
 if ( !is_home() ) { $link_prefix = QUINCEM_BLOGURL. "/"; }
 else { $link_prefix = ""; }
 
