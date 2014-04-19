@@ -142,8 +142,20 @@ $band_tits = array("Descubre","Aprende","Haz");
 			</ul>
 
 			<ul id="navbar-third" class="nav navbar-nav navbar-right">
-				<li class="navbar-socialb"><a href="https://twitter.com/15muebles" class="twitter-follow-button" data-show-count="false" data-lang="es">Seguir a @15muebles</a>
-				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				<li class="navbar-socialb">
+<div class="g-follow" data-annotation="bubble" data-height="20" data-href="https://plus.google.com/104536835218787209984" data-rel="publisher"></div>
+
+<!-- Place this tag after the last widget tag. -->
+<script type="text/javascript">
+  window.___gcfg = {lang: 'es'};
+
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
 				</li>
 			</ul>
 		</div>

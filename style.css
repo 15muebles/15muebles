@@ -49,11 +49,6 @@ h1, h3 {
 }
 
 /* common styles */
-.container-full {
-	width: 100%;
-	margin: 0 auto;
-	padding: 70px 0;
-}
 .thumbnail, .img-thumbnail {
 	box-shadow: none;
 	-webkit-box-shadow: none;
@@ -117,7 +112,12 @@ body { padding-top: 50px; }
 	background-color: #c7e3e3;
 }
 
-/* home bands */
+/* home page */
+.home .container-full {
+	width: 100%;
+	margin: 0 auto;
+	padding: 70px 0;
+}
 #top {
 	background-color: #9cc;
 }
@@ -216,7 +216,7 @@ img.patrocina-sec {
 }
 
 
-/* mosac loop */
+/* home mosac loop */
 .home .mosac-item:hover img {
 	opacity: 0.7;
 }
@@ -301,6 +301,11 @@ img.patrocina-sec {
 }
 
 /* single */
+.single .container-full {
+	width: 100%;
+	margin: 0 auto;
+	padding: 20px 0;
+}
 .single-tit {
 	margin: 0;
 }
@@ -325,6 +330,8 @@ img.patrocina-sec {
 
 /* About page */
 .page-template-page-about-php .container-full {
+	width: 100%;
+	margin: 0 auto;
 	color: #fff;
 	padding: 70px 0 0;
 	background-color: #9fcfcf;
