@@ -23,6 +23,7 @@ if ( $pt == 'itinerario' ) {
 	}
 	$single_img_size = "small";
 	$single_material_out = "";
+	$single_como_out = "";
 
 } elseif ( $pt == 'badge' ) {
 	$single_subtit = get_post_meta( $post->ID, '_quincem_subtit', true );
@@ -59,6 +60,11 @@ if ( $pt == 'itinerario' ) {
 		$single_material_out = "<h2>Material de trabajo</h2>" .apply_filters( 'the_content', $single_material );
 	}
 	else { $single_material_out = ""; }
+	$single_como = get_post_meta( $post->ID, '_quincem_badge_como',true );
+	if ( $single_como != '' ) {
+		$single_como_out = "<h2>Cómo ganar el badge</h2>" .apply_filters( 'the_content', $single_como );
+	}
+
 	$single_info_out = "";
 
 } elseif ( $pt == 'actividad' ) {
@@ -79,6 +85,7 @@ if ( $pt == 'itinerario' ) {
 	$single_icons_out = "";
 	$single_img_size = "medium";
 	$single_material_out = "";
+	$single_como_out = "";
 
 }
 
@@ -213,6 +220,7 @@ if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$s
 	<div class="col-md-5 col-sm-6">
 		<section class="single-desc">
 		<?php the_content();
+		echo $single_como_out;
 		echo $single_material_out; ?>
 		</section>
 
