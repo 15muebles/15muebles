@@ -66,7 +66,13 @@ if ( $pt == 'itinerario' ) {
 
 	$single_date_begin = get_post_meta( $post->ID, '_quincem_date_begin', true );
 	$single_date_end = get_post_meta( $post->ID, '_quincem_date_end', true );
-	$single_date_out = date('d\/m',$single_date_begin). "-" .date('d\/m',$single_date_end);
+	$single_date_begin_human = date('d\/m',$single_date_begin);
+	$single_date_end_human = date('d\/m',$single_date_end);
+	if ( $single_date_begin_human == $single_date_end_human ) {
+		$single_date_out = $single_date_begin_human;
+	} else {
+		$single_date_out = $single_date_begin_human. "-" .$single_date_end_human;
+	}
 	$single_info = get_post_meta( $post->ID, '_quincem_contacto', true );
 	if ( $single_info != '' ) { $single_info_out = apply_filters( 'the_content', $single_info ); }
 	else { $single_info_out = ""; }

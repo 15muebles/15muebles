@@ -32,7 +32,13 @@ if ( $band_pts[$band_count] == 'itinerario' ) {
 
 	$item_date_begin = get_post_meta( $post->ID, '_quincem_date_begin', true );
 	$item_date_end = get_post_meta( $post->ID, '_quincem_date_end', true );
-	$item_date_out = date('d\/m',$item_date_begin). "-" .date('d\/m',$item_date_end);
+	$item_date_begin_human = date('d\/m',$item_date_begin);
+	$item_date_end_human = date('d\/m',$item_date_end);
+	if ( $item_date_begin_human == $item_date_end_human ) {
+		$item_date_out = $item_date_begin_human;
+	} else {
+		$item_date_out = $item_date_begin_human. "-" .$item_date_end_human;
+	}
 
 	$item_desc = get_the_excerpt();
 
