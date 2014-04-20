@@ -392,6 +392,18 @@ img.patrocina-sec {
 	top: 70px;
 }
 
+/* Error 404 */
+#e404,
+.epi-e404 {
+	background-color: #ff0;
+}
+#e404 h1 {
+	font-family: 'museo700';
+	font-size: 60px;
+	line-height: 1em;
+	margin-top: 100px;
+}
+
 /* media queries */
 @media (min-width: 992px) {
 /* styles just for desktop */
