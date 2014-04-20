@@ -108,8 +108,20 @@ body { padding-top: 50px; }
 	color: #000;
 	background-image: url('images/quincem-bg-band-border-black-hover.png');
 }
+
+/* footer */
 .epi-home {
 	background-color: #c7e3e3;
+}
+.explica {
+	color: #fff;
+}
+.explica a {
+	color: #fff;
+	text-decoration: underline;
+}
+.explica a:hover {
+	text-decoration: none;
 }
 
 /* home page */
