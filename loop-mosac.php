@@ -56,9 +56,11 @@ if ( $band_pts[$band_count] == 'itinerario' ) {
 	if ( count($badges) > 0 ) {
 		$item_icons_out = "<ul class='list-inline'>";
 		foreach ( $badges as $badge ) {
+			$badge_perma = get_permalink( $badge->ID );
+			$badge_tit = get_the_title( $badge->ID );
 			$badge_icon_id = get_post_meta( $badge->ID, '_quincem_icono_id',true );	
 			$badge_icon = wp_get_attachment_image( $badge_icon_id, 'icon' );
-			$item_icons_out .= "<li>" .$badge_icon. "</li>";
+			$item_icons_out .= "<li><a href='" .$badge_perma. "' title='Badge: " .$badge_tit. "'>" .$badge_icon. "</a></li>";
 		}
 		$item_icons_out .= "</ul>";
 	 } else { $item_icons_out = ""; }

@@ -82,7 +82,31 @@ if ( $pt == 'itinerario' ) {
 	$single_info = get_post_meta( $post->ID, '_quincem_contacto', true );
 	if ( $single_info != '' ) { $single_info_out = apply_filters( 'the_content', $single_info ); }
 	else { $single_info_out = ""; }
-	$single_icons_out = "";
+
+	$second_loop_args = array(
+		'post_type' => 'badge',
+		'meta_query' => array(
+			array(
+				'key' => '_quincem_actividades',
+				'value' => '"' .$post->ID. '"',
+				'compare' => 'LIKE'
+			)
+		)
+	);
+	$badges = get_posts($second_loop_args);
+	if ( count($badges) > 0 ) {
+		$single_icons_out = "<ul class='list-inline single-icons'>";
+		foreach ( $badges as $badge ) {
+			$badge_icon_id = get_post_meta( $badge->ID, '_quincem_icono_id',true );
+			if ( $badge_icon_id != '' ) {
+				$badge_perma = get_permalink( $badge->ID );
+				$badge_tit = get_the_title( $badge->ID );
+				$single_icons_out .= "<li><a href='" .$badge_perma. "' title='Badge: " .$badge_tit. "'>" .wp_get_attachment_image( $badge_icon_id, 'icon' ). "</a></li>";
+			}
+		}
+		$single_icons_out .= "</ul>";
+	 } else { $single_icons_out = ""; }
+
 	$single_img_size = "medium";
 	$single_material_out = "";
 	$single_como_out = "";
