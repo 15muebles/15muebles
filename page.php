@@ -19,7 +19,7 @@ while ( have_posts() ) : the_post();
 	</header>
 
 	<section class="row page-desc">
-		<div class="col-md-6 col-sm-7">
+		<div class="col-md-8 col-sm-8">
 			<?php the_content(); ?>
 		</div>
 	</section><!-- #<?php echo $parent_slug; ?> -->

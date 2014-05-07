@@ -19,7 +19,7 @@ Tags: HTML5, CSS3
 */
 
 /* jokers */
-strong { font-family: 'museo700'; }
+strong { font-weight: normal; font-family: 'museo700'; }
 .aligncenter { text-align: center; }
 .hideout {
 	text-indent: -9999px;
@@ -339,6 +339,21 @@ img.patrocina-sec {
 .single-badge .single-desc {
 	padding: 30px 0;
 }
+.single-solicita {
+	color: white;
+	background-image: url(images/quincem-star.png);
+	background-repeat: no-repeat;
+	background-position: left 3px;
+	background-size: 14px;
+	padding-left: 21px;
+}
+.single-solicita a {
+	color: white;
+	text-decoration: underline;
+}
+.single-solicita a:hover {
+	text-decoration: none;
+}
 
 /* About page and default template page */
 .page-template-default .container-full,
@@ -391,6 +406,17 @@ img.patrocina-sec {
 .menutotop {
 	position: fixed;
 	top: 70px;
+}
+
+/* forms */
+.wpcf7 {
+	margin-top: 70px;
+}
+
+label {
+	font-weight: normal;
+	font-family: 'museo700';
+	line-height: 1em;
 }
 
 /* Error 404 */
