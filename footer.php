@@ -5,15 +5,20 @@ elseif ( is_page() ) { $epi_class = "about"; }
 elseif ( is_404() ) { $epi_class = "e404"; }
 ?>
 
+<footer class="aligncenter">
 <div id="epi" class="container-full epi-<?php echo $epi_class; ?>">
 
 <div class="container">
-<footer class="aligncenter">
-	<div class="row hair">
+	<div class="row">
 		<div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-4 col-xs-offset-3">
 			<img class="img-responsive" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-logo-detalle.png" alt="<?php echo QUINCEM_BLOGNAME; ?>" />
 		</div>
 	</div><!-- .row -->
+</div><!-- .container -->
+</div><!-- .container-full -->
+
+<div id="trasepi" class="container-full">
+<div class="container">
 	<div class="row patrocina">
 	<div class="col-md-4 col-md-offset-3">
 		<ul class="list-inline">
@@ -28,10 +33,10 @@ elseif ( is_404() ) { $epi_class = "e404"; }
 		<div><p><strong>El contenido de Ciudad Escuela</strong>, a menos que se indique lo contrario, está disponible para su uso bajo las condiciones de la licencia <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.es_ES">Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional</a>. <strong>El código de la web de Ciudad Escuela</strong> está igualmente disponible para su uso bajo las condiciones de una licencia <a href="https://github.com/skotperez/15muebles/blob/master/LICENSE">GPL2</a>, y puede <a href="https://github.com/skotperez/15muebles">descargarse libremente</a>. La web de Ciudad Escuela funciona usando <a href="http://wordpress.org">WordPress</a>.</p></div>
 	</div>
 	</div><!-- .row -->
-</footer>
 </div><!-- .container -->
 
 </div><!-- .container-full -->
+</footer>
 
 <?php
 // get number of queries

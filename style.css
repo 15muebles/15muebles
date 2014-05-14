@@ -108,10 +108,24 @@ body { padding-top: 50px; }
 	color: #000;
 	background-image: url('images/quincem-bg-band-border-black-hover.png');
 }
-
-/* footer */
 .epi-home {
 	background-color: #c7e3e3;
+}
+
+/* footer */
+#epi {
+	background-image: url('images/quincem-skyline.png');
+	background-position: center top;
+	background-repeat: repeat-x;
+	background-size: 800px auto;
+	height: 261px;
+}
+#epi .container {
+	margin-top: 27px;
+}
+#trasepi {
+	background-color: #47471a;
+	padding-top: 20px;
 }
 .explica {
 	color: #fff;
