@@ -221,6 +221,37 @@ function quincem_create_post_type() {
 		'_builtin' => false,
 	));
 
+	// Earners post type
+	register_post_type( 'earner', array(
+		'labels' => array(
+			'name' => __( 'Earners' ),
+			'singular_name' => __( 'Earner' ),
+			'add_new_item' => __( 'Añadir earner' ),
+			'edit' => __( 'Editar' ),
+			'edit_item' => __( 'Editar este earner' ),
+			'new_item' => __( 'Nuevo earner' ),
+			'view' => __( 'Ver earner' ),
+			'view_item' => __( 'Ver este earner' ),
+			'search_items' => __( 'Buscar earners' ),
+			'not_found' => __( 'Ningún earner encontrado' ),
+			'not_found_in_trash' => __( 'Ningún earner en la papelera' ),
+			'parent' => __( 'Parent' )
+		),
+		'description' => '',
+		'has_archive' => false,
+		'public' => true,
+		'publicly_queryable' => true,
+		'exclude_from_search' => false,
+		'menu_position' => 5,
+		'menu_icon' => get_template_directory_uri() . '/images/quincem-dashboard-pt-earner.png',
+		'hierarchical' => false, // if true this post type will be as pages
+		'query_var' => true,
+		'supports' => array('title','author','trackbacks','thumbnail'),
+		'rewrite' => array('slug'=>'earner','with_front'=>false),
+		'can_export' => true,
+		'_builtin' => false,
+	));
+
 } // end register post types
 
 // get all posts from a post type to be used in select or multicheck forms
@@ -431,6 +462,43 @@ function quincem_metaboxes( $meta_boxes ) {
 					'type' => 'wysiwyg',
 					'options' => array(),
 				),
+		),
+	);
+
+	// CUSTOM FIELDS FOR EARNERS
+	///
+
+	// mail, evidence, badge
+	$meta_boxes[] = array(
+		'id' => 'quincem_earner_meta',
+		'title' => 'Información sobre el earner',
+		'pages' => array('earner'), // post type
+		'context' => 'normal', //  'normal', 'advanced', or 'side'
+		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
+		'show_names' => true, // Show field names on the left
+		'fields' => array(
+			array(
+				'name' => 'Nombre',
+				'id' => $prefix . 'earner_name',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'Dirección email',
+				'id' => $prefix . 'earner_mail',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'URL del material producido',
+				'id' => $prefix . 'earner_material',
+				'type' => 'text'
+			),
+			array(
+				'name' => 'Test Select',
+				'id' => $prefix . 'earner_badge',
+				'type' => 'select',
+				'options' => $badges,
+				'default' => 'none',
+			),
 		),
 	);
 
