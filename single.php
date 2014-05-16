@@ -24,6 +24,7 @@ if ( $pt == 'itinerario' ) {
 	$single_img_size = "small";
 	$single_material_out = "";
 	$single_como_out = "";
+	$single_earners_out = "";
 
 } elseif ( $pt == 'badge' ) {
 	$single_subtit = get_post_meta( $post->ID, '_quincem_subtit', true );
@@ -53,13 +54,15 @@ if ( $pt == 'itinerario' ) {
 			}
 		}
 		$single_icons_out .= "</ul>";
-	 } else { $single_icons_out = ""; }
+	} else { $single_icons_out = ""; }
+
 	$single_img_size = "small";
 	$single_material = get_post_meta( $post->ID, '_quincem_material',true );
 	if ( $single_material != '' ) {
 		$single_material_out = "<h2>Material de trabajo</h2>" .apply_filters( 'the_content', $single_material );
 	}
 	else { $single_material_out = ""; }
+
 	$single_como = get_post_meta( $post->ID, '_quincem_badge_como',true );
 	if ( $single_como != '' ) {
 		$single_como_out =
@@ -69,6 +72,44 @@ if ( $pt == 'itinerario' ) {
 	}
 
 	$single_info_out = "";
+
+	$third_loop_args = array(
+		'post_type' => 'earner',
+		'meta_query' => array(
+			array(
+				'key' => '_quincem_earner_badge',
+				//'value' => '"' .$post->ID. '"',
+				'value' => $post->ID,
+				'compare' => '='
+			)
+		)
+	);
+	$earners = get_posts($third_loop_args);
+	if ( count($earners) > 0 ) {
+		$single_earners_out = "<ul class='list-inline'>";
+		$earners_script = "";
+		$id_count = 0;
+		foreach ( $earners as $earner ) {
+			$id_count++;
+			if ( has_post_thumbnail( $earner->ID ) ) {
+				$earner_avatar = get_the_post_thumbnail( $earner->ID,'bigicon' );
+			} else { $earner_avatar = "<img src='" .QUINCEM_BLOGTHEME. "/images/quincem-earner-avatar.png' alt='Avatar por omisión en Ciudad Escuela'>"; }
+			$earner_name = get_post_meta( $earner->ID, '_quincem_earner_name', true );
+			$earner_date = $earner->post_date;
+			$earner_material = get_post_meta( $earner->ID, '_quincem_earner_material', true );
+			$single_earners_out .= "<li><a id='earner-" .$id_count. "' class='earner-click' title='" .$earner_name. "'>" .$earner_avatar. "</a></li>";
+			$earners_script .= "
+				jQuery('#earner-$id_count').popover({
+					trigger: 'manual',
+					placement: 'right',
+					html: 'true',
+					content: 'Fecha: " .$earner_date. "<br /><a href=\'" .$earner_material. "\'>Material producido</a>',
+				});
+
+			";
+		}
+		$single_earners_out .= "</ul>";
+	} else { $single_earners_out = ""; }
 
 } elseif ( $pt == 'actividad' ) {
 	$single_subtit = get_post_meta( $post->ID, '_quincem_escenario', true );
@@ -113,6 +154,7 @@ if ( $pt == 'itinerario' ) {
 	$single_img_size = "medium";
 	$single_material_out = "";
 	$single_como_out = "";
+	$single_earners_out = "";
 
 }
 
@@ -151,11 +193,35 @@ if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$s
 			</div>
 		</header>
 
-		<?php if ( $single_info_out != '' ) { ?>
+		<?php // contact info
+		if ( $single_info_out != '' ) { ?>
 		<section class="single-contacto row hair">
 			<div class="col-md-10 col-sd-10">
 				<header><h2>Contacto</h2></header>			
 				<div class="single-contacto-desc"><?php echo $single_info_out; ?></div>
+			</div>
+		</section>
+		<?php } ?>
+
+		<?php // earners list
+		if ( $single_earners_out != '' ) { ?>
+		<section class="single-earners row hair">
+			<div class="col-md-10 col-sd-10">
+				<header><h2>Ganaron el badge</h2></header>			
+				<script type='text/javascript'>
+					jQuery(document).ready(function(){
+						jQuery(".earner-click").on('click', function() {
+							if ( jQuery(this).hasClass("earner-active") ) {
+								jQuery(this).popover("hide").toggleClass("earner-active");
+							} else {
+								jQuery(".earner-active").popover("hide").toggleClass("earner-active");
+								jQuery(this).popover("show").addClass("earner-active");
+							}
+						});
+						<?php echo $earners_script; ?>
+					});
+				</script>
+				<?php echo $single_earners_out; ?>
 			</div>
 		</section>
 		<?php } ?>
@@ -254,6 +320,7 @@ if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$s
 	</div><!-- .col-md-4 .col-md-offset-1 -->
 
 	</article><!-- .mosac .row .hair -->
+
 	<?php endwhile; // end main loop ?>
 
 </div><!-- .container -->

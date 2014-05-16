@@ -119,9 +119,10 @@ body { padding-top: 50px; }
 	background-repeat: repeat-x;
 	background-size: 800px auto;
 	height: 261px;
+	padding: 70px 0;
 }
 #epi .container {
-	margin-top: 27px;
+	margin-top: 14px;
 }
 #trasepi {
 	background-color: #47471a;
@@ -368,6 +369,17 @@ img.patrocina-sec {
 .single-solicita a:hover {
 	text-decoration: none;
 }
+.single-earners {
+	display: none;
+}
+.single-earners .popover {
+	width: 276px;
+}
+.earner-click {
+	cursor: pointer;
+	display: block;
+}
+
 
 /* About page and default template page */
 .page-template-default .container-full,
