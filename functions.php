@@ -61,6 +61,7 @@ function quincem_media_options() {
 
 	// add icon and extra sizes
 	add_image_size( 'icon', '32', '32', true );
+	add_image_size( 'bigicon', '48', '48', true );
 	add_image_size( 'small', '234', '0', false );
 	add_image_size( 'extralarge', '819', '0', false );
 
