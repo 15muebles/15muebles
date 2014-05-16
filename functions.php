@@ -57,7 +57,7 @@ function quincem_remove_dashboard_item() {
 // set up media options
 function quincem_media_options() {
 	/* Add theme support for post thumbnails (featured images). */
-	add_theme_support( 'post-thumbnails', array( 'page','badge','itinerario','actividad') );
+	add_theme_support( 'post-thumbnails', array( 'page','badge','itinerario','actividad','earner') );
 
 	// add icon and extra sizes
 	add_image_size( 'icon', '32', '32', true );
