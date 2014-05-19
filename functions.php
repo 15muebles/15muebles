@@ -47,6 +47,9 @@ function quincem_theme_setup() {
 	// adding classes to post_class()
 	add_filter('post_class', 'quincem_classes');
 
+	add_action('wp_insert_post', 'quincem_write_badge_metadata');
+	add_action('wp_insert_post', 'quincem_write_earner_metadata');
+
 } // end quincem theme setup function
 
 // remove item from wordpress dashboard
@@ -524,5 +527,106 @@ function quincem_classes($classes) {
 		        return $classes;
 		}
 } // end adding classes to post_class()
+
+// create badge json metadata
+function quincem_write_badge_metadata() {
+
+	global $post;
+	if ( $post ) {
+
+	// If this is just a revision, don't continue
+	if ( wp_is_post_revision( $post->ID ) )
+		return;
+
+	if ( $post->post_type == 'badge' && $post->post_status == 'publish' ) {
+		$badge_json = $_SERVER['DOCUMENT_ROOT'] . "/openbadges/badge-" .$post->post_name. ".json";
+		$badge_img = $_SERVER['DOCUMENT_ROOT'] . "/openbadges/images/badge-" .$post->post_name. ".png";
+
+		$perma = get_permalink($post->ID);
+		$subtit = get_post_meta( $post->ID, '_quincem_subtit',true );
+		$wp_img_id = get_post_thumbnail_id( $post->ID );
+ 
+		$data = '{
+"name": "' .$post->post_title. '. ' .$subtit. '",
+"description": "' .$post->post_excerpt. '",
+"image": "http://ciudad-escuela.org/openbadges/images/badge-' .$post->post_name. '.png",
+"criteria": "' .$perma. '",
+"issuer": "http://ciudad-escuela.org/openbadges/issuer-15muebles.json"
+}';
+
+		// json metadata file
+		$handle = fopen( $badge_json, 'w') or die("Cannot create the file index.html. Be sure that " .$badge_json. " directory is writable."); //open file for writing
+		$write_success = fwrite($handle, $data);
+		fclose($handle);
+
+		// badge image
+		if ( $wp_img_id == '' || $wp_img_id == FALSE ) {} else {
+			//copy( wp_get_attachment_url($wp_img_id), $badge_img );
+			$wp_img = wp_get_attachment_image_src($wp_img_id,'large');
+			copy( $wp_img[0], $badge_img );
+		}
+
+	}
+
+	} // end if $post is set
+
+} // end create badge json metadata
+
+// create earner json metadata
+function quincem_write_earner_metadata() {
+
+	global $post;
+	if ( $post ) {
+
+	// If this is just a revision, don't continue
+	if ( wp_is_post_revision( $post->ID ) )
+		return;
+
+	if ( $post->post_type == 'earner' && $post->post_status == 'publish' ) {
+
+		$earner_mail = get_post_meta( $post->ID, '_quincem_earner_mail',true );
+		$earner_evidence = get_post_meta( $post->ID, '_quincem_earner_material',true );
+		$earner_date = $post->post_date;
+		$earner_badge = get_post_meta( $post->ID, '_quincem_earner_badge',true );
+
+		$args = array(
+			'post_type' => 'badge',
+			'include' => $earner_badge
+		);
+		$badges = get_posts($args);
+		foreach ( $badges as $badge ) {
+			$badge_json = "http://ciudad-escuela.org/openbadges/badge-" .$badge->post_name. ".json";
+			$badge_img = "http://ciudad-escuela.org/openbadges/images/badge-" .$badge->post_name. ".png";		
+			$earner_perma = "http://ciudad-escuela.org/openbadges/assertions/badge-" .$badge->post_name. "-" .$post->ID. ".json";
+			$earner_json = $_SERVER['DOCUMENT_ROOT'] . "/openbadges/assertions/badge-" .$badge->post_name. "-" .$post->ID. ".json";
+		}
+ 
+		$data = '{
+"uid": "' .$post->ID. '",
+"recipient": {
+	"type": "email",
+	"hashed": false,
+	"identity": "' .$earner_mail. '"
+},
+"evidence": "' .$earner_evidence. '",
+"issuedOn": "' .$earner_date. '",
+"badge": "' .$badge_json. '",
+"image": "' .$badge_img. '",
+"verify": {
+	"type": "hosted",
+	"url": "' .$earner_perma. '"
+}
+}';
+
+		// json metadata file
+		$handle = fopen( $earner_json, 'w') or die("Cannot create the file index.html. Be sure that " .$earner_json. " directory is writable."); //open file for writing
+		$write_success = fwrite($handle, $data);
+		fclose($handle);
+
+	}
+
+	} // end if $post is set
+
+} // end create badge json metadata
 
 ?>
