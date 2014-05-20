@@ -629,4 +629,162 @@ function quincem_write_earner_metadata() {
 
 } // end create badge json metadata
 
+// reclaim a badge form
+function quincem_reclaim_badge_form() {
+
+	$action = get_permalink();
+
+	$badges = quincem_get_list("badge");
+	$options_badges = "<option></option>";
+	while ( $badge = current($badges) ) {
+		$options_badges .= "<option value='" .key($badges). "'>" .$badge. "</option>";
+		next($badges);
+	}
+
+	$form_out = "
+<form method='post' action='" .$action. "'>
+<div class='row'>
+<div class='form-horizontal col-md-10'>
+
+<div class='form-group'>
+<label for='quincem-form-badge-name' class='col-sm-4 control-label'>Tu nombre</label>
+<div class='col-sm-6'>
+    <input class='form-control' type='text' value='' name='quincem-form-badge-name' />
+</div>
+</div>
+
+<div class='form-group'>
+<label for='quincem-form-badge-mail' class='col-sm-4 control-label'>Tu dirección de correo electrónico</label>
+<div class='col-sm-6'>
+    <input class='form-control' type='text' value='' name='quincem-form-badge-mail' />
+</div>
+</div>
+
+<div class='form-group'>
+<label for='quincem-form-badge-actividad' class='col-sm-4 control-label'>Actividad realizada</label>
+<div class='col-sm-6'>
+    <input class='form-control' type='text' value='' name='quincem-form-badge-actividad' />
+</div>
+</div>
+
+<div class='form-group'>
+<label for='quincem-form-badge-badge' class='col-sm-4 control-label'>Badge solicitado</label>
+<div class='col-sm-6'>
+	<select class='form-control' name='quincem-form-badge-badge'i maxlenght='11' >
+		" .$options_badges. "
+	</select>
+</div>
+</div>
+
+<div class='form-group'>
+<label for='quincem-form-badge-material' class='col-sm-4 control-label'>Dirección URL al material producido</label>
+<div class='col-sm-6'>
+    <input class='form-control' type='text' value='' name='quincem-form-badge-material' />
+</div>
+</div>
+
+<div class='form-group'>
+    <div class='col-sm-offset-4 col-sm-6'>
+    <input class='btn btn-default' type='submit' value='Enviar' name='quincem-form-badge-submit' />
+	<span class='help-block'><small>Todos los campos son requeridos.</small></span>
+    </div>
+  </div>
+
+
+</div>
+</div>
+</form>
+";
+	echo $form_out;
+
+} // end reclaim a badge form
+
+// insert earner data in database
+function quincem_insert_earner() {
+
+	if ( !array_key_exists('quincem-form-badge-submit', $_POST) ) {
+		quincem_reclaim_badge_form();
+		return;
+	} elseif ( sanitize_text_field( $_POST['quincem-form-badge-submit'] ) != 'Enviar' ) {
+		quincem_reclaim_badge_form();
+		return;
+	}
+
+	// messages
+	$error = "Uno o varios campos están vacíos o no tienen un formato válido: en cualquier caso el formulario no se envió correctamente. Por favor, inténtalo de nuevo.";
+	$success = "El formulario ha sido enviado correctamente: hemos recibido tus datos. Vamos a revisarlos y si todo está correcto recibirás el badge en unos cuantos días.";
+
+	// check if all fields have been filled
+	// sanitize them all
+	$earner_name = sanitize_text_field( $_POST['quincem-form-badge-name'] );
+	$earner_mail = sanitize_email( $_POST['quincem-form-badge-mail'] );
+	$earner_material = sanitize_text_field( $_POST['quincem-form-badge-material'] );
+	$earner_actividad = sanitize_text_field( $_POST['quincem-form-badge-actividad'] );
+	$earner_badge = intval( $_POST['quincem-form-badge-badge'] );
+	if ( strlen( $earner_badge ) > 11 ) {
+		echo $error;
+		quincem_reclaim_badge_form();
+		return;
+	}
+	$args = array(
+		'post_type' => 'badge',
+		'include' => $earner_badge
+	);
+	$badges = get_posts($args);
+	if ( count($badges) == 1 ) {
+		foreach ( $badges as $badge ) {
+			$earner_badge_tit = $badge->post_title;
+			$earner_badge_slug = $badge->post_name;
+		}
+	} else {
+		echo $error;
+		quincem_reclaim_badge_form();
+		return;
+	}
+
+	$fields = array(
+		'_quincem_earner_name' => $earner_name,
+		'_quincem_earner_mail' => $earner_mail,
+		'_quincem_earner_actividad' => $earner_actividad,
+		'_quincem_earner_badge' => $earner_badge,
+		'_quincem_earner_material' => $earner_material,
+	);
+	foreach ( $fields as $field ) {
+		if ( $field == '' ) {
+			echo $error;
+			quincem_reclaim_badge_form();
+			return;
+		}
+	}
+	// end checking
+
+	// if everything ok, do insert
+	//$earner_tit = sanitize_title( $earner_name. ": " .$earner_badge_tit, "Título provisional" );
+	$earner_tit = $earner_name. ": " .$earner_badge_tit;
+
+	// insert post
+	$earner_id = wp_insert_post(array(
+		'post_type' => 'earner',
+		'post_status' => 'draft',
+		'post_author' => 1,
+		'post_title' => $earner_tit,
+	));
+
+	if ( $earner_id == 0 ) {
+		echo $error;
+		quincem_reclaim_badge_form();
+		return;
+	}
+
+	// insert custom fields
+	reset($fields);
+	while ( $field = current($fields) ) {
+		add_post_meta($earner_id, key($fields), $field, TRUE);
+		next($fields);
+	}
+	echo $success;
+
+
+} // end insert earner data in database
+
 ?>
