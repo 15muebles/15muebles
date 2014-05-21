@@ -497,7 +497,12 @@ function quincem_metaboxes( $meta_boxes ) {
 				'type' => 'text'
 			),
 			array(
-				'name' => 'Test Select',
+				'name' => 'Actividad realizada',
+				'id' => $prefix . 'earner_actividad',
+				'type' => 'text'
+			),
+			array(
+				'name' => 'Badge conseguido',
 				'id' => $prefix . 'earner_badge',
 				'type' => 'select',
 				'options' => $badges,
