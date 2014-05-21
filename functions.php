@@ -126,6 +126,15 @@ function quincem_load_scripts() {
 		FALSE
 	);
 	}
+	if ( is_page_template("page-solicita-badge.php") ) {
+	wp_enqueue_script(
+		'form-empty-fields-js',
+		get_template_directory_uri() . '/js/form.empty.fields.js',
+		array( 'jquery' ),
+		'0.1',
+		FALSE
+	);
+	}
 
 
 } // end load js scripts to avoid conflicts
@@ -647,7 +656,7 @@ function quincem_reclaim_badge_form() {
 	}
 
 	$form_out = "
-<form method='post' action='" .$action. "'>
+<form id='quincem-form-content' method='post' action='" .$action. "'>
 <div class='row'>
 <div class='form-horizontal col-md-10'>
 
