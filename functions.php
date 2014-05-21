@@ -702,17 +702,27 @@ function quincem_reclaim_badge_form() {
 // insert earner data in database
 function quincem_insert_earner() {
 
+	// messages and locations for redirection
+	$perma = get_permalink();
+	$location = $perma."?form=success";
+	$error = "<div class='alert alert-danger'>Uno o varios campos están vacíos o no tienen un formato válido: en cualquier caso el formulario no se envió correctamente. Por favor, inténtalo de nuevo.</div>";
+	$success = "<div class='alert alert-success'>El formulario ha sido enviado correctamente: hemos recibido tus datos. Vamos a revisarlos y si todo está correcto recibirás el badge en unos cuantos días.</div><p><strong>¿Quieres solicitar otro badge?</strong>: <a href='" .$perma. "'>vuelve al formulario</a>.</p>";
+
+	if ( array_key_exists('form', $_GET) ) {
+	if ( sanitize_text_field( $_GET['form']) == 'success' ){
+		echo "<strong>" .$success. "</strong>";
+		return;
+	}
+	}
+
 	if ( !array_key_exists('quincem-form-badge-submit', $_POST) ) {
 		quincem_reclaim_badge_form();
 		return;
+
 	} elseif ( sanitize_text_field( $_POST['quincem-form-badge-submit'] ) != 'Enviar' ) {
 		quincem_reclaim_badge_form();
 		return;
 	}
-
-	// messages
-	$error = "Uno o varios campos están vacíos o no tienen un formato válido: en cualquier caso el formulario no se envió correctamente. Por favor, inténtalo de nuevo.";
-	$success = "El formulario ha sido enviado correctamente: hemos recibido tus datos. Vamos a revisarlos y si todo está correcto recibirás el badge en unos cuantos días.";
 
 	// check if all fields have been filled
 	// sanitize them all
@@ -782,8 +792,9 @@ function quincem_insert_earner() {
 		add_post_meta($earner_id, key($fields), $field, TRUE);
 		next($fields);
 	}
-	echo $success;
 
+	wp_redirect( $location );
+	exit;	
 
 } // end insert earner data in database
 

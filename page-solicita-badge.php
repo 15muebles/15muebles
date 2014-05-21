@@ -1,4 +1,4 @@
-<?php
+<?php ob_start();
 /* Template name: Solicita badge */
 get_header();
 
