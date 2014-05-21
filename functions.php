@@ -807,8 +807,46 @@ function quincem_insert_earner() {
 		next($fields);
 	}
 
+	// send confirmation mail to earner
+	$to = $earner_mail;
+	$subject = "Solicitud de concesión de badge de Ciudad Escuela";
+	$message = '
+Hola ' .$earner_name. ','
+. "\r\n\r\n" .
+'si estás leyendo este mensaje todo ha ido bien: hemos recibido tu petición para emitir el badge ' .$earner_badge_tit. ' a tu nombre, por tu participación en la actividad ' .$earner_actividad. '.'
+. "\r\n\r\n" .
+'Vamos a revisar el material que has generado durante la actividad [' .$earner_material. '], y si cumple los criterios en unos días recibirás el badge en esta misma dirección de correo, junto con las instrucciones para mostrarlo al mundo.'
+. "\r\n\r\n" .
+'Un saludo del equipo de Ciudad Escuela.';
+	$headers[] = 'From: Ciudad Escuela <no-reply@ciudad-escuela.org>' . "\r\n";
+	$headers[] = 'To: ' .$earner_name. ' <' .$to. '>' . "\r\n";
+	// To send HTML mail, the Content-type header must be set, uncomment the following two lines
+	//$headers[]  = 'MIME-Version: 1.0' . "\r\n";
+	//$headers[] = 'Content-type: text/html; charset=utf-8' . "\r\n";
+	wp_mail( $to, $subject, $message, $headers);
+
+	// send notification mail to issuer
+	$to = "info@montera34.com";
+	$subject = "Solicitud de emisión de badge de Ciudad Escuela";
+	$message = '
++ Nombre del solicitante: ' .$earner_name.
+"\r\n" .
+'+ Dirección e-mail del solicitante: ' .$earner_mail.
+"\r\n\r\n" .
+'+ Actividad realizada: ' .$earner_actividad.
+"\r\n" .
+'+ Badge solicitado: ' .$earner_badge_tit.
+"\r\n" .
+'+ URL del material producido: ' .$earner_material;
+	$headers[] = 'From: ' .$earner_name. ' <' .$earner_mail. '>' . "\r\n";
+	$headers[] = 'To: <' .$to. '>' . "\r\n";
+	// To send HTML mail, the Content-type header must be set, uncomment the following two lines
+	//$headers[]  = 'MIME-Version: 1.0' . "\r\n";
+	//$headers[] = 'Content-type: text/html; charset=utf-8' . "\r\n";
+	wp_mail( $to, $subject, $message, $headers);
+
 	wp_redirect( $location );
-	exit;	
+	exit;
 
 } // end insert earner data in database
 
