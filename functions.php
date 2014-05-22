@@ -48,7 +48,8 @@ function quincem_theme_setup() {
 	add_filter('post_class', 'quincem_classes');
 
 	add_action('wp_insert_post', 'quincem_write_badge_metadata');
-	add_action('wp_insert_post', 'quincem_write_earner_metadata');
+	//add_action('wp_insert_post', 'quincem_write_earner_metadata');
+	add_action('draft_to_publish', 'quincem_earner_admited');
 
 } // end quincem theme setup function
 
@@ -586,8 +587,8 @@ function quincem_write_badge_metadata() {
 
 } // end create badge json metadata
 
-// create earner json metadata
-function quincem_write_earner_metadata() {
+// create earner json metadata and notificate him/her by mail
+function quincem_earner_admited() {
 
 	global $post;
 	if ( $post ) {
@@ -596,12 +597,16 @@ function quincem_write_earner_metadata() {
 	if ( wp_is_post_revision( $post->ID ) )
 		return;
 
-	if ( $post->post_type == 'earner' && $post->post_status == 'publish' ) {
+	//if ( $post->post_type == 'earner' && $post->post_status == 'publish' ) {
+	if ( $post->post_type == 'earner' ) {
 
+		$earner_name = get_post_meta( $post->ID, '_quincem_earner_name',true );
 		$earner_mail = get_post_meta( $post->ID, '_quincem_earner_mail',true );
 		$earner_evidence = get_post_meta( $post->ID, '_quincem_earner_material',true );
 		$earner_date = $post->post_date;
 		$earner_badge = get_post_meta( $post->ID, '_quincem_earner_badge',true );
+		$earner_actividad = get_post_meta( $post->ID, '_quincem_earner_actividad',true );
+		$earner_perma = get_permalink($post->ID);
 
 		$args = array(
 			'post_type' => 'badge',
@@ -609,10 +614,13 @@ function quincem_write_earner_metadata() {
 		);
 		$badges = get_posts($args);
 		foreach ( $badges as $badge ) {
+			$earner_badge_tit = $badge->post_title;
+			$earner_badge_slug = $badge->post_name;
+			$badge_perma = get_permalink();
 			$badge_json = "http://ciudad-escuela.org/openbadges/badge-" .$badge->post_name. ".json";
 			$badge_img = "http://ciudad-escuela.org/openbadges/images/badge-" .$badge->post_name. ".png";		
-			$earner_perma = "http://ciudad-escuela.org/openbadges/assertions/badge-" .$badge->post_name. "-" .$post->ID. ".json";
-			$earner_json = $_SERVER['DOCUMENT_ROOT'] . "/openbadges/assertions/badge-" .$badge->post_name. "-" .$post->ID. ".json";
+			$earner_json_url = "http://ciudad-escuela.org/openbadges/assertions/badge-" .$badge->post_name. "-" .$post->ID. ".json";
+			$earner_json_path = $_SERVER['DOCUMENT_ROOT'] . "/openbadges/assertions/badge-" .$badge->post_name. "-" .$post->ID. ".json";
 		}
  
 		$data = '{
@@ -628,20 +636,47 @@ function quincem_write_earner_metadata() {
 "image": "' .$badge_img. '",
 "verify": {
 	"type": "hosted",
-	"url": "' .$earner_perma. '"
+	"url": "' .$earner_json_url. '"
 }
 }';
 
 		// json metadata file
-		$handle = fopen( $earner_json, 'w') or die("Cannot create the file index.html. Be sure that " .$earner_json. " directory is writable."); //open file for writing
+		$handle = fopen( $earner_json_path, 'w') or die("Cannot create the file index.html. Be sure that " .$earner_json_path. " directory is writable."); //open file for writing
 		$write_success = fwrite($handle, $data);
 		fclose($handle);
 
-	}
+		// notificate user when badge application is admited
+		if ( $write_success != FALSE ) {
+			$to = $earner_mail;
+			$subject = "Has ganado el badge " .$earner_badge_tit;
+			$message = '
+¡Enhorabuena ' .$earner_name. '!'
+. "\r\n\r\n" .
+'has ganado el badge ' .$earner_badge_tit. ' por tu participación en la actividad ' .$earner_actividad. '.'
+. "\r\n\r\n" .
+'Para añadirlo a tu mochila, y poder así mostrárselo al mundo, puedes visitar el siguiente enlace: ' .$earner_perma. '.'
+. "\r\n\r\n" .
+'Te hemos incluido en la lista de personas que ganaron este badge, para que otros puedan consultar el material que has generado. Puedes ver la lista en la sección "Ganaron el badge" del siguiente enlace: ' .$badge_perma. '.'
+. "\r\n\r\n" .
+'Si prefieres no figurar en la lista, comunícanoslo: el badge es tuyo y tú decides dónde y cómo mostrarlo. Puedes escribirnos a badges@ciudad-escuela.org'
+. "\r\n\r\n" .
+'Un saludo del equipo de Ciudad Escuela.';
+			$headers[] = 'From: Ciudad Escuela <badges@ciudad-escuela.org>' . "\r\n";
+			$headers[] = 'To: ' .$earner_name. ' <' .$to. '>' . "\r\n";
+			// To send HTML mail, the Content-type header must be set, uncomment the following two lines
+			//$headers[]  = 'MIME-Version: 1.0' . "\r\n";
+			//$headers[] = 'Content-type: text/html; charset=utf-8' . "\r\n";
+			wp_mail( $to, $subject, $message, $headers);
+
+		} // end if metadata write success
+		// end notificate user
+
+	} // end if post type earner
 
 	} // end if $post is set
 
 } // end create badge json metadata
+
 
 // reclaim a badge form
 function quincem_reclaim_badge_form() {
@@ -850,4 +885,10 @@ Hola ' .$earner_name. ','
 
 } // end insert earner data in database
 
+// add badge to backpack, notificate ciudad escuela system
+//function quincem_earn_badge() {
+
+	
+
+//} // end add badge to backpack
 ?>
