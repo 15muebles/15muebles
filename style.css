@@ -379,6 +379,7 @@ img.patrocina-sec {
 
 
 /* About page and default template page */
+.page-template-page-solicita-badge-php .container-full,
 .page-template-default .container-full,
 .page-template-page-about-php .container-full {
 	width: 100%;

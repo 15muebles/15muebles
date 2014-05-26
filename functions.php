@@ -136,6 +136,15 @@ function quincem_load_scripts() {
 		FALSE
 	);
 	}
+	if ( is_singular('earner') ) {
+//	wp_enqueue_script(
+//		'issuer-js',
+//		'https://backpack.openbadges.org/issuer.js',
+//		array( 'jquery' ),
+//		'0.1',
+//		FALSE
+//	);
+	}
 
 
 } // end load js scripts to avoid conflicts

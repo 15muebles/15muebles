@@ -156,7 +156,7 @@ if ( $pt == 'itinerario' ) {
 	$single_como_out = "";
 	$single_earners_out = "";
 
-}
+} // end vars depending on post type
 
 // common vars for all post types
 if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$single_img_size,array('class' => 'img-responsive')); } else { $single_logo = ""; }
