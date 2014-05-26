@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
 	var hashNow = location.hash;
 	var toAnimate = $('html, body');
 	var $header_h = $('#pre-navbar').height();
-	var $pos = 70+$header_h;
+	var $pos = $header_h;
 
 	// fix right menu when scroll
 	win.scroll(function () {
@@ -48,14 +48,14 @@ jQuery(document).ready(function($) {
 		);
 	});
 
-	// rombo and navbar items click event
+	// navbar items click event
 	$(".quincem-smooth a[href^='#']").on('click', function(e) {
 		// prevent default anchor click behavior
 		e.preventDefault();
 
 		// store hash and offset
 		var hash = this.hash;
-		offset = $(this.hash).offset().top;
+		offset = Number($(this.hash).offset().top);
 		var active = $(this);
 
 		// animate

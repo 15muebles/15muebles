@@ -46,20 +46,28 @@ while ( have_posts() ) : the_post();
 
 <div id="<?php echo $parent_slug ?>" class="container-full">
 <div class="container">
-	<header class="row">
-		<div class="col-md-10 col-sm-10">
-			<h1 class="parent-tit"><?php echo $parent_tit; ?></h1>
-		</div>
-	</header>
-
-	<section class="row page-desc">
+	<div class="row">
 		<div class="col-md-6 col-sm-7">
-			<?php the_content(); ?>
-		</div>
+			<section class="hair">
+				<header>
+				<h1 class="parent-tit"><?php echo $parent_tit; ?></h1>
+				</header>
+
+				<div class="page-desc">
+				<?php the_content(); ?>
+				</div>
+			</section>
+
+			<?php // subpages
+			echo $pages_loop; ?>
+
+		</div><!-- .col-md-6 .col-sm-7 -->
+
 		<nav id="about-nav" class="col-md-4 col-sm-3 hidden-xs">
 			<?php echo $pages_nav; ?>
 		</nav>
-	</section><!-- #<?php echo $parent_slug; ?> -->
+
+	</div><!-- .row -->
 
 </div><!-- .container -->
 </div><!-- .container-full -->
@@ -67,8 +75,6 @@ while ( have_posts() ) : the_post();
 
 <?php endwhile;
 } // end if posts
-
-echo $pages_loop;
 ?>
 
 <?php get_footer(); ?>

@@ -1,18 +1,12 @@
 <?php $pages_loop .= "
-<div id='" .$page_slug. "' class='container-full'>
-<div class='container'>
-	<header class='row'>
-		<div class='col-md-6 col-sm-7'>
-			" .$page_tit. "
-		</div>
+<section id='" .$page_slug. "' class='subpage'>
+	<header>
+	" .$page_tit. "
 	</header>
 
-	<section class='row page-desc'>
-		<div class='col-md-6 col-sm-7'>
-			" .$page_desc. "
-		</div>
-	</section><!-- #" .$page_slug. " -->
+	<div class='page-desc'>
+	" .$page_desc. "
+	</div><!-- .page-desc -->
 
-</div><!-- .container -->
-</div><!-- .container-full -->
+</section><!-- #" .$page_slug. " -->
 "; ?>

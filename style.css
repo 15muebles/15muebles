@@ -384,8 +384,11 @@ img.patrocina-sec {
 	width: 100%;
 	margin: 0 auto;
 	color: #fff;
-	padding: 70px 0 0;
+	padding: 70px 0;
 	background-color: #9fcfcf;
+}
+.subpage {
+	padding: 70px 0;
 }
 .epi-about {
 	background-color: #9fcfcf;
@@ -407,8 +410,12 @@ img.patrocina-sec {
 #about-nav {
 	display: inline-block;
 }
+#about-nav li {
+	padding: 3px 0;
+}
 #about-nav a {
-	font-size: 20px;
+	font-size: 14px;
+	line-height: 1em;
 	text-transform: uppercase;
 	color: #fff;
 	font-family: 'museo700';
@@ -423,8 +430,8 @@ img.patrocina-sec {
 	background-image: url(images/quincem-star.png);
 	background-repeat: no-repeat;
 	background-position: left center;
-	background-size: 19px;
-	padding-left: 25px;
+	background-size: 15px;
+	padding-left: 20px;
 }
 .menutotop {
 	position: fixed;
