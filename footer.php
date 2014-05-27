@@ -30,7 +30,9 @@ elseif ( is_404() ) { $epi_class = "e404"; }
 	</div><!-- .row -->
 	<div class="row explica">
 	<div class="col-md-8 col-md-offset-1">
-		<div><p><strong>El contenido de Ciudad Escuela</strong>, a menos que se indique lo contrario, está disponible para su uso bajo las condiciones de la licencia <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.es_ES">Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional</a>. <strong>El código de la web de Ciudad Escuela</strong> está igualmente disponible para su uso bajo las condiciones de una licencia <a href="https://github.com/skotperez/15muebles/blob/master/LICENSE">GPL2</a>, y puede <a href="https://github.com/skotperez/15muebles">descargarse libremente</a>. La web de Ciudad Escuela funciona usando <a href="http://wordpress.org">WordPress</a>.</p></div>
+		<div><p><strong>El contenido de Ciudad Escuela</strong>, a menos que se indique lo contrario, está disponible para su uso bajo las condiciones de la licencia <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.es_ES">Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional</a>. <strong>El código de la web de Ciudad Escuela</strong> está igualmente disponible para su uso bajo las condiciones de una licencia <a href="https://github.com/skotperez/15muebles/blob/master/LICENSE">GPL2</a>, y puede <a href="https://github.com/skotperez/15muebles">descargarse libremente</a>. La web de Ciudad Escuela funciona usando <a href="http://wordpress.org">WordPress</a>.</p>
+			<p><a href="http://openbadges.org"><img src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-openbadges.png" alt="Openbadges -- Mozilla Foundation" /></a></p>
+		</div>
 	</div>
 	</div><!-- .row -->
 </div><!-- .container -->

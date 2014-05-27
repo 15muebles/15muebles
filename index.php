@@ -40,9 +40,9 @@ $rombo_classes = array("rombo col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2"
 	<div class="row patrocina">
 		<div class="col-md-4 col-md-offset-3">
 			<ul class="list-inline">
-				<li><img class="patrocina-sec" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-mozilla.png" alt="Mozilla Foundation" /></li>
-				<li><img class="patrocina-main" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-15muebles.png" alt="Proyecto 15 muebles" /></li>
-				<li><img class="patrocina-sec" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-mncars.png" alt="Museo Nacional Centro de Arte Reina Sofia" /></li>
+				<li><a href="http://openbadges.org"><img class="patrocina-sec" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-mozilla.png" alt="Mozilla Foundation" /></a></li>
+				<li><a href="http://15muebles.org/"><img class="patrocina-main" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-15muebles.png" alt="Proyecto 15 muebles" /></a></li>
+				<li><a href="http://museoreinasofia.es/"><img class="patrocina-sec" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-mncars.png" alt="Museo Nacional Centro de Arte Reina Sofia" /></a></li>
 			</ul>
 		</div>
 	</div>

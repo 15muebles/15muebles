@@ -103,7 +103,10 @@ body { padding-top: 50px; }
 	padding-top: 15px;
 	padding-bottom: 15px;
 }
-#navbar-sec a:hover,
+#navbar-sec a:hover {
+	color: #fff;
+}
+#navbar-sec .border-band-black:hover,
 #navbar-sec .active a {
 	color: #000;
 	background-image: url('images/quincem-bg-band-border-black-hover.png');
@@ -553,12 +556,14 @@ styles just for tablets */
 	margin-left: inherit;
 }
 #navbar-sec a,
-#navbar-sec a:hover,
 #navbar-sec .active a {
 	color: #000;
-	background-image: none;
+	background-image: none!important;
 }
-
+#navbar-sec a:hover {
+	color: #fff!important;
+	background-image: none!important;
+}
 
 /* END
 styles just for tablets */

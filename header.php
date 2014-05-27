@@ -139,6 +139,7 @@ $band_tits = array("Descubre","Aprende","Haz");
 				<?php } else { ?>
 					<li><a class="border-band-black" href="/about">About</a></li>
 				<?php } ?>
+					<li><a href="/preguntas-frecuentes">FAQ</a></li>
 			</ul>
 
 			<ul id="navbar-third" class="nav navbar-nav navbar-right">
