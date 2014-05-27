@@ -136,16 +136,6 @@ function quincem_load_scripts() {
 		FALSE
 	);
 	}
-	if ( is_singular('earner') ) {
-//	wp_enqueue_script(
-//		'issuer-js',
-//		'https://backpack.openbadges.org/issuer.js',
-//		array( 'jquery' ),
-//		'0.1',
-//		FALSE
-//	);
-	}
-
 
 } // end load js scripts to avoid conflicts
 
@@ -625,7 +615,7 @@ function quincem_earner_admited() {
 		foreach ( $badges as $badge ) {
 			$earner_badge_tit = $badge->post_title;
 			$earner_badge_slug = $badge->post_name;
-			$badge_perma = get_permalink();
+			$badge_perma = get_permalink($badge->ID);
 			$badge_json = "http://ciudad-escuela.org/openbadges/badge-" .$badge->post_name. ".json";
 			$badge_img = "http://ciudad-escuela.org/openbadges/images/badge-" .$badge->post_name. ".png";		
 			$earner_json_url = "http://ciudad-escuela.org/openbadges/assertions/badge-" .$badge->post_name. "-" .$post->ID. ".json";
@@ -692,43 +682,63 @@ function quincem_reclaim_badge_form() {
 
 	$action = get_permalink();
 
+	// which badge
+	if ( array_key_exists('badge_id', $_GET) ) {
+		$badge_from = sanitize_text_field( $_GET['badge_id']);
+	} else { $badge_from = ""; }
+
 	$badges = quincem_get_list("badge");
 	$options_badges = "<option></option>";
 	while ( $badge = current($badges) ) {
-		$options_badges .= "<option value='" .key($badges). "'>" .$badge. "</option>";
+		if ( $badge_from == key($badges) ) {
+			$options_badges .= "<option value='" .key($badges). "' selected>" .$badge. "</option>";
+		} else {
+			$options_badges .= "<option value='" .key($badges). "'>" .$badge. "</option>";
+		}
 		next($badges);
 	}
 
 	$form_out = "
-<form id='quincem-form-content' method='post' action='" .$action. "'>
+<form id='quincem-form-content' method='post' action='" .$action. "' enctype='multipart/form-data'>
 <div class='row'>
 <div class='form-horizontal col-md-10'>
+<legend>Tus datos</legend>
+<div class='form-group'>
+<label for='quincem-form-badge-name' class='col-sm-4 control-label'>Nombre</label>
+<div class='col-sm-6'>
+    <input class='form-control req' type='text' value='' name='quincem-form-badge-name' />
+</div>
+</div>
 
 <div class='form-group'>
-<label for='quincem-form-badge-name' class='col-sm-4 control-label'>Tu nombre</label>
+<label for='quincem-form-badge-mail' class='col-sm-4 control-label'>Dirección de correo electrónico</label>
 <div class='col-sm-6'>
-    <input class='form-control' type='text' value='' name='quincem-form-badge-name' />
+    <input class='form-control req' type='text' value='' name='quincem-form-badge-mail' />
+    <p class='help-block'><small>En el caso de que ya tengas una mochila de badges (Mozilla Backpack) <strong>esta dirección debe ser la misma de tu cuenta Persona</strong>.</small></p>
 </div>
 </div>
 
 <div class='form-group'>
-<label for='quincem-form-badge-mail' class='col-sm-4 control-label'>Tu dirección de correo electrónico</label>
+    <label for='quincem-form-badge-avatar' class='col-sm-4 control-label'>Imagen de perfil</label>
 <div class='col-sm-6'>
-    <input class='form-control' type='text' value='' name='quincem-form-badge-mail' />
+    <input type='file' name='quincem-form-badge-avatar' />
+	<input type='hidden' name='MAX_FILE_SIZE' value='4000000' />
+    <p class='help-block'><small>Tu imagen aparecerá en las listas de ganadores del badge. El archivo <strong>no puede ser más grande de 4MB</strong> y <strong>debe ser una archivo de tipo JPG, PNG o GIF</strong>.</small></p>
 </div>
-</div>
+  </div>
 
+<legend>Datos del badge que solicitas</legend>
 <div class='form-group'>
 <label for='quincem-form-badge-actividad' class='col-sm-4 control-label'>Actividad realizada</label>
 <div class='col-sm-6'>
-    <input class='form-control' type='text' value='' name='quincem-form-badge-actividad' />
+    <input class='form-control req' type='text' value='' name='quincem-form-badge-actividad' />
 </div>
 </div>
 
 <div class='form-group'>
 <label for='quincem-form-badge-badge' class='col-sm-4 control-label'>Badge solicitado</label>
 <div class='col-sm-6'>
-	<select class='form-control' name='quincem-form-badge-badge'i maxlenght='11' >
+	<select class='form-control req' name='quincem-form-badge-badge' maxlenght='11' >
 		" .$options_badges. "
 	</select>
 </div>
@@ -737,14 +747,14 @@ function quincem_reclaim_badge_form() {
 <div class='form-group'>
 <label for='quincem-form-badge-material' class='col-sm-4 control-label'>Dirección URL al material producido</label>
 <div class='col-sm-6'>
-    <input class='form-control' type='text' value='' name='quincem-form-badge-material' />
+    <input class='form-control req' type='text' value='' name='quincem-form-badge-material' />
 </div>
 </div>
 
 <div class='form-group'>
     <div class='col-sm-offset-4 col-sm-6'>
     <input class='btn btn-default' type='submit' value='Enviar' name='quincem-form-badge-submit' />
-	<span class='help-block'><small>Todos los campos son requeridos.</small></span>
+	<span class='help-block'><small><strong>Todos los campos son requeridos excepto la imagen</strong>.</small></span>
     </div>
   </div>
 
@@ -763,7 +773,11 @@ function quincem_insert_earner() {
 	// messages and locations for redirection
 	$perma = get_permalink();
 	$location = $perma."?form=success";
-	$error = "<div class='alert alert-danger'>Uno o varios campos están vacíos o no tienen un formato válido: en cualquier caso el formulario no se envió correctamente. Por favor, inténtalo de nuevo.</div>";
+	$error = "<div class='alert alert-danger'>
+		<p>Uno o varios campos están vacíos o no tienen un formato válido.</p>
+		<p>Si has rellenado el campo de imagen comprueba que no pesa más de 4MB y que está en un formato adecuado (JPG, PNG, GIF).</p>
+		<p>En cualquier caso el formulario no se envió correctamente. Por favor, inténtalo de nuevo.</p>
+	</div>";
 	$success = "<div class='alert alert-success'>El formulario ha sido enviado correctamente: hemos recibido tus datos. Vamos a revisarlos y si todo está correcto recibirás el badge en unos cuantos días.</div><p><strong>¿Quieres solicitar otro badge?</strong>: <a href='" .$perma. "'>vuelve al formulario</a>.</p>";
 
 	if ( array_key_exists('form', $_GET) ) {
@@ -779,6 +793,7 @@ function quincem_insert_earner() {
 
 	} elseif ( sanitize_text_field( $_POST['quincem-form-badge-submit'] ) != 'Enviar' ) {
 		quincem_reclaim_badge_form();
+		echo "har";
 		return;
 	}
 
@@ -794,6 +809,7 @@ function quincem_insert_earner() {
 		quincem_reclaim_badge_form();
 		return;
 	}
+	// check that badge exists
 	$args = array(
 		'post_type' => 'badge',
 		'include' => $earner_badge
@@ -809,7 +825,7 @@ function quincem_insert_earner() {
 		quincem_reclaim_badge_form();
 		return;
 	}
-
+	// check that all required fields were filled
 	$fields = array(
 		'_quincem_earner_name' => $earner_name,
 		'_quincem_earner_mail' => $earner_mail,
@@ -824,6 +840,27 @@ function quincem_insert_earner() {
 			return;
 		}
 	}
+	// checking if image file have the right format and size
+	if ( array_key_exists('quincem-form-badge-avatar', $_FILES) ) {
+		$file = $_FILES['quincem-form-badge-avatar'];
+		if ( $file['name'] != '' ) {
+			$finfo = new finfo(FILEINFO_MIME_TYPE);
+			$mime = $finfo->file($file['tmp_name']); 
+			//if ( $file['type'] == 'text/plain' || $file['type'] == 'application/pdf' || $file['type'] == 'application/vnd' ) {}
+			if ( $mime == 'image/png' || $mime == 'image/jpg' || $mime == 'image/jpeg' || $mime == 'image/gif' ) {}
+			else {
+				echo $error;
+				quincem_reclaim_badge_form();
+				return;
+			}
+			if ( $file['size'] > '4000000' ) {
+				echo $error;
+				quincem_reclaim_badge_form();
+				return;
+			}
+		} // if filename is not empty
+	} // if file has been uploaded
+
 	// end checking
 
 	// if everything ok, do insert
@@ -851,6 +888,61 @@ function quincem_insert_earner() {
 		next($fields);
 	}
 
+	// file insert
+	$upload_dir_vars = wp_upload_dir();
+	$upload_dir = $upload_dir_vars['path']; // absolute path to uploads folder
+	$uploaddir = realpath($upload_dir);
+
+	// if image has been added to form
+	if ( array_key_exists('quincem-form-badge-avatar', $_FILES) ) {
+		$file = $_FILES['quincem-form-badge-avatar'];
+		$filename = basename($file['name']); // file name in client machine
+		$filename = trim($filename); // removing spaces at the begining and end
+		$filename = ereg_replace(" ", "-", $filename); // removing spaces inside the name
+
+		$typefile = $file['type']; // file type
+		$uploadfile = $uploaddir.'/'.$filename;
+
+		$slugname = preg_replace('/\.[^.]+$/', '', basename($uploadfile));
+
+		// if file exists
+		if ( file_exists($uploadfile) ) {
+			$count = "a";
+			while ( file_exists($uploadfile) ) {
+				$count++;
+				if ( $typefile == 'image/png' ) { $exten = 'png'; }
+				elseif ( $typefile == 'image/jpg' ) { $exten = 'jpg'; }
+				elseif ( $typefile == 'image/jpeg' ) { $exten = 'jpg'; }
+				elseif ( $typefile == 'image/gif' ) { $exten = 'gif'; }
+				$uploadfile = $uploaddir.'/'.$slugname.'-'.$count.'.'.$exten;
+			}
+		} // end if file exist
+
+		// if the file is uploaded, do the insert
+		if (move_uploaded_file($file['tmp_name'], $uploadfile)) {
+			$slugname = preg_replace('/\.[^.]+$/', '', basename($uploadfile)); // defining image slug again to make it matching the file name
+			$attachment = array(
+				'post_mime_type' => $typefile,
+				'post_title' => $earner_name,
+				'post_content' => '',
+				'post_status' => 'inherit'
+			);
+
+			$attach_id = wp_insert_attachment( $attachment, $uploadfile, $earner_id );
+			// you must first include the image.php file
+			// for the function wp_generate_attachment_metadata() to work
+			require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+
+			$attach_data = wp_generate_attachment_metadata( $attach_id, $uploadfile );
+			wp_update_attachment_metadata( $attach_id,  $attach_data );
+			
+			add_post_meta($earner_id, "_thumbnail_id", $attach_id, TRUE);
+			//$img_url = wp_get_attachment_url($attach_id);
+
+		} // end if file is upload
+	} // end if image has been uploaded
+
+
 	// send confirmation mail to earner
 	$to = $earner_mail;
 	$subject = "Solicitud de concesión de badge de Ciudad Escuela";
@@ -862,7 +954,7 @@ Hola ' .$earner_name. ','
 'Vamos a revisar el material que has generado durante la actividad [' .$earner_material. '], y si cumple los criterios en unos días recibirás el badge en esta misma dirección de correo, junto con las instrucciones para mostrarlo al mundo.'
 . "\r\n\r\n" .
 'Un saludo del equipo de Ciudad Escuela.';
-	$headers[] = 'From: Ciudad Escuela <no-reply@ciudad-escuela.org>' . "\r\n";
+	$headers[] = 'From: Ciudad Escuela <badges@ciudad-escuela.org>' . "\r\n";
 	$headers[] = 'To: ' .$earner_name. ' <' .$to. '>' . "\r\n";
 	// To send HTML mail, the Content-type header must be set, uncomment the following two lines
 	//$headers[]  = 'MIME-Version: 1.0' . "\r\n";
@@ -870,8 +962,8 @@ Hola ' .$earner_name. ','
 	wp_mail( $to, $subject, $message, $headers);
 
 	// send notification mail to issuer
-	$to = "info@montera34.com";
-	$subject = "Solicitud de emisión de badge de Ciudad Escuela";
+	$to = "badges@ciudad-escuela.org";
+	$subject = "[badges] Solicitud de emisión de badge";
 	$message = '
 + Nombre del solicitante: ' .$earner_name.
 "\r\n" .
@@ -881,7 +973,10 @@ Hola ' .$earner_name. ','
 "\r\n" .
 '+ Badge solicitado: ' .$earner_badge_tit.
 "\r\n" .
-'+ URL del material producido: ' .$earner_material;
+'+ URL del material producido: ' .$earner_material.
+"\r\n\r\n" .
+'Visita el panel de administración de Ciudad Escuela para aprobar o no esta solicitud: http://ciudad-escuela.org/wp-admin/post.php?post=' .$earner_id. '&action=edit'
+;
 	$headers[] = 'From: ' .$earner_name. ' <' .$earner_mail. '>' . "\r\n";
 	$headers[] = 'To: <' .$to. '>' . "\r\n";
 	// To send HTML mail, the Content-type header must be set, uncomment the following two lines
@@ -894,10 +989,4 @@ Hola ' .$earner_name. ','
 
 } // end insert earner data in database
 
-// add badge to backpack, notificate ciudad escuela system
-//function quincem_earn_badge() {
-
-	
-
-//} // end add badge to backpack
 ?>

@@ -68,7 +68,7 @@ if ( $pt == 'itinerario' ) {
 		$single_como_out =
 			"<h2>Cómo ganar el badge</h2>"
 			.apply_filters( 'the_content', $single_como ).
-			"<p class='single-solicita'>Si has participado en alguna de las actividades asociadas a este badge puedes <strong><a href='/como-conseguir-un-badge-de-ciudad-escuela/'>solicitar este badge</a></strong> para añadirlo a <a href='http://backpack.openbadges.org'>tu backpack</a>.</p>";
+			"<p class='single-solicita'>Si has participado en alguna de las actividades asociadas a este badge puedes <strong><a href='/solicita-tu-badge/?badge_id=" .$post->ID. "'>solicitar este badge</a></strong> para añadirlo a <a href='http://backpack.openbadges.org'>tu backpack</a>.</p>";
 	}
 
 	$single_info_out = "";

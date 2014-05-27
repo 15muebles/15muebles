@@ -85,6 +85,9 @@ body { padding-top: 50px; }
 .epi-actividad {
 	background-color: #c7e3e3;
 }
+.epi-earner {
+	background-color: #d5eaea;
+}
 #pre-navbar .active .badge {
 	font-size: inherit;
 	font-weight: normal;
@@ -159,6 +162,9 @@ body { padding-top: 50px; }
 }
 #actividad {
 	background-color: #c7e3e3;
+}
+#earner {
+	background-color: #d5eaea;
 }
 
 #quincem-imago {
@@ -443,6 +449,16 @@ img.patrocina-sec {
 }
 
 /* forms */
+#quincem-form-content {
+	margin-top: 70px;
+}
+#quincem-form-content legend {
+	color: #fff;
+}
+#quincem-form-content .help-block {
+	line-height: 1.1em;
+}
+
 .wpcf7 {
 	margin-top: 70px;
 }
