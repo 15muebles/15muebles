@@ -93,7 +93,7 @@ if ( $pt == 'itinerario' ) {
 			$id_count++;
 			if ( has_post_thumbnail( $earner->ID ) ) {
 				$earner_avatar = get_the_post_thumbnail( $earner->ID,'bigicon' );
-			} else { $earner_avatar = "<img src='" .QUINCEM_BLOGTHEME. "/images/quincem-earner-avatar.png' alt='Avatar por omisión en Ciudad Escuela'>"; }
+			} else { $earner_avatar = "<img src='" .QUINCEM_BLOGTHEME. "/images/quincem-earner-avatar.png' alt='Avatar por omisión en Ciudad Escuela' />"; }
 			$earner_name = get_post_meta( $earner->ID, '_quincem_earner_name', true );
 			$earner_date = $earner->post_date;
 			$earner_material = get_post_meta( $earner->ID, '_quincem_earner_material', true );
