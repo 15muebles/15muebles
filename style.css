@@ -378,6 +378,9 @@ img.patrocina-sec {
 .single-solicita a:hover {
 	text-decoration: none;
 }
+.single-earners .list-inline li {
+	padding-bottom: 10px;
+}
 .single-earners .popover {
 	width: 276px;
 }

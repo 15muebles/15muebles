@@ -74,6 +74,7 @@ if ( $pt == 'itinerario' ) {
 	$single_info_out = "";
 
 	$third_loop_args = array(
+		'nopaging' => true,
 		'post_type' => 'earner',
 		'meta_query' => array(
 			array(
