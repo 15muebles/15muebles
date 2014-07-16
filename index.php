@@ -168,7 +168,7 @@ foreach ( $band_pts as $band_pt ) {
 			'post_type' => $band_pt,
 			'orderby' => 'meta_value_num',
 			'meta_key' => '_quincem_date_begin',
-			'order' => 'ASC',
+			'order' => 'DESC',
 			'meta_query' => array(
 				array(
 					'key' => '_quincem_date_end',
