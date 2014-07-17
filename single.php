@@ -98,13 +98,14 @@ if ( $pt == 'itinerario' ) {
 			$earner_name = get_post_meta( $earner->ID, '_quincem_earner_name', true );
 			$earner_date = $earner->post_date;
 			$earner_material = get_post_meta( $earner->ID, '_quincem_earner_material', true );
+			$earner_actividad = get_post_meta( $earner->ID, '_quincem_earner_actividad', true );
 			$single_earners_out .= "<li><a id='earner-" .$id_count. "' class='earner-click' title='" .$earner_name. "'>" .$earner_avatar. "</a></li>";
 			$earners_script .= "
 				jQuery('#earner-$id_count').popover({
 					trigger: 'manual',
 					placement: 'right',
 					html: 'true',
-					content: 'Fecha: " .$earner_date. "<br /><a href=\'" .$earner_material. "\'>Material producido</a>',
+					content: 'Fecha: " .$earner_date. "<br />Actividad realizada: " .$earner_actividad. "<br /><a href=\'" .$earner_material. "\'>Material producido</a>',
 				});
 
 			";
