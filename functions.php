@@ -977,7 +977,7 @@ Hola ' .$earner_name. ','
 "\r\n\r\n" .
 'Visita el panel de administración de Ciudad Escuela para aprobar o no esta solicitud: http://ciudad-escuela.org/wp-admin/post.php?post=' .$earner_id. '&action=edit'
 ;
-	$headers[] = 'From: ' .$earner_name. ' <' .$earner_mail. '>' . "\r\n";
+	$headers[] = 'From: Ciudad Escuela <badges@ciudad-escuela.org>' . "\r\n";
 	$headers[] = 'To: <' .$to. '>' . "\r\n";
 	// To send HTML mail, the Content-type header must be set, uncomment the following two lines
 	//$headers[]  = 'MIME-Version: 1.0' . "\r\n";
