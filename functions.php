@@ -38,9 +38,6 @@ function quincem_theme_setup() {
 	add_post_type_support( 'itinerarios', 'page-attributes' );
 	add_post_type_support( 'badge', 'page-attributes' );
 
-	// remove unused items from dashboard
-	add_action( 'admin_menu', 'quincem_remove_dashboard_item' );
-
 	// disable admin bar in front end
 	add_filter('show_admin_bar', '__return_false');
 
@@ -52,11 +49,6 @@ function quincem_theme_setup() {
 	add_action('draft_to_publish', 'quincem_earner_admited');
 
 } // end quincem theme setup function
-
-// remove item from wordpress dashboard
-function quincem_remove_dashboard_item() {
-	remove_menu_page('edit.php');	
-}
 
 // set up media options
 function quincem_media_options() {
