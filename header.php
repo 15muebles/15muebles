@@ -42,10 +42,10 @@ if ( is_single() || is_page() ) {
 	$metatype = "article";
 	$img_id = get_post_thumbnail_id();
 	if ( $img_id != '' ) {
-		$img_array = wp_get_attachment_image_src($img_id,'extralarge', true);
+		$img_array = wp_get_attachment_image_src($img_id,'large', true);
 		$metaimg = $img_array[0];
 	} else {
-		$metaimg = "http://ciudad-escuela.org/wp-content/themes/15muebles/images/quincem-logo-detalle.png";
+		$metaimg = "http://ciudad-escuela.org/wp-content/themes/montera34/screenshot.png";
 	}
 	$metaperma = get_permalink();
 	
