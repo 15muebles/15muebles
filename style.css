@@ -391,6 +391,7 @@ img.patrocina-sec {
 
 
 /* About page and default template page */
+.blog .container-full,
 .page-template-page-solicita-badge-php .container-full,
 .page-template-default .container-full,
 .page-template-page-about-php .container-full {
@@ -450,6 +451,39 @@ img.patrocina-sec {
 	position: fixed;
 	top: 70px;
 }
+
+/* Blog page and posts archives */
+#blog a { color: #fff; text-decoration: underline; }
+#blog a:hover { text-decoration: none; }
+.type-post {
+	margin-bottom: 60px;
+}
+.blog-header { margin-bottom: 1em; }
+.blog-tit { margin-bottom: 0; }
+.blog-meta-tit { text-transform: uppercase; }
+.entry-date, .blog-cat-links a { font-weight: bold; }
+.entry-date, .updated a { white-space: nowrap; }
+
+/* Widget sidebar */
+.widget {
+	margin-bottom: 2em;
+	padding-bottom: 2em;
+}
+.widget-tit {
+	font-size: 14px;
+	margin-top: 0;
+}
+.widget > ul {
+	padding: 0;
+	list-style: none;
+}
+.widget > ul ul {
+	padding: 0 0 0 20px;
+	list-style: none;
+}
+.widget_categories a { text-decoration: none !important;}
+.widget_categories a:hover { text-decoration: underline !important; }
+.widget input { color: #222; }
 
 /* forms */
 #quincem-form-content {

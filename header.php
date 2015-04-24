@@ -99,7 +99,7 @@ wp_head(); ?>
 
 <?php
 // navbar links
-if ( !is_home() ) { $link_prefix = QUINCEM_BLOGURL. "/"; }
+if ( !is_front_page() ) { $link_prefix = QUINCEM_BLOGURL. "/"; }
 else { $link_prefix = ""; }
 
 // custom post types info
