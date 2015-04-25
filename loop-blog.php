@@ -1,5 +1,5 @@
 <?php
-$img_size = "larger";
+$img_size = "extralarge";
 if ( has_post_thumbnail() ) {
 	$blog_img = "<figure>".get_the_post_thumbnail($post->ID,$img_size,array('class' => 'img-responsive'))."</figure>";
 } else { $blog_img = ""; }
@@ -22,7 +22,7 @@ $tags_list = get_the_tag_list( ', ', ', ' );
 <article id="post-<?php the_ID(); ?>" class="blog-article">
 		<?php echo $blog_img; ?>
 		<header class="blog-header">
-			<h2 class="blog-tit"><?php the_title(); ?></h2>
+			<h2 class="blog-tit"><a href="<?php the_permalink() ?>" title="Leer artículo completo" rel="bookmark"><?php the_title(); ?></a></h2>
 			<?php // meta
 			echo "<div class='blog-meta'>";
 				if ( $categories_list && twentyfifteen_categorized_blog() ) {
@@ -42,7 +42,19 @@ $tags_list = get_the_tag_list( ', ', ', ' );
 		</header>
 
 		<section class="page-desc">
-		<?php the_content(); ?>
+		<?php
+			/* translators: %s: Name of current post */
+			the_content( 'Continuar leyendo' );
+
+			wp_link_pages( array(
+				'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentyfifteen' ) . '</span>',
+				'after'       => '</div>',
+				'link_before' => '<span>',
+				'link_after'  => '</span>',
+				'pagelink'    => '<span class="screen-reader-text">' . __( 'Page', 'twentyfifteen' ) . ' </span>%',
+				'separator'   => '<span class="screen-reader-text">, </span>',
+			) );
+		?>
 		</section>
 
 </article><!-- .row .hentry -->
