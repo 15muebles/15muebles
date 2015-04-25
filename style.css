@@ -87,6 +87,9 @@ body { padding-top: 50px; }
 }
 .epi-earner {
 	background-color: #d5eaea;
+} 
+.epi-post {
+	background-color: #9fcfcf;
 }
 #pre-navbar .active .badge {
 	font-size: inherit;
@@ -180,7 +183,6 @@ body { padding-top: 50px; }
 	display: block;
 	color: #fff;
 	margin-bottom: 0;
-/*	background-image: url('images/quincem-bg-band.png');*/
 	background-image: url('images/quincem-bg-band-hover.png');
 	background-repeat: no-repeat;
 	background-position: center top;
@@ -391,7 +393,7 @@ img.patrocina-sec {
 
 
 /* About page and default template page */
-.blog .container-full,
+#blog,
 .page-template-page-solicita-badge-php .container-full,
 .page-template-default .container-full,
 .page-template-page-about-php .container-full {
@@ -497,7 +499,13 @@ img.patrocina-sec {
 .widget_categories a:hover { text-decoration: underline !important; }
 .widget input { color: #222; }
 
-/* Pagination*/
+/* single post */
+.single #blog h1 { margin-bottom: 0; }
+.single .blog-meta {
+	margin-bottom: 40px;
+}
+
+/* Pagination */
 .pagination h2 {
 	font-size: 14px;
 	margin: 0;
