@@ -3,6 +3,7 @@ if ( is_home() || is_front_page() ) { $epi_class = "home"; }
 elseif ( is_single() ) { $epi_class = get_post_type(); }
 elseif ( is_page() ) { $epi_class = "about"; }
 elseif ( is_404() ) { $epi_class = "e404"; }
+else { $epi_class = "post"; }
 ?>
 
 <footer class="aligncenter">
