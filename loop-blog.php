@@ -15,7 +15,7 @@ $blog_date = sprintf( $blog_date,
 	get_the_modified_date()
 );
 
-$blog_author = "Por ".get_the_author_link();
+$blog_author = "Por <a href='".get_author_posts_url( get_the_author_meta( 'ID' ) )."'>".get_the_author()."</a>";
 $categories_list = get_the_category_list(', ');
 $tags_list = get_the_tag_list( ', ', ', ' );
 ?>
@@ -25,7 +25,7 @@ $tags_list = get_the_tag_list( ', ', ', ' );
 			<h2 class="blog-tit"><a href="<?php the_permalink() ?>" title="Leer artículo completo" rel="bookmark"><?php the_title(); ?></a></h2>
 			<?php // meta
 			echo "<div class='blog-meta'>";
-				if ( $categories_list && twentyfifteen_categorized_blog() ) {
+				if ( $categories_list ) {
 					printf( '<span class="blog-cat-links">%1$s</span>',
 						$categories_list
 					);

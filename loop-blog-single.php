@@ -10,14 +10,14 @@ $blog_date = sprintf( $blog_date,
 	get_the_modified_date()
 );
 
-$blog_author = get_the_author_link();
+$blog_author = "<a href='".get_author_posts_url( get_the_author_meta( 'ID' ) )."'>".get_the_author()."</a>";
 $categories_list = get_the_category_list(', ');
 $tags_list = get_the_tag_list( ', ', ', ' );
 
 			// meta
 			echo "<div class='blog-meta'>
 				<div class='blog-meta-item'>CONTEXTO: ";
-				if ( $categories_list && twentyfifteen_categorized_blog() ) {
+				if ( $categories_list ) {
 					printf( '<span class="blog-cat-links">%1$s</span>',
 						$categories_list
 					);
