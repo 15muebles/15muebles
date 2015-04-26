@@ -44,7 +44,8 @@ function quincem_theme_setup() {
 	// adding classes to post_class()
 	add_filter('post_class', 'quincem_classes');
 
-	add_action('wp_insert_post', 'quincem_write_badge_metadata');
+	//add_action('wp_insert_post', 'quincem_write_badge_metadata');
+	add_action('save_post', 'quincem_write_badge_metadata');
 	//add_action('wp_insert_post', 'quincem_write_earner_metadata');
 	add_action('draft_to_publish', 'quincem_earner_admited');
 
