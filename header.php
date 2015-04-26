@@ -23,14 +23,14 @@
 
 	// Add a page number if necessary:
 	if ( $paged >= 2 || $page >= 2 )
-		echo ' | ' . sprintf( __( 'Page %s', '15muebles' ), max( $paged, $page ) );
+		echo ' | Página ' . max( $paged, $page );
 
 	?>
 </title>
 
 <?php
 // metatags generation
-if ( is_single() || is_page() ) {
+if ( is_single() || is_page() && !is_front_page() ) {
 	$metadesc = $post->post_excerpt;
 	if ( $metadesc == '' ) { $metadesc = $post->post_content; }
 	$metadesc = wp_strip_all_tags($post->post_content);
@@ -48,7 +48,26 @@ if ( is_single() || is_page() ) {
 		$metaimg = "http://ciudad-escuela.org/wp-content/themes/montera34/screenshot.png";
 	}
 	$metaperma = get_permalink();
-	
+
+} elseif ( is_category() ) {
+	$term =	$wp_query->queried_object;
+	$metadesc = $term->description;
+	if ( $metadesc == '' ) { $metadesc = "Contenidos en la categoría ".$term->name; }
+	$metadesc_fb = substr( $metadesc, 0, 297 );
+	$metadesc_tw = substr( $metadesc, 0, 200 );
+	$metatit = $term->name;
+	$metatype = "blog";
+	$metaperma = "http://ciudad-escuela.org/seccion/".$term->slug;
+
+} elseif ( is_tag() ) {
+	$term =	$wp_query->queried_object;
+	$metadesc = "Contenidos en con la etiqueta ".$term->name;
+	$metadesc_fb = substr( $metadesc, 0, 297 );
+	$metadesc_tw = substr( $metadesc, 0, 200 );
+	$metatit = $term->name;
+	$metatype = "blog";
+	$metaperma = "http://ciudad-escuela.org/etiqueta/".$term->slug;
+
 } else {
 	$metadesc = QUINCEM_BLOGDESC;
 	$metadesc_tw = QUINCEM_BLOGDESC;
