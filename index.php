@@ -1,7 +1,6 @@
 <?php get_header();
 
-$band_tit = $wp_query->query_vars['pagename'];
-$band_desc = get_the_content(); ?>
+$band_tit = "Blog"; ?>
 
 <div id="blog" class="container-full">
 <div class="container">

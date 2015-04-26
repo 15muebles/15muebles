@@ -497,7 +497,8 @@ img.patrocina-sec {
 }
 .widget_categories a { text-decoration: none !important;}
 .widget_categories a:hover { text-decoration: underline !important; }
-.widget input { color: #222; }
+.widget input,
+.widget select { color: #222; }
 
 /* single post */
 .single #blog h1 { margin-bottom: 0; }
