@@ -479,6 +479,9 @@ img.patrocina-sec {
 .more-link:hover {
 	opacity: 0.9;
 }
+.page-desc img {
+	max-width: 100%;
+}
 
 .widget {
 	margin-bottom: 2em;
