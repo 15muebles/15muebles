@@ -27,7 +27,7 @@ $rombo_classes = array("rombo col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2"
 		<?php
 		$rombo_count = 0;
 		foreach ( $band_pts as $band_pt ) { ?>
-		<div class="<?echo $rombo_classes[$rombo_count]; ?>">
+		<div class="<?php echo $rombo_classes[$rombo_count]; ?>">
 			<h2 class="rombo-tit quincem-smooth"><a href="#<?php echo $band_pt; ?>"><?php echo $wp_post_types[$band_pt]->labels->parent; ?></a></h2>
 			<p><small><?php echo $wp_post_types[$band_pt]->description; ?></small></p>
 		</div>
