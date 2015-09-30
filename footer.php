@@ -11,7 +11,7 @@ else { $epi_class = "post"; }
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-4 col-xs-offset-3">
+		<div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4">
 			<img class="img-responsive" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-logo-detalle.png" alt="<?php echo QUINCEM_BLOGNAME; ?>" />
 		</div>
 	</div><!-- .row -->
@@ -21,7 +21,7 @@ else { $epi_class = "post"; }
 <div id="trasepi" class="container-full">
 <div class="container">
 	<div class="row patrocina">
-	<div class="col-md-4 col-md-offset-3">
+	<div class="col-md-4 col-md-offset-4">
 		<ul class="list-inline">
 			<li><img class="patrocina-sec" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-mozilla.png" alt="Mozilla Foundation" /></li>
 			<li><img class="patrocina-main" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-15muebles.png" alt="Proyecto 15 muebles" /></li>
@@ -30,7 +30,7 @@ else { $epi_class = "post"; }
 	</div>
 	</div><!-- .row -->
 	<div class="row explica">
-	<div class="col-md-8 col-md-offset-1">
+	<div class="col-md-8 col-md-offset-2">
 		<div><p><strong>El contenido de Ciudad Escuela</strong>, a menos que se indique lo contrario, está disponible para su uso bajo las condiciones de la licencia <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.es_ES">Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional</a>. <strong>El código de la web de Ciudad Escuela</strong> está igualmente disponible para su uso bajo las condiciones de una licencia <a href="https://github.com/skotperez/15muebles/blob/master/LICENSE">GPL2</a>, y puede <a href="https://github.com/skotperez/15muebles">descargarse libremente</a>. La web de Ciudad Escuela funciona usando <a href="http://wordpress.org">WordPress</a>.</p>
 			<p><a href="http://openbadges.org"><img src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-openbadges.png" alt="Openbadges -- Mozilla Foundation" /></a></p>
 		</div>

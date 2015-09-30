@@ -126,13 +126,13 @@ while ( have_posts() ) : the_post();
 <div id="earner" class="container-full">
 <div class="container">
 	<header class="row">
-		<div class="col-md-10 col-sm-10">
+		<div class="col-md-12 col-sm-12">
 			<h1 class="parent-tit"><?php echo $parent_tit; ?></h1>
 		</div>
 	</header>
 
 	<section class="row page-desc">
-		<div class="col-md-8 col-sm-8">
+		<div class="col-md-8 col-sm-9">
 			<?php
 			echo "<div id='backpack-out'>" .$backpack_out. "</div>";
 			the_content(); ?>

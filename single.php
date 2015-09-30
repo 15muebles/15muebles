@@ -167,7 +167,7 @@ if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$s
 <div id="<?php echo $band_class; ?>" class="container-full">
 <div class="container">
 	<div class="sec-header row hair">
-	<div class="col-md-10 col-sm-10">
+	<div class="col-md-12 col-sm-12">
 		<div class="sec-tit">
 			<h2><?php echo $band_tit; ?></h2>
 			<div class="sec-subtit"><?php echo $band_subtit; ?></div>
@@ -178,7 +178,7 @@ if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$s
 
 	<?php while ( have_posts() ) : the_post(); ?>
 	<article class="row hentry">
-	<div class="col-md-3 col-sm-4">
+	<div class="col-md-4 col-sm-4">
 		<header class="thumbnail">
 			<?php echo $single_logo; ?>
 			<div class="caption aligncenter">
@@ -198,7 +198,7 @@ if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$s
 		<?php // contact info
 		if ( $single_info_out != '' ) { ?>
 		<section class="single-contacto row hair">
-			<div class="col-md-10 col-sd-10">
+			<div class="col-md-12 col-sd-12">
 				<header><h2>Contacto</h2></header>			
 				<div class="single-contacto-desc"><?php echo $single_info_out; ?></div>
 			</div>
@@ -208,7 +208,7 @@ if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$s
 		<?php // earners list
 		if ( $single_earners_out != '' ) { ?>
 		<section class="single-earners row hair">
-			<div class="col-md-10 col-sd-10">
+			<div class="col-md-12 col-sd-12">
 				<header><h2>Ganaron el badge</h2></header>			
 				<script type='text/javascript'>
 					jQuery(document).ready(function(){
@@ -241,7 +241,7 @@ if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$s
 					'include' => $rel_ids
 				);
 			}
-			$rel_item_class = "col-md-3 col-md-offset-0 col-sm-4 col-sm-offset-1 col-xs-5";
+			$rel_item_class = "col-md-4 col-sm-4 col-xs-6";
 			$rel_item_img_size = "thumbnail";
 
 		} elseif ( $pt == 'badge' ) {
@@ -256,7 +256,7 @@ if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$s
 					'include' => $rel_ids
 				);
 			}
-			$rel_item_class = "col-md-5 col-sm-5";
+			$rel_item_class = "col-md-6 col-sm-6";
 			$rel_item_img_size = "small";
 
 		} elseif ( $pt == 'actividad' ) {
@@ -271,7 +271,7 @@ if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$s
 					'include' => $rel_ids
 				);
 			}
-			$rel_item_class = "col-md-3 col-md-offset-0 col-sm-4 col-sm-offset-1 col-xs-5";
+			$rel_item_class = "col-md-4 col-sm-4 col-xs-6";
 			$rel_item_img_size = "thumbnail";
 
 		}
@@ -293,7 +293,7 @@ if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$s
 			foreach ( $rel_items as $rel ) {
 				if ( $pt == 'itinerario' && $mobile_count == 2 || $pt == 'actividad' && $mobile_count == 2 ) { $mobile_count = 0; echo '<div class="clearfix visible-xs"></div>';  }
 
-				if ( $pt == 'itinerario' && $tablet_count == 2 || $pt == 'actividad' && $tablet_count == 2 ) { $tablet_count = 0; echo '<div class="clearfix visible-sm"></div>';  }
+				if ( $pt == 'itinerario' && $tablet_count == 3 || $pt == 'actividad' && $tablet_count == 2 ) { $tablet_count = 0; echo '<div class="clearfix visible-sm"></div>';  }
 				elseif ( $pt == 'badge' && $tablet_count == 2 ) { $tablet_count = 0; echo '<div class="clearfix visible-sm"></div>';  }
 				
 				if ( $pt == 'itinerario' && $desktop_count == 3 || $pt == 'actividad' && $tablet_count == 3 ) { $desktop_count = 0; echo '<div class="clearfix visible-md visible-lg"></div>';  }
@@ -310,16 +310,16 @@ if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$s
 	<?php } // end if related content
 	?>
 
-	</div><!-- .col-md-3 -->
+	</div><!-- .col-md-4 .col-sm-4  -->
 
-	<div class="col-md-5 col-sm-6">
+	<div class="col-md-6 col-sm-7">
 		<section class="single-desc">
 		<?php the_content();
 		echo $single_como_out;
 		echo $single_material_out; ?>
 		</section>
 
-	</div><!-- .col-md-4 .col-md-offset-1 -->
+	</div><!-- .col-md-6 .col-sm-7 -->
 
 	</article><!-- .mosac .row .hair -->
 

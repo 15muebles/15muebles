@@ -47,7 +47,7 @@ while ( have_posts() ) : the_post();
 <div id="<?php echo $parent_slug ?>" class="container-full">
 <div class="container">
 	<div class="row">
-		<div class="col-md-6 col-sm-7">
+		<div class="col-md-8 col-sm-9">
 			<section class="hair">
 				<header>
 				<h1 class="parent-tit"><?php echo $parent_tit; ?></h1>
@@ -61,7 +61,7 @@ while ( have_posts() ) : the_post();
 			<?php // subpages
 			echo $pages_loop; ?>
 
-		</div><!-- .col-md-6 .col-sm-7 -->
+		</div><!-- .col-md-8 .col-sm-9 -->
 
 		<nav id="about-nav" class="col-md-4 col-sm-3 hidden-xs">
 			<?php echo $pages_nav; ?>

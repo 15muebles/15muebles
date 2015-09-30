@@ -8,14 +8,14 @@ global $wp_post_types;
 // descubre, aprende, haz bands
 $band_pts = array("itinerario","badge","actividad");
 $band_tits = array("Descubre","Aprende","Haz");
-$rombo_classes = array("rombo col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2","rombo col-md-2 col-sm-2","rombo col-md-2 col-sm-2");
+$rombo_classes = array("rombo col-md-2 col-md-offset-3 col-sm-2 col-sm-offset-3","rombo col-md-2 col-sm-2","rombo col-md-2 col-sm-2");
 ?>
 
 <div id="top" class="container-full">
 <div class="container">
 <header class="aligncenter">
 	<div class="row hair">
-		<div class="col-md-4 col-md-offset-3 col-sm-4 col-sm-offset-3 col-xs-6 col-xs-offset-2">
+		<div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3">
 			<img id="quincem-imago" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-imago.png" alt="<?php echo QUINCEM_BLOGNAME. " | " . QUINCEM_BLOGDESC; ?>" />
 			<h1 class="hideout"><?php echo QUINCEM_BLOGNAME ?></h1>
 			<div class="hideout"><strong><?php echo QUINCEM_BLOGDESC ?></strong></div>
@@ -35,12 +35,12 @@ $rombo_classes = array("rombo col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2"
 		} ?>
 	</div>
 	<div class="row hair">
-		<div class="col-md-2 col-md-offset-4">
+		<div class="col-md-2 col-md-offset-5">
 			<a class="border-band-white" href="/about">About</a>
 		</div>
 	</div>
 	<div class="row patrocina">
-		<div class="col-md-4 col-md-offset-3">
+		<div class="col-md-4 col-md-offset-4">
 			<ul class="list-inline">
 				<li><a href="http://openbadges.org"><img class="patrocina-sec" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-mozilla.png" alt="Mozilla Foundation" /></a></li>
 				<li><a href="http://15muebles.org/"><img class="patrocina-main" src="<?php echo QUINCEM_BLOGTHEME; ?>/images/quincem-15muebles.png" alt="Proyecto 15 muebles" /></a></li>
@@ -91,7 +91,7 @@ foreach ( $band_pts as $band_pt ) {
 		<div class="container">
 		<section>
 			<header class="sec-header row hair">
-			<div class="col-md-10 col-sm-10">
+			<div class="col-md-12 col-sm-12">
 				<div class="sec-tit">
 					<h2><?php echo $band_tit; ?></h2>
 					<div class="sec-subtit"><?php echo $band_subtit; ?></div>
@@ -105,8 +105,8 @@ foreach ( $band_pts as $band_pt ) {
 			$tablet_count = 0;
 			$desktop_count = 0;
 			while ( $the_query->have_posts() ) : $the_query->the_post();
-				if ( $tablet_count == 3 ) { $tablet_count = 0; echo '<div class="clearfix visible-sm"></div>';  }
-				if ( $desktop_count == 5 ) { $desktop_count = 0; echo '<div class="clearfix visible-md visible-lg"></div>';  }
+				if ( $tablet_count == 4 ) { $tablet_count = 0; echo '<div class="clearfix visible-sm"></div>';  }
+				if ( $desktop_count == 6 ) { $desktop_count = 0; echo '<div class="clearfix visible-md visible-lg"></div>';  }
 				$tablet_count++; $desktop_count++;
 				include "loop-mosac.php";
 
@@ -184,7 +184,7 @@ foreach ( $band_pts as $band_pt ) {
 		<div id="<?php echo $band_pt; ?>" class="container-full">
 		<div class="container">
 			<header class="sec-header row hair">
-			<div class="col-md-10 col-sm-10">
+			<div class="col-md-12 col-sm-12">
 				<div class="sec-tit">
 					<h2><?php echo $band_tit; ?></h2>
 				</div>
@@ -201,7 +201,7 @@ foreach ( $band_pts as $band_pt ) {
 
 				<section>
 				<div class="row">
-					<header class="col-md-10 col-sm-10">
+					<header class="col-md-12 col-sm-12">
 					<h3 class="sec-part-tit"><?php echo $act_tits[$act_count]; ?></h3>
 					</header>
 				</div><!-- .row .hair -->
@@ -209,8 +209,8 @@ foreach ( $band_pts as $band_pt ) {
 				<?php $tablet_count = 0;
 				$desktop_count = 0;
 				while ( $the_query->have_posts() ) : $the_query->the_post();
-					if ( $tablet_count == 3 ) { $tablet_count = 0; echo '<div class="clearfix visible-sm"></div>';  }
-					if ( $desktop_count == 5 ) { $desktop_count = 0; echo '<div class="clearfix visible-md visible-lg"></div>';  }
+					if ( $tablet_count == 4 ) { $tablet_count = 0; echo '<div class="clearfix visible-sm"></div>';  }
+					if ( $desktop_count == 6 ) { $desktop_count = 0; echo '<div class="clearfix visible-md visible-lg"></div>';  }
 					$tablet_count++; $desktop_count++;
 					include "loop-mosac.php";
 
