@@ -121,7 +121,7 @@ function quincem_load_scripts() {
 	if ( is_front_page() ) {
 	wp_enqueue_script(
 		'smooth-scroll-js',
-		get_template_directory_uri() . '/bootstrap/js/smooth.scroll.js',
+		get_template_directory_uri() . '/js/smooth.scroll.js',
 		array( 'bootstrap-js' ),
 		'0.1',
 		FALSE
@@ -130,7 +130,7 @@ function quincem_load_scripts() {
 	if ( is_page_template("page-about.php") ) {
 	wp_enqueue_script(
 		'smooth-scroll-page-js',
-		get_template_directory_uri() . '/bootstrap/js/smooth.scroll.page.js',
+		get_template_directory_uri() . '/js/smooth.scroll.page.js',
 		array( 'bootstrap-js' ),
 		'0.1',
 		FALSE
@@ -139,7 +139,7 @@ function quincem_load_scripts() {
 	if ( !is_page() || is_front_page() ) {
 	wp_enqueue_script(
 		'tit-position-js',
-		get_template_directory_uri() . '/bootstrap/js/tit.position.js',
+		get_template_directory_uri() . '/js/tit.position.js',
 		array( 'bootstrap-js' ),
 		'0.1',
 		FALSE
