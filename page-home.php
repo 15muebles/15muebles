@@ -74,6 +74,7 @@ foreach ( $band_pts as $band_pt ) {
 			'orderby' => 'menu_order title',
 			'order' => 'ASC',
 		);
+		$tablet_count_pt = 4;
 
 		} elseif ( $band_pt == 'itinerario' ) {
 		$args = array(
@@ -82,6 +83,8 @@ foreach ( $band_pts as $band_pt ) {
 			'orderby' => 'menu_order',
 			'order' => 'ASC',
 		);
+		$tablet_count_pt = 3;
+
 		}
 
 		$the_query = new WP_Query( $args );
@@ -105,7 +108,7 @@ foreach ( $band_pts as $band_pt ) {
 			$tablet_count = 0;
 			$desktop_count = 0;
 			while ( $the_query->have_posts() ) : $the_query->the_post();
-				if ( $tablet_count == 4 ) { $tablet_count = 0; echo '<div class="clearfix visible-sm"></div>';  }
+				if ( $tablet_count == $tablet_count_pt ) { $tablet_count = 0; echo '<div class="clearfix visible-sm"></div>';  }
 				if ( $desktop_count == 6 ) { $desktop_count = 0; echo '<div class="clearfix visible-md visible-lg"></div>';  }
 				$tablet_count++; $desktop_count++;
 				include "loop-mosac.php";

@@ -13,7 +13,7 @@ if ( $band_pts[$band_count] == 'itinerario' ) {
 	if ( is_single() ) { $item_desc = get_the_content(); }
 	else { $item_desc = get_the_excerpt(); }
 	$item_img_size = "small";
-
+	$pt_class = "4";
 
 
 } elseif ( $band_pts[$band_count] == 'badge' ) {
@@ -24,6 +24,7 @@ if ( $band_pts[$band_count] == 'itinerario' ) {
 	$item_desc = "";
 	$item_icons_out = "";
 	$item_img_size = array(75,75);
+	$pt_class = "3";
 
 
 
@@ -66,6 +67,7 @@ if ( $band_pts[$band_count] == 'itinerario' ) {
 	 } else { $item_icons_out = ""; }
 
 	$item_img_size = "small";
+	$pt_class = "3";
 
 }
 
@@ -79,7 +81,7 @@ if ( $band_pts[$band_count] == 'itinerario' ) {
 
 ?>
 
-<article class="mosac-item aligncenter col-md-2 col-sm-3">
+	<article class="mosac-item aligncenter col-md-2 col-sm-<?php echo $pt_class ?>">
 <div <?php post_class(); ?>>
 	<?php echo $item_logo; ?>
 	<div class="caption">
