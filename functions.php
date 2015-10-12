@@ -48,6 +48,8 @@ function quincem_theme_setup() {
 	add_action('save_post', 'quincem_write_badge_metadata');
 	//add_action('wp_insert_post', 'quincem_write_earner_metadata');
 	add_action('draft_to_publish', 'quincem_earner_admited');
+	//add_action('wp_insert_post', 'quincem_write_badge_metadata');
+	add_action('save_post', 'quincem_write_issuer_metadata');
 
 	// Enable support for Post Formats.
 	add_theme_support( 'post-formats', array(
@@ -615,6 +617,40 @@ function quincem_classes($classes) {
 		        return $classes;
 		}
 } // end adding classes to post_class()
+
+// create issuer json metadata
+function quincem_write_issuer_metadata() {
+
+	global $post;
+	if ( $post ) {
+
+	// If this is just a revision, don't continue
+	if ( wp_is_post_revision( $post->ID ) )
+		return;
+
+	if ( $post->post_type == 'issuer' && $post->post_status == 'publish' ) {
+		$issuer_json = $_SERVER['DOCUMENT_ROOT'] . "/openbadges/issuer-" .$post->post_name. ".json";
+
+		$issuer_url = get_post_meta($post->ID,'_quincem_issuer_url',true);
+		$issuer_email = get_post_meta( $post->ID, '_quincem_issuer_email',true );
+ 
+		$data = '{
+"name": "' .$post->post_title. '",
+"url": "' .$issuer_url. '",
+"description": "' .$post->post_excerpt. '",
+"url": "' .$issuer_email. '"
+}';
+
+		// json metadata file
+		$handle = fopen( $issuer_json, 'w') or die("Cannot create the file index.html. Be sure that " .$issuer_json. " directory is writable."); //open file for writing
+		$write_success = fwrite($handle, $data);
+		fclose($handle);
+
+	}
+
+	} // end if $post is set
+
+} // end create badge json metadata
 
 // create badge json metadata
 function quincem_write_badge_metadata() {
