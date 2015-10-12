@@ -67,9 +67,6 @@ body { padding-top: 50px; }
 	-webkit-box-shadow: none;
 	border: none;
 }
-.navbar-brand {
-	padding: 7px 15px 15px;
-}
 #pre-navbar .active a[href="#itinerario"],
 #pre-navbar .active .itinerario,
 .epi-itinerario {
@@ -101,9 +98,6 @@ body { padding-top: 50px; }
 	color: #fff;
 }
 
-#navbar-sec {
-	margin-left: 50px;
-}
 .navbar-socialb {
 	height: 50px;
 	padding-top: 15px;
@@ -588,6 +582,12 @@ label {
 	.sec-desc {
 		width: 40%;
 	}
+	#navbar-sec {
+		margin-left: 50px;
+	}
+	.navbar-brand {
+		padding: 7px 15px 15px;
+	}
 
 /* END
 styles just for desktop */
@@ -632,6 +632,9 @@ styles just for desktop */
 		background-size: 15px;
 		padding-left: 20px;
 	}
+	.navbar-brand {
+		padding: 7px 0px 15px 15px;
+	}
 
 /* END
 styles just for tablets */
@@ -652,20 +655,22 @@ styles just for tablets */
 	padding-top: 15px;
 	padding-bottom: 15px;
 	padding-left: 15px;
-}
-#navbar-sec {
-	margin-left: inherit;
-}
-#navbar-sec a,
-#navbar-sec .active a {
-	color: #000;
-	background-image: none!important;
-}
-#navbar-sec a:hover {
-	color: #fff!important;
-	background-image: none!important;
-}
-
+	}
+	#navbar-sec {
+		margin-left: inherit;
+	}
+	#navbar-sec a,
+	#navbar-sec .active a {
+		color: #000;
+		background-image: none!important;
+	}
+	#navbar-sec a:hover {
+		color: #fff!important;
+		background-image: none!important;
+	}
+	.navbar-brand {
+		padding: 7px 0px 15px 15px;
+	}
 /* END
 styles just for tablets */
 }

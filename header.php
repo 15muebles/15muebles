@@ -162,7 +162,7 @@ $band_tits = array("Descubre","Aprende","Haz");
 					<li><a href="/blog">Blog</a></li>
 			</ul>
 
-			<ul id="navbar-third" class="nav navbar-nav navbar-right">
+			<ul id="navbar-third" class="nav navbar-nav navbar-right hidden-sm">
 				<li class="navbar-socialb">
 <div class="g-follow" data-annotation="bubble" data-height="20" data-href="https://plus.google.com/104536835218787209984" data-rel="publisher"></div>
 
