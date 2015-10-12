@@ -77,7 +77,7 @@ function quincem_widgets_init() {
 // set up media options
 function quincem_media_options() {
 	/* Add theme support for post thumbnails (featured images). */
-	add_theme_support( 'post-thumbnails', array( 'post','page','badge','itinerario','actividad','earner') );
+	add_theme_support( 'post-thumbnails', array( 'post','page','badge','itinerario','actividad','earner','issuer') );
 
 	// add icon and extra sizes
 	add_image_size( 'icon', '32', '32', true );
@@ -283,6 +283,37 @@ function quincem_create_post_type() {
 		'_builtin' => false,
 	));
 
+	// Issuer post type
+	register_post_type( 'issuer', array(
+		'labels' => array(
+			'name' => __( 'Issuers' ),
+			'singular_name' => __( 'Issuer' ),
+			'add_new_item' => __( 'Añadir issuer' ),
+			'edit' => __( 'Editar' ),
+			'edit_item' => __( 'Editar este issuer' ),
+			'new_item' => __( 'Nuevo issuer' ),
+			'view' => __( 'Ver issuer' ),
+			'view_item' => __( 'Ver este issuer' ),
+			'search_items' => __( 'Buscar issuers' ),
+			'not_found' => __( 'Ningún issuer encontrado' ),
+			'not_found_in_trash' => __( 'Ningún issuer en la papelera' ),
+			'parent' => __( 'Aprende' )
+		),
+		'description' => '',
+		'has_archive' => false,
+		'public' => true,
+		'publicly_queryable' => true,
+		'exclude_from_search' => true,
+		'menu_position' => 5,
+		'menu_icon' => 'dashicons-welcome-learn-more',
+		'hierarchical' => false, // if true this post type will be as pages
+		'query_var' => true,
+		'supports' => array('title', 'editor','excerpt','author','trackbacks','thumbnail'),
+		'rewrite' => array('slug'=>'issuer','with_front'=>false),
+		'can_export' => true,
+		'_builtin' => false,
+	));
+
 } // end register post types
 
 // get all posts from a post type to be used in select or multicheck forms
@@ -308,6 +339,30 @@ function quincem_metaboxes( $meta_boxes ) {
 	$actividades = quincem_get_list("actividad");
 	$badges = quincem_get_list("badge");
 
+	// CUSTOM FIELDS FOR ISSUERS
+	$meta_boxes[] = array(
+		'id' => 'quincem_issuer',
+		'title' => 'Datos del emisor',
+		'pages' => array('issuer'), // post type
+		'context' => 'normal', //  'normal', 'advanced', or 'side'
+		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
+		'show_names' => true, // Show field names on the left
+		'fields' => array(
+			array(
+				'name' => 'URL',
+				'desc' => '',
+				'id' => $prefix . 'issuer_url',
+				'type' => 'text_url',
+			),
+			array(
+				'name' => 'E-mail',
+				'desc' => 'La dirección de email no podrá cambiarse. Debe coincidir con la de la cuenta Mozilla Persona.',
+				'id' => $prefix . 'issuer_email',
+				'type' => 'text_email',
+			),
+		),
+	);
+
 	// CUSTOM FIELDS FOR ITINERARIOS AND BADGES
 	$meta_boxes[] = array(
 		'id' => 'quincem_subtit',
@@ -325,10 +380,11 @@ function quincem_metaboxes( $meta_boxes ) {
 			),
 		),
 	);
+	// CUSTOM FIELDS FOR ITINERARIOS AND BADGES AND ISSUERS
 	$meta_boxes[] = array(
 		'id' => 'quincem_icono',
 		'title' => 'Icono',
-		'pages' => array('itinerario','badge'), // post type
+		'pages' => array('itinerario','badge','issuer'), // post type
 		'context' => 'side', //  'normal', 'advanced', or 'side'
 		'priority' => 'default',  //  'high', 'core', 'default' or 'low'
 		'show_names' => false, // Show field names on the left
