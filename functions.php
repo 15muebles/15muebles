@@ -319,12 +319,13 @@ function quincem_create_post_type() {
 } // end register post types
 
 // get all posts from a post type to be used in select or multicheck forms
-function quincem_get_list($post_type) {
+function quincem_get_list( $post_type,$first_element = false ) {
 	$posts = get_posts(array(
 		'posts_per_page' => -1,
 		'post_type' => $post_type,
 	));
 	if ( count($posts) > 0 ) {
+		if ( $first_element == true ) { $list[] = ''; }
 		foreach ( $posts as $post ) {
 			$list[$post->ID] = $post->post_title;
 		}
@@ -340,6 +341,7 @@ function quincem_metaboxes( $meta_boxes ) {
 	//$itinerarios = quincem_get_list("itinerario");
 	$actividades = quincem_get_list("actividad");
 	$badges = quincem_get_list("badge");
+	$issuers = quincem_get_list("issuer",true);
 
 	// CUSTOM FIELDS FOR ISSUERS
 	$meta_boxes[] = array(
@@ -382,6 +384,24 @@ function quincem_metaboxes( $meta_boxes ) {
 			),
 		),
 	);
+	$meta_boxes[] = array(
+		'id' => 'quincem_issuers_list',
+		'title' => 'Emisor',
+		'pages' => array('itinerario','badge'), // post type
+		'context' => 'side', //  'normal', 'advanced', or 'side'
+		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
+		'show_names' => false, // Show field names on the left
+		'fields' => array(
+			array(
+				'name' => 'Selecciona un emisor',
+				'desc' => 'Emisor de este badge o itinerario.',
+				'id' => $prefix . 'issuer',
+				'type' => 'select',
+				'options' => $issuers
+			),
+		),
+	);
+
 	// CUSTOM FIELDS FOR ITINERARIOS AND BADGES AND ISSUERS
 	$meta_boxes[] = array(
 		'id' => 'quincem_icono',
@@ -669,13 +689,20 @@ function quincem_write_badge_metadata() {
 		$perma = get_permalink($post->ID);
 		$subtit = get_post_meta( $post->ID, '_quincem_subtit',true );
 		$wp_img_id = get_post_thumbnail_id( $post->ID );
- 
+
+		$issuer_id = get_post_meta( $post->ID, '_quincem_issuer',true);
+		$args = array(
+			'post_type' => 'issuer',
+			'include' => array($issuer_id)
+		);
+		$issuers = get_posts( $args );
+		foreach ( $issuers as $i ) { $issuer_slug = $i->post_name; }
 		$data = '{
 "name": "' .$post->post_title. '. ' .$subtit. '",
 "description": "' .$post->post_excerpt. '",
 "image": "http://ciudad-escuela.org/openbadges/images/badge-' .$post->post_name. '.png",
 "criteria": "' .$perma. '",
-"issuer": "http://ciudad-escuela.org/openbadges/issuer-15muebles.json"
+"issuer": "http://ciudad-escuela.org/openbadges/issuer-'.$issuer_slug.'.json"
 }';
 
 		// json metadata file
