@@ -45,11 +45,11 @@ function quincem_theme_setup() {
 	add_filter('post_class', 'quincem_classes');
 
 	//add_action('wp_insert_post', 'quincem_write_badge_metadata');
-	add_action('save_post', 'quincem_write_badge_metadata');
+	add_action('save_post', 'quincem_write_badge_metadata',9999);
 	//add_action('wp_insert_post', 'quincem_write_earner_metadata');
 	add_action('draft_to_publish', 'quincem_earner_admited');
 	//add_action('wp_insert_post', 'quincem_write_badge_metadata');
-	add_action('save_post', 'quincem_write_issuer_metadata');
+	add_action('save_post', 'quincem_write_issuer_metadata',9999);
 
 	// Enable support for Post Formats.
 	add_theme_support( 'post-formats', array(
