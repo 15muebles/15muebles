@@ -184,7 +184,7 @@ function quincem_create_post_type() {
 		'exclude_from_search' => false,
 		'menu_position' => 5,
 		'menu_icon' => get_template_directory_uri() . '/images/quincem-dashboard-pt-badge.png',
-		'hierarchical' => false, // if true this post type will be as pages
+		'hierarchical' => true, // if true this post type will be as pages
 		'query_var' => true,
 		'supports' => array('title', 'editor','excerpt','author','trackbacks','thumbnail'),
 		'rewrite' => array('slug'=>'badge','with_front'=>false),
@@ -443,7 +443,6 @@ function quincem_metaboxes( $meta_boxes ) {
 
 	// CUSTOM FIELDS FOR BADGES
 	///
-
 	// actividades multicheckbox
 	$meta_boxes[] = array(
 		'id' => 'quincem_actividades',
@@ -513,6 +512,24 @@ function quincem_metaboxes( $meta_boxes ) {
 					'type' => 'wysiwyg',
 					'options' => array(),
 				),
+		),
+	);
+
+	// Version
+	$meta_boxes[] = array(
+		'id' => 'quincem_version',
+		'title' => 'Versión del badge',
+		'pages' => array('badge'), // post type
+		'context' => 'side', //  'normal', 'advanced', or 'side'
+		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
+		'show_names' => false, // Show field names on the left
+		'fields' => array(
+			array(
+				'name' => 'Versión',
+				'id' => $prefix . 'version',
+				'type' => 'text',
+				'description' => 'Número de versión del badge: solo números naturales.'
+			),
 		),
 	);
 

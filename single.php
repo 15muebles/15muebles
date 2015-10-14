@@ -67,8 +67,7 @@ if ( $pt == 'itinerario' ) {
 	if ( $single_como != '' ) {
 		$single_como_out =
 			"<h2>Cómo ganar el badge</h2>"
-			.apply_filters( 'the_content', $single_como ).
-			"<p class='single-solicita'>Si has participado en alguna de las actividades asociadas a este badge puedes <strong><a href='/solicita-tu-badge/?badge_id=" .$post->ID. "'>solicitar este badge</a></strong> para añadirlo a <a href='http://backpack.openbadges.org'>tu backpack</a>.</p>";
+			.apply_filters( 'the_content', $single_como );
 	}
 
 	$single_info_out = "";
@@ -112,6 +111,71 @@ if ( $pt == 'itinerario' ) {
 		}
 		$single_earners_out .= "</ul>";
 	} else { $single_earners_out = ""; }
+
+	
+	$solicita_out = "
+		<div class='single-aside'>
+			<h3>Solicitar el badge</h3>
+			<p>Si has participado en alguna de las actividades asociadas a este badge puedes solicitar este badge para añadirlo a <a href='http://backpack.openbadges.org'>tu backpack</a>.</p>
+		<p><a class='btn-cescuela' href='/solicita-tu-badge/?badge_id=" .$post->ID. "'>Solicita este badge</a></p>
+		</div>
+	";
+
+	$args = array(
+		'post_type' => $pt,
+		'child_of' => $post->ID,
+	);
+	$children = get_pages($args);
+	$current_version = get_post_meta($post->ID,'_quincem_version',true);
+	$version_message = "<p class='bg-yellow'><span class='glyphicon glyphicon-exclamation-sign'></span> <strong>Versión desactualizada.</strong></p><p>Ésta es la versión ".$current_version." del badge ".get_the_title().". En el listado de versiones puedes encontrar la última versión:</p>";
+	$versions = "";
+
+	// if versions
+	if ( $post->post_parent != 0 ) { // is child badge: it is not the first version
+		$args = array(
+			'post_type' => $pt,
+			'sort_order' => 'desc',
+			'sort_column' => 'post_date',
+			'child_of' => $post->post_parent,
+		);
+		$sisters = get_pages($args);
+		$s_count = count($sisters) + 1;
+		if ( $current_version == $s_count ) { $version_message = "<p class='bg-blue-top'><span class='glyphicon glyphicon-ok-sign'></span> <strong>Última versión del badge.</strong></p><p>Ésta es la versión ".$current_version." del badge ".get_the_title().".</p>"; }
+		foreach ( $sisters as $s ) {
+			$s_perma = get_permalink($s);
+			$s_date = get_the_date('j\/m\/Y',$s->ID);
+			if ( $current_version == $s_count ) { 
+				$versions .= "<li><span class='glyphicon glyphicon-star'></span> <strong><a href='".$s_perma."'>Versión ".$s_count."</a></strong> (".$s_date.")</li>";
+			} else {
+				$versions .= "<li><a href='".$s_perma."'>Versión ".$s_count."</a>.<br />Fecha: ".$s_date."</li>";
+			}
+			$s_count--;
+		}
+		$versions .= "<li><span class='glyphicon glyphicon-star-empty'></span> <a href='".get_permalink($post->post_parent)."'>Versión 1</a> (".get_the_date('j\/m\/Y',$post->parent).")</li>";
+		
+	} elseif ( count($children) != 0 ) { // is parent badge with children: is the first version of many
+		$s_count = count($children) + 1;
+		foreach ( $children as $s ) {
+			$s_perma = get_permalink($s);
+			$s_date = get_the_date('j\/m\/Y',$s->ID);
+			$versions .= "<li><span class='glyphicon glyphicon-star-empty'></span> <a href='".$s_perma."'>Versión ".$s_count."</a> (".$s_date.")</li>";
+			$s_count--;
+			
+		}
+		$versions .= "<li><span class='glyphicon glyphicon-star'></span> <strong><a href='".get_permalink($post)."'>Versión 1</a></strong> (".get_the_date('j\/m\/Y').")</li>";
+
+	} // end if versions
+
+	if ( $versions != '') {
+	$version_out = "
+		<div class='single-aside'>
+			<h3>Versión</h3>
+			".$version_message."
+			<h4>Listado de versiones</h4>
+			<ul class='versions'>".$versions."</ul>
+		</div>
+	";
+	} else { $version_out = ""; }
 
 } elseif ( $pt == 'actividad' ) {
 	$single_subtit = get_post_meta( $post->ID, '_quincem_escenario', true );
@@ -312,7 +376,7 @@ if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$s
 
 	</div><!-- .col-md-4 .col-sm-4  -->
 
-	<div class="col-md-6 col-sm-7">
+	<div class="col-md-5 col-sm-5">
 		<section class="single-desc">
 		<?php the_content();
 		echo $single_como_out;
@@ -320,6 +384,12 @@ if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$s
 		</section>
 
 	</div><!-- .col-md-6 .col-sm-7 -->
+
+	<?php if( $pt == 'badge' ) { ?>
+	<aside class="col-md-3 col-sm-3">
+		<?php echo $version_out.$solicita_out ?>
+	</aside><!-- .col-md-2 .col-sm-2 -->
+	<?php } ?>
 
 	</article><!-- .mosac .row .hair -->
 

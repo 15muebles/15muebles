@@ -66,24 +66,53 @@ foreach ( $band_pts as $band_pt ) {
 	// IF ITINERARIOS OR BADGES
 	if ( $band_pt != 'actividad' ) {
 
-		// loop args
+		// BADGES: loop args
 		if ( $band_pt == 'badge' )  {
-		$args = array(
-			'posts_per_page' => -1,
-			'post_type' => $band_pt,
-			'orderby' => 'menu_order title',
-			'order' => 'ASC',
-		);
-		$tablet_count_pt = 4;
+			$args = array(
+				'posts_per_page' => -1,
+				'post_type' => $band_pt,
+				'post_parent' => 0
+			);
+			$badges = get_posts($args);
+			foreach ( $badges as $b ) {
+				$args = array(
+					'post_type' => $band_pt,
+					'post_parent' => $b->ID,
+					'meta_key' => '_quincem_version',
+					'orderby' => 'meta_value_num',
+					'order' => 'DESC'
+
+				);
+				$children = get_posts($args);
+				if ( count($children) == 1 ) { $not_in[] = $b->ID; }
+				elseif ( count($children) >= 2 ) {
+					$not_in[] = $b->ID;
+					$ch_count = 0;
+					foreach ( $children as  $ch ) {
+						if ( $ch_count != 0 ) { $not_in[] = $ch->ID; }
+						$ch_count++;
+					}
+				}
+				
+			}
+			$args = array(
+				'posts_per_page' => -1,
+				'post_type' => $band_pt,
+				'orderby' => 'menu_order title',
+				'order' => 'ASC',
+				'post__not_in' => $not_in
+			);
+	
+			$tablet_count_pt = 4;
 
 		} elseif ( $band_pt == 'itinerario' ) {
-		$args = array(
-			'posts_per_page' => -1,
-			'post_type' => $band_pt,
-			'orderby' => 'menu_order',
-			'order' => 'ASC',
-		);
-		$tablet_count_pt = 3;
+			$args = array(
+				'posts_per_page' => -1,
+				'post_type' => $band_pt,
+				'orderby' => 'menu_order',
+				'order' => 'ASC',
+			);
+			$tablet_count_pt = 3;
 
 		}
 
