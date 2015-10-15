@@ -20,7 +20,7 @@ while ( have_posts() ) : the_post();
 	</header>
 
 	<section class="row page-desc">
-		<div class="col-md-8 col-sm-9">
+		<div class="col-md-8 col-sm-10">
 			<?php the_content();
 			quincem_insert_earner();
 			?>

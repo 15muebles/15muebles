@@ -319,13 +319,56 @@ function quincem_create_post_type() {
 } // end register post types
 
 // get all posts from a post type to be used in select or multicheck forms
-function quincem_get_list( $post_type,$first_element = false ) {
-	$posts = get_posts(array(
-		'posts_per_page' => -1,
-		'post_type' => $post_type,
-	));
+function quincem_get_list( $post_type,$first_element_empty = false ) {
+	if ( $post_type == 'badge' ) {
+		$args = array(
+			'posts_per_page' => -1,
+			'post_type' => $post_type,
+			'post_parent' => 0
+		);
+		$badges = get_posts($args);
+		$not_in = array();
+		foreach ( $badges as $b ) {
+			$args = array(
+				'post_type' => $post_type,
+				'post_parent' => $b->ID,
+				'meta_key' => '_quincem_version',
+				'orderby' => 'meta_value_num',
+				'order' => 'DESC'
+
+			);
+			$children = get_posts($args);
+			if ( count($children) == 1 ) { $not_in[] = $b->ID; }
+			elseif ( count($children) >= 2 ) {
+				$not_in[] = $b->ID;
+				$ch_count = 0;
+				foreach ( $children as  $ch ) {
+					if ( $ch_count != 0 ) { $not_in[] = $ch->ID; }
+					$ch_count++;
+				}
+			}
+			
+		}
+		$posts = get_posts(array(
+			'posts_per_page' => -1,
+			'post_type' => $post_type,
+			'orderby' => 'menu_order title',
+			'order' => 'ASC',
+			'post__not_in' => $not_in
+		));
+	
+	} else {
+		$posts = get_posts(array(
+			'posts_per_page' => -1,
+			'post_type' => $post_type,
+			'orderby' => 'title',
+			'order' => 'ASC'
+		));
+	
+	}
+
 	if ( count($posts) > 0 ) {
-		if ( $first_element == true ) { $list[] = ''; }
+		if ( $first_element_empty == true ) { $list[] = ''; }
 		foreach ( $posts as $post ) {
 			$list[$post->ID] = $post->post_title;
 		}

@@ -68,7 +68,7 @@ if ( $pt == 'itinerario' ) {
 		$single_como_out =
 			"<h2>Cómo ganar el badge</h2>"
 			.apply_filters( 'the_content', $single_como );
-	}
+	} else { $single_como_out = ''; }
 
 	$single_info_out = "";
 
@@ -147,7 +147,7 @@ if ( $pt == 'itinerario' ) {
 			if ( $current_version == $s_count ) { 
 				$versions .= "<li><span class='glyphicon glyphicon-star'></span> <strong><a href='".$s_perma."'>Versión ".$s_count."</a></strong> (".$s_date.")</li>";
 			} else {
-				$versions .= "<li><a href='".$s_perma."'>Versión ".$s_count."</a>.<br />Fecha: ".$s_date."</li>";
+				$versions .= "<li><span class='glyphicon glyphicon-star-empty'></span> <a href='".$s_perma."'>Versión ".$s_count."</a> (".$s_date.")</li>";
 			}
 			$s_count--;
 		}

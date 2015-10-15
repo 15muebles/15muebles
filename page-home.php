@@ -74,6 +74,7 @@ foreach ( $band_pts as $band_pt ) {
 				'post_parent' => 0
 			);
 			$badges = get_posts($args);
+			$not_in = array();
 			foreach ( $badges as $b ) {
 				$args = array(
 					'post_type' => $band_pt,
