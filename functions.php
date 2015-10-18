@@ -374,7 +374,34 @@ function quincem_get_list( $post_type,$first_element_empty = false ) {
 		}
 		return $list;
 	}
-}
+
+}// END quincem_get_list
+
+// get a list of users to use in select or multicheck form fields
+function quincem_get_users( $role,$first_element_empty = false ) {
+	if ( $role != 'all' ) {
+		$args = array(
+			'role' => $role,
+			'orderby' => 'nicename',
+			'order' => 'ASC'
+		);
+
+	} else {
+		$args = array(
+			'orderby' => 'nicename',
+			'order' => 'ASC'
+		);
+	}
+	$users = get_users($args);
+	if ( count($users) > 0 ) {
+		if ( $first_element_empty == true ) { $list[] = ''; }
+		foreach ( $users as $u ) {
+			$list[$u->ID] = $u->display_name;
+		}
+		return $list;
+	}
+	
+} // END quincem_get_users
 
 //Add metaboxes to several post types edit screen
 function quincem_metaboxes( $meta_boxes ) {
@@ -385,6 +412,7 @@ function quincem_metaboxes( $meta_boxes ) {
 	$actividades = quincem_get_list("actividad");
 	$badges = quincem_get_list("badge");
 	$issuers = quincem_get_list("issuer",true);
+	$users = quincem_get_users('all',true);
 
 	// CUSTOM FIELDS FOR ISSUERS
 	$meta_boxes[] = array(
@@ -422,6 +450,23 @@ function quincem_metaboxes( $meta_boxes ) {
 				'desc' => 'En esta dirección se recibirán las peticiones de emisión de badges.',
 				'id' => $prefix . 'issuer_notifica_email',
 				'type' => 'text_email',
+			),
+		),
+	);
+	$meta_boxes[] = array(
+		'id' => 'quincem_issuer_user',
+		'title' => 'Usuario Ciudad Escuela',
+		'pages' => array('issuer'), // post type
+		'context' => 'side', //  'normal', 'advanced', or 'side'
+		'priority' => 'default',  //  'high', 'core', 'default' or 'low'
+		'show_names' => false, // Show field names on the left
+		'fields' => array(
+			array(
+				'name' => 'Usuario',
+				'desc' => 'Usuario Ciudad Escuela asociado a este emisor.',
+				'id' => $prefix . 'issuer_user',
+				'type' => 'select',
+				'options' => $users
 			),
 		),
 	);
@@ -1021,7 +1066,6 @@ function quincem_insert_earner() {
 
 	} elseif ( sanitize_text_field( $_POST['quincem-form-badge-submit'] ) != 'Enviar' ) {
 		quincem_reclaim_badge_form();
-		echo "har";
 		return;
 	}
 
@@ -1057,6 +1101,8 @@ function quincem_insert_earner() {
 				$issuer_name = $i->post_title;
 				$issuer_notifica_email = get_post_meta($i->ID,'_quincem_issuer_notifica_email',true);
 				if ( $issuer_notifica_email == '' ) { $issuer_notifica_email = get_post_meta($i->ID,'_quincem_issuer_email',true); }
+				$issuer_user = get_post_meta($i->ID,'_quincem_issuer_user',true);
+				if ( $issuer_user == '' ) { $issuer_user = '1'; }
 			}
 		}
 	} else {
@@ -1110,7 +1156,7 @@ function quincem_insert_earner() {
 	$earner_id = wp_insert_post(array(
 		'post_type' => 'earner',
 		'post_status' => 'draft',
-		'post_author' => 1,
+		'post_author' => $issuer_user,
 		'post_title' => $earner_tit,
 	));
 
