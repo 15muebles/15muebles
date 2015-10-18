@@ -389,7 +389,7 @@ function quincem_metaboxes( $meta_boxes ) {
 	// CUSTOM FIELDS FOR ISSUERS
 	$meta_boxes[] = array(
 		'id' => 'quincem_issuer',
-		'title' => 'Datos del emisor',
+		'title' => 'Metadatos del emisor',
 		'pages' => array('issuer'), // post type
 		'context' => 'normal', //  'normal', 'advanced', or 'side'
 		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
@@ -403,8 +403,24 @@ function quincem_metaboxes( $meta_boxes ) {
 			),
 			array(
 				'name' => 'E-mail',
-				'desc' => 'La dirección de email no podrá cambiarse. Debe coincidir con la de la cuenta Mozilla Persona.',
+				'desc' => 'La dirección de email no podrá cambiarse.',
 				'id' => $prefix . 'issuer_email',
+				'type' => 'text_email',
+			),
+		),
+	);
+	$meta_boxes[] = array(
+		'id' => 'quincem_issuer_notifica',
+		'title' => 'Datos para notificaciones',
+		'pages' => array('issuer'), // post type
+		'context' => 'normal', //  'normal', 'advanced', or 'side'
+		'priority' => 'high',  //  'high', 'core', 'default' or 'low'
+		'show_names' => true, // Show field names on the left
+		'fields' => array(
+			array(
+				'name' => 'E-mail',
+				'desc' => 'En esta dirección se recibirán las peticiones de emisión de badges.',
+				'id' => $prefix . 'issuer_notifica_email',
 				'type' => 'text_email',
 			),
 		),
@@ -817,6 +833,18 @@ function quincem_earner_admited() {
 			$badge_img = "http://ciudad-escuela.org/openbadges/images/badge-" .$badge->post_name. ".png";		
 			$earner_json_url = "http://ciudad-escuela.org/openbadges/assertions/badge-" .$badge->post_name. "-" .$post->ID. ".json";
 			$earner_json_path = $_SERVER['DOCUMENT_ROOT'] . "/openbadges/assertions/badge-" .$badge->post_name. "-" .$post->ID. ".json";
+
+			$badge_issuer = get_post_meta($badge->ID,'_quincem_issuer',true);
+			$args = array(
+				'post_type' => 'issuer',
+				'include' => $badge_issuer
+			);
+			$issuers = get_posts($args);
+			foreach ( $issuers as $i ) {
+				$issuer_name = $i->post_title;
+				$issuer_notifica_email = get_post_meta($i->ID,'_quincem_issuer_notifica_email',true);
+				if ( $issuer_notifica_email == '' ) { $issuer_notifica_email = get_post_meta($i->ID,'_quincem_issuer_email',true); }
+			}
 		}
  
 		$data = '{
@@ -854,10 +882,13 @@ function quincem_earner_admited() {
 . "\r\n\r\n" .
 'Te hemos incluido en la lista de personas que ganaron este badge, para que otros puedan consultar el material que has generado. Puedes ver la lista en la sección "Ganaron el badge" del siguiente enlace: ' .$badge_perma. '.'
 . "\r\n\r\n" .
-'Si prefieres no figurar en la lista, comunícanoslo: el badge es tuyo y tú decides dónde y cómo mostrarlo. Puedes escribirnos a badges@ciudad-escuela.org'
+'Si prefieres no figurar en la lista, comunícanoslo: el badge es tuyo y tú decides dónde y cómo mostrarlo. Puedes escribirnos a '.$issuer_notifica_email. '.'
 . "\r\n\r\n" .
-'Un saludo del equipo de Ciudad Escuela.';
-			$headers[] = 'From: Ciudad Escuela <badges@ciudad-escuela.org>' . "\r\n";
+'Un saludo de '.$issuer_name.'.'
+;
+			$headers[] = 'From: '.$issuer_name. ' <' .$issuer_notifica_email. '>' . "\r\n";
+			$headers[] = 'Sender: Sistema de emisión de badge de Ciudad Escuela <badges@ciudad-escuela.org>' . "\r\n";
+			$headers[] = 'Reply-To:  '.$issuer_name. ' <' .$issuer_notifica_email. '>' . "\r\n";
 			$headers[] = 'To: ' .$earner_name. ' <' .$to. '>' . "\r\n";
 			// To send HTML mail, the Content-type header must be set, uncomment the following two lines
 			//$headers[]  = 'MIME-Version: 1.0' . "\r\n";
@@ -898,17 +929,17 @@ function quincem_reclaim_badge_form() {
 	$form_out = "
 <form id='quincem-form-content' method='post' action='" .$action. "' enctype='multipart/form-data'>
 <div class='row'>
-<div class='form-horizontal col-md-10'>
+<div class='form-horizontal col-md-12'>
 <legend>Tus datos</legend>
 <div class='form-group'>
-<label for='quincem-form-badge-name' class='col-sm-4 control-label'>Nombre</label>
+<label for='quincem-form-badge-name' class='col-sm-6 control-label'>Nombre</label>
 <div class='col-sm-6'>
     <input class='form-control req' type='text' value='' name='quincem-form-badge-name' />
 </div>
 </div>
 
 <div class='form-group'>
-<label for='quincem-form-badge-mail' class='col-sm-4 control-label'>Dirección de correo electrónico</label>
+<label for='quincem-form-badge-mail' class='col-sm-6 control-label'>Dirección de correo electrónico</label>
 <div class='col-sm-6'>
     <input class='form-control req' type='text' value='' name='quincem-form-badge-mail' />
     <p class='help-block'><small>En el caso de que ya tengas una mochila de badges (Mozilla Backpack) <strong>esta dirección debe ser la misma de tu cuenta Persona</strong>.</small></p>
@@ -916,7 +947,7 @@ function quincem_reclaim_badge_form() {
 </div>
 
 <div class='form-group'>
-    <label for='quincem-form-badge-avatar' class='col-sm-4 control-label'>Imagen de perfil</label>
+    <label for='quincem-form-badge-avatar' class='col-sm-6 control-label'>Imagen de perfil</label>
 <div class='col-sm-6'>
     <input type='file' name='quincem-form-badge-avatar' />
 	<input type='hidden' name='MAX_FILE_SIZE' value='4000000' />
@@ -926,14 +957,14 @@ function quincem_reclaim_badge_form() {
 
 <legend>Datos del badge que solicitas</legend>
 <div class='form-group'>
-<label for='quincem-form-badge-actividad' class='col-sm-4 control-label'>Actividad realizada</label>
+<label for='quincem-form-badge-actividad' class='col-sm-6 control-label'>Actividad realizada</label>
 <div class='col-sm-6'>
     <input class='form-control req' type='text' value='' name='quincem-form-badge-actividad' />
 </div>
 </div>
 
 <div class='form-group'>
-<label for='quincem-form-badge-badge' class='col-sm-4 control-label'>Badge solicitado</label>
+<label for='quincem-form-badge-badge' class='col-sm-6 control-label'>Badge solicitado</label>
 <div class='col-sm-6'>
 	<select class='form-control req' name='quincem-form-badge-badge' maxlenght='11' >
 		" .$options_badges. "
@@ -942,14 +973,14 @@ function quincem_reclaim_badge_form() {
 </div>
 
 <div class='form-group'>
-<label for='quincem-form-badge-material' class='col-sm-4 control-label'>Dirección URL al material producido</label>
+<label for='quincem-form-badge-material' class='col-sm-6 control-label'>Dirección URL al material producido</label>
 <div class='col-sm-6'>
     <input class='form-control req' type='text' value='' name='quincem-form-badge-material' />
 </div>
 </div>
 
 <div class='form-group'>
-    <div class='col-sm-offset-4 col-sm-6'>
+    <div class='col-sm-offset-6 col-sm-6'>
     <input class='btn btn-default' type='submit' value='Enviar' name='quincem-form-badge-submit' />
 	<span class='help-block'><small><strong>Todos los campos son requeridos excepto la imagen</strong>.</small></span>
     </div>
@@ -1016,6 +1047,17 @@ function quincem_insert_earner() {
 		foreach ( $badges as $badge ) {
 			$earner_badge_tit = $badge->post_title;
 			$earner_badge_slug = $badge->post_name;
+			$badge_issuer = get_post_meta($badge->ID,'_quincem_issuer',true);
+			$args = array(
+				'post_type' => 'issuer',
+				'include' => $badge_issuer
+			);
+			$issuers = get_posts($args);
+			foreach ( $issuers as $i ) {
+				$issuer_name = $i->post_title;
+				$issuer_notifica_email = get_post_meta($i->ID,'_quincem_issuer_notifica_email',true);
+				if ( $issuer_notifica_email == '' ) { $issuer_notifica_email = get_post_meta($i->ID,'_quincem_issuer_email',true); }
+			}
 		}
 	} else {
 		echo $error;
@@ -1139,6 +1181,10 @@ function quincem_insert_earner() {
 		} // end if file is upload
 	} // end if image has been uploaded
 
+			$headers[] = 'From: '.$issuer_name. ' <' .$issuer_notifica_email. '>' . "\r\n";
+			$headers[] = 'Sender: Sistema de emisión de badge de Ciudad Escuela <badges@ciudad-escuela.org>' . "\r\n";
+			$headers[] = 'Reply-To:  '.$issuer_name. ' <' .$issuer_notifica_email. '>' . "\r\n";
+			$headers[] = 'To: ' .$earner_name. ' <' .$to. '>' . "\r\n";
 
 	// send confirmation mail to earner
 	$to = $earner_mail;
@@ -1150,8 +1196,11 @@ Hola ' .$earner_name. ','
 . "\r\n\r\n" .
 'Vamos a revisar el material que has generado durante la actividad [' .$earner_material. '], y si cumple los criterios en unos días recibirás el badge en esta misma dirección de correo, junto con las instrucciones para mostrarlo al mundo.'
 . "\r\n\r\n" .
-'Un saludo del equipo de Ciudad Escuela.';
-	$headers[] = 'From: Ciudad Escuela <badges@ciudad-escuela.org>' . "\r\n";
+'Un saludo de '.$issuer_name.'.'
+;
+	$headers[] = 'From: '.$issuer_name. ' <' .$issuer_notifica_email. '>' . "\r\n";
+	$headers[] = 'Sender: Sistema de emisión de badge de Ciudad Escuela <badges@ciudad-escuela.org>' . "\r\n";
+	$headers[] = 'Reply-To:  '.$issuer_name. ' <' .$issuer_notifica_email. '>' . "\r\n";
 	$headers[] = 'To: ' .$earner_name. ' <' .$to. '>' . "\r\n";
 	// To send HTML mail, the Content-type header must be set, uncomment the following two lines
 	//$headers[]  = 'MIME-Version: 1.0' . "\r\n";
@@ -1159,10 +1208,14 @@ Hola ' .$earner_name. ','
 	wp_mail( $to, $subject, $message, $headers);
 
 	// send notification mail to issuer
-	$to = "badges@ciudad-escuela.org";
+	$to = $issuer_notifica_email;
 	$subject = "[badges] Solicitud de emisión de badge";
 	$message = '
-+ Nombre del solicitante: ' .$earner_name.
+Hola ' .$issuer_name.','
+. "\r\n\r\n" .
+'un usuario ha solicitado uno de tus badge a través del sistema de emisión de Ciudad Escuela. Aquí puedes ver sus datos:'
+. "\r\n\r\n" .
+'+ Nombre del solicitante: ' .$earner_name.
 "\r\n" .
 '+ Dirección e-mail del solicitante: ' .$earner_mail.
 "\r\n\r\n" .
@@ -1172,9 +1225,20 @@ Hola ' .$earner_name. ','
 "\r\n" .
 '+ URL del material producido: ' .$earner_material.
 "\r\n\r\n" .
-'Visita el panel de administración de Ciudad Escuela para aprobar o no esta solicitud: http://ciudad-escuela.org/wp-admin/post.php?post=' .$earner_id. '&action=edit'
+'Si es la primera vez que recibes una solicitud de emisión de badge Ciudad Escuela puedes leer las siguientes instrucciones para gestionar esta solicitud:'.
+"\r\n\r\n" .
+'1. Comprueba los datos del solicitante y el material que ha generado, para asegurarte de que cumple los requisitos.'.
+"\r\n" .
+'2. Visita el panel de administración de Ciudad Escuela: puedes aprobar la solicitud pinchando sobre el botón azul "Publicar" que verás una vez hayas accedido al panel: http://ciudad-escuela.org/wp-admin/post.php?post=' .$earner_id. '&action=edit'.
+"\r\n\r\n" .
+'Si crees que el usuario no cumple alguno de los requisitos quizás quieras ponerte en contacto con él: ' .$earner_mail.
+"\r\n\r\n" .
+'Puedes escribirnos a Ciudad Escuela respondiendo a este correo sobre cualquier duda que tengas sobre el sistema de emisión.'.
+"\r\n\r\n" .
+'Un saludo del equipo de Ciudad Escuela.'
 ;
-	$headers[] = 'From: Ciudad Escuela <badges@ciudad-escuela.org>' . "\r\n";
+	$headers[] = 'From: Sistema de emisión de badge de Ciudad Escuela <badges@ciudad-escuela.org>' . "\r\n";
+	$headers[] = 'Reply-To: Sistema de emisión de badge de Ciudad Escuela <badges@ciudad-escuela.org>' . "\r\n";
 	$headers[] = 'To: <' .$to. '>' . "\r\n";
 	// To send HTML mail, the Content-type header must be set, uncomment the following two lines
 	//$headers[]  = 'MIME-Version: 1.0' . "\r\n";
