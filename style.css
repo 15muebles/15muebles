@@ -84,6 +84,15 @@ body { padding-top: 50px; }
 .epi-actividad {
 	background-color: #c7e3e3;
 }
+.archive .navbar-blog a,
+.blog .navbar-blog a,
+.single-post .navbar-blog a,
+.archive .navbar-blog a:hover,
+.blog .navbar-blog a:hover,
+.single-post .navbar-blog a:hover {
+	color: #fff !important;
+	background-color: #9fcfcf !important;
+}
 .epi-earner {
 	background-color: #d5eaea;
 } 
@@ -95,6 +104,7 @@ body { padding-top: 50px; }
 	font-weight: normal;
 	border-radius: 0;
 }
+#navbar-sec a:hover,
 #navbar-main a:hover,
 #navbar-main .active a {
 	color: #fff;
@@ -105,13 +115,11 @@ body { padding-top: 50px; }
 	padding-top: 15px;
 	padding-bottom: 15px;
 }
-#navbar-sec a:hover {
-	color: #fff;
-}
 #navbar-sec .border-band-black:hover,
-#navbar-sec .active a {
+#navbar-sec .active a.border-band-black {
 	color: #000;
 	background-image: url('images/quincem-bg-band-border-black-hover.png');
+	background-color: transparent;
 }
 .epi-home {
 	background-color: #c7e3e3;
