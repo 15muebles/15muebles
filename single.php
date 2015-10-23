@@ -177,6 +177,36 @@ if ( $pt == 'itinerario' ) {
 	";
 	} else { $version_out = ""; }
 
+	// issuer
+	$issuer_id = get_post_meta($post->ID,'_quincem_issuer',true);
+	$args = array(
+		'post_type' => 'issuer',
+		'post__in' => array($issuer_id),
+	);
+	$issuers = get_posts($args);
+	if ( count($issuers) == 1 ) {
+		foreach ( $issuers as $i ) {
+			$issuer_metadatas = array();
+			$issuer_metadatas['Emisor'] = $i->post_title;
+			$issuer_metadatas['Descripción'] = $i->post_content;
+			$issuer_url = get_post_meta($i->ID,'_quincem_issuer_url',true);
+			if ($issuer_url != '') { $issuer_metadatas['Sitio web'] = "<a href='".$issuer_url."'>".$issuer_url."</a>"; }
+				$issuer_metadatas_out = "<dl class='issuer-metadatas'>";
+			foreach ( $issuer_metadatas as $label => $im ) {
+				$issuer_metadatas_out .= "<dt>".$label."</dt><dd>".$im."</dd>";
+			}
+				$issuer_metadatas_out .= "</dl>";
+
+			$issuer_out = "
+			<div class='single-aside'>
+				<h3>Ficha del emisor del badge</h3>
+				".$issuer_metadatas_out."
+				<a class='btn-cescuela' href='".get_permalink($i)."'>Contactar al emisor</a>
+			</div>
+			";
+		}
+	} else { $issuer_out = ""; }
+	
 } elseif ( $pt == 'actividad' ) {
 	$single_subtit = get_post_meta( $post->ID, '_quincem_escenario', true );
 
@@ -387,7 +417,7 @@ if ( has_post_thumbnail() ) { $single_logo = get_the_post_thumbnail($post->ID,$s
 
 	<?php if( $pt == 'badge' ) { ?>
 	<aside class="col-md-3 col-sm-3">
-		<?php echo $version_out.$solicita_out ?>
+		<?php echo $version_out.$solicita_out.$issuer_out ?>
 	</aside><!-- .col-md-2 .col-sm-2 -->
 	<?php } ?>
 
