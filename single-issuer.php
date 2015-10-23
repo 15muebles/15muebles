@@ -15,9 +15,9 @@ $issuer_metadatas = array();
 $issuer_metadatas['Emisor'] = $post->post_title;
 $issuer_metadatas['Descripción'] = $post->post_content;
 $issuer_url = get_post_meta($post->ID,'_quincem_issuer_url',true);
-if ($issuer_url != '') { $issuer_metadatas['Sitio web'] = "<a href='>".$issuer_url."'>".$issuer_url."</a>"; }
+if ($issuer_url != '') { $issuer_metadatas['Sitio web'] = "<a href='".$issuer_url."'>".$issuer_url."</a>"; }
 
-$single_img_size = "medium";
+$single_img_size = "small";
 if ( has_post_thumbnail() ) {
 	$single_logo = get_the_post_thumbnail($post->ID,$single_img_size,array('class' => 'img-responsive'));
 	$issuer_tit = "<header><h1 class='hideout'>" .get_the_title(). "</h1></header>";
@@ -124,7 +124,7 @@ if ( count($badges) > 0 ) {
 $rel_item_name = get_the_title($rel->ID);
 $rel_item_tit = "<h3 class='rel-item-tit'><a href='" .$rel_item_perma. "' title='" .$rel_item_name. "' rel='bookmark'>" .$rel_item_name. "</a></h3>";
 $rel_item_subtit = get_post_meta($rel->ID,'_quincem_badge_subtit',true);
-if ( has_post_thumbnail() ) { $rel_item_logo = "<a href='" .$rel_item_perma. "' title='" .$rel_item_name. "' rel='bookmark'>" .get_the_post_thumbnail($rel->ID,$rel_item_img_size,array('class' => 'img-responsive')). "</a>"; } else { $rel_item_logo = ""; }
+if ( has_post_thumbnail($rel->ID) ) { $rel_item_logo = "<a href='" .$rel_item_perma. "' title='" .$rel_item_name. "' rel='bookmark'>" .get_the_post_thumbnail($rel->ID,$rel_item_img_size,array('class' => 'img-responsive')). "</a>"; } else { $rel_item_logo = ""; }
 ?>
 	<div class="rel-item aligncenter col-md-3 col-sm-4 col-xs-6">
 		<div class="thumbnail">
