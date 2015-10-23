@@ -1,13 +1,13 @@
 /*
 Theme Name: 15muebles
-Theme URI: http://15muebles.org
-Description: WordPress theme for the site 15muebles.org
-Version: 0.1
+Theme URI: http://ciudad-escuela.org
+Description: WordPress theme for the site ciudad-escuela.org
+Version: 1.0
 Author: montera34
 Author URI: http://montera34.com
 Tags: HTML5, CSS3
 
-	montera34 v0.1
+	montera34 v1.0
 	 http://montera34.com
 
 	This theme was designed and built by montera34,
@@ -22,10 +22,12 @@ Tags: HTML5, CSS3
 strong { font-weight: normal; font-family: 'museo700'; }
 .aligncenter { text-align: center; }
 .hideout {
-	text-indent: -9999px;
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
 	height: 0;
-	margin: 0;
 	padding: 0;
+	margin: 0;
 }
 .hair {
 	padding-bottom: 30px;
@@ -402,6 +404,7 @@ img.patrocina-sec {
 	color: #fff;
 	padding: 5px;
 	border-radius: 2px;
+	border: none;
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 	text-decoration: none !important;
@@ -423,8 +426,16 @@ img.patrocina-sec {
 	display: block;
 }
 
+/* Issuer single */
+.issuer-ficha {
+	margin-top: 20px;
+}
+.issuer-ficha dd {
+	margin-bottom: 1em;
+}
 
 /* About page and default template page */
+#issuer,
 #blog,
 .page-template-page-solicita-badge-php .container-full,
 .page-template-default .container-full,
@@ -438,7 +449,8 @@ img.patrocina-sec {
 .subpage {
 	padding: 70px 0;
 }
-.epi-about {
+.epi-about,
+.epi-issuer {
 	background-color: #9fcfcf;
 }
 .parent-tit {
@@ -575,15 +587,16 @@ img.patrocina-sec {
 #quincem-form-content .help-block {
 	line-height: 1.1em;
 }
-
-.wpcf7 {
-	margin-top: 70px;
-}
-
 label {
 	font-weight: normal;
 	font-family: 'museo700';
 	line-height: 1em;
+}
+.form-control {
+	border: none;
+}
+#quincem-form-contact {
+	margin-top: 20px;
 }
 
 /* Error 404 */

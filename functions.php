@@ -299,9 +299,9 @@ function quincem_create_post_type() {
 			'search_items' => __( 'Buscar issuers' ),
 			'not_found' => __( 'Ningún issuer encontrado' ),
 			'not_found_in_trash' => __( 'Ningún issuer en la papelera' ),
-			'parent' => __( 'Aprende' )
+			'parent' => __( 'Emisor de badges' )
 		),
-		'description' => '',
+		'description' => 'Éste es el perfil de una de las organizaciones que emiten badges en Ciudad Escuela. Si te interesa alguno de ellos, puedes consultar las actividades relacionadas para conseguirlo. Si lo prefieres puedes ponerte en contacto con el emisor directamente en la sección contacto.',
 		'has_archive' => false,
 		'public' => true,
 		'publicly_queryable' => true,
@@ -319,7 +319,7 @@ function quincem_create_post_type() {
 } // end register post types
 
 // get all posts from a post type to be used in select or multicheck forms
-function quincem_get_list( $post_type,$first_element_empty = false ) {
+function quincem_get_list( $post_type,$output = 'form_select' ) {
 	if ( $post_type == 'badge' ) {
 		$args = array(
 			'posts_per_page' => -1,
@@ -368,7 +368,7 @@ function quincem_get_list( $post_type,$first_element_empty = false ) {
 	}
 
 	if ( count($posts) > 0 ) {
-		if ( $first_element_empty == true ) { $list[] = ''; }
+		if ( $output == 'form_select' ) { $list[] = ''; }
 		foreach ( $posts as $post ) {
 			$list[$post->ID] = $post->post_title;
 		}
@@ -411,7 +411,7 @@ function quincem_metaboxes( $meta_boxes ) {
 	//$itinerarios = quincem_get_list("itinerario");
 	$actividades = quincem_get_list("actividad");
 	$badges = quincem_get_list("badge");
-	$issuers = quincem_get_list("issuer",true);
+	$issuers = quincem_get_list("issuer",'form_select');
 	$users = quincem_get_users('all',true);
 
 	// CUSTOM FIELDS FOR ISSUERS
@@ -960,7 +960,7 @@ function quincem_reclaim_badge_form() {
 		$badge_from = sanitize_text_field( $_GET['badge_id']);
 	} else { $badge_from = ""; }
 
-	$badges = quincem_get_list("badge");
+	$badges = quincem_get_list("badge","form_select_first_not_empty");
 	$options_badges = "<option></option>";
 	while ( $badge = current($badges) ) {
 		if ( $badge_from == key($badges) ) {
@@ -1026,7 +1026,7 @@ function quincem_reclaim_badge_form() {
 
 <div class='form-group'>
     <div class='col-sm-offset-6 col-sm-6'>
-    <input class='btn btn-default' type='submit' value='Enviar' name='quincem-form-badge-submit' />
+    <input class='btn-cescuela' type='submit' value='Enviar' name='quincem-form-badge-submit' />
 	<span class='help-block'><small><strong>Todos los campos son requeridos excepto la imagen</strong>.</small></span>
     </div>
   </div>
@@ -1295,4 +1295,130 @@ Hola ' .$issuer_name.','
 	exit;
 
 } // end insert earner data in database
+
+// contact form
+function quincem_contact_form() {
+
+	$action = get_permalink();
+
+	$form_out = "
+<form id='quincem-form-contact' method='post' action='" .$action. "'>
+<div class='form-group'>
+	<label for='quincem-form-contact-name'>Nombre</label>
+	<input class='form-control req' type='text' value='' name='quincem-form-contact-name' />
+</div>
+
+<div class='form-group'>
+	<label for='quincem-form-contact-mail' class='control-label'>Dirección de correo electrónico</label>
+	<input class='form-control req' type='text' value='' name='quincem-form-contact-mail' />
+</div>
+
+<div class='form-group'>
+	<label for='quincem-form-contact-message' class='control-label'>Mensaje</label>
+	<textarea class='form-control req' name='quincem-form-contact-message'></textarea>
+</div>
+<div class='checkbox'>
+	<label>
+		<input type='checkbox' name='quincem-form-contact-copy' value='true' /> Recibir una copia del mensaje en mi buzón de correo.
+	</label>
+</div>
+<div class='form-group'>
+	<input class='btn-cescuela' type='submit' value='Enviar' name='quincem-form-contact-submit' />
+	<span class='help-block'><small><strong>Todos los campos son requeridos</strong>.</small></span>
+    </div>
+  </div>
+
+</form>
+";
+	echo $form_out;
+
+} // end contact form
+
+// contact issuer
+function quincem_contact_issuer($post) {
+
+	// issuer data
+	$issuer_name = get_the_title($post->ID);
+	$issuer_mail = get_post_meta($post->ID,'_quincem_issuer_email',true);
+
+	// messages and locations for redirection
+	$perma = get_permalink();
+	$location = $perma."?form=success";
+	$error = "<div class='alert alert-danger'>
+		<p>Uno o varios campos están vacíos o contienen algún caracter no permitido.</p>
+		<p>Aségurate de que rellenaste todos los campos y únicamente utilizaste texto plano.</p>
+		<p>En cualquier caso el formulario no se envió correctamente. Por favor, inténtalo de nuevo.</p>
+	</div>";
+	$success = "<div class='alert alert-success'><p>Tu mensaje ha sido enviado correctamente a este emisor.</p></div><a class='btn-cescuela' href='".$perma."'>Enviar otro mensaje a ".$issuer_name."</a>";
+
+	if ( array_key_exists('form', $_GET) ) {
+	if ( sanitize_text_field( $_GET['form']) == 'success' ){
+		echo $success;
+		return;
+	}
+	}
+
+	if ( !array_key_exists('quincem-form-contact-submit', $_POST) ) {
+		quincem_contact_form();
+		return;
+
+	} elseif ( sanitize_text_field( $_POST['quincem-form-contact-submit'] ) != 'Enviar' ) {
+		quincem_contact_form();
+		return;
+	}
+
+	// check if all fields have been filled
+	// sanitize them all
+	$sender_name = sanitize_text_field( $_POST['quincem-form-contact-name'] );
+	$sender_mail = sanitize_email( $_POST['quincem-form-contact-mail'] );
+	$sender_message = sanitize_text_field( $_POST['quincem-form-contact-message'] );
+
+	if ( $sender_name == '' || $sender_mail == '' || $sender_message == '' ) {
+		echo $error;
+		quincem_contact_form();
+		return;
+	}
+
+	// if everything ok, send message to issuer
+	$to = $issuer_mail;
+	$headers[] = 'From: '.$sender_name. ' <' .$sender_mail. '>' . "\r\n";
+	$headers[] = 'Sender: Formulario de contacto de Ciudad Escuela <no-reply@ciudad-escuela.org>' . "\r\n";
+	$headers[] = 'Reply-To:  '.$sender_name. ' <' .$sender_mail. '>' . "\r\n";
+	$headers[] = 'To: ' .$issuer_name. ' <' .$to. '>' . "\r\n";
+	$subject = "Mensaje desde el formulario de contacto de Ciudad Escuela";
+	$message = 
+'Hola ' .$issuer_name.','
+. "\r\n\r\n" .
+'el usuario '.$sender_name.' te ha enviado el siguiente mensaje desde el formulario de contacto de tu perfil en Ciudad Escuela ('.$perma.'):'
+. "\r\n\r\n" .
+$sender_message
+. "\r\n\r\n" .
+'para contestarle puedes darle a responder en este correo o escribirle a '.$sender_mail
+. "\r\n\r\n" .
+'Un saludo,'
+. "\r\n" .
+'El sistema autómatico de mensajería de Ciudad Escuela'
+;
+	wp_mail( $to, $subject, $message, $headers);
+
+	// send copy to sender
+	if ( sanitize_text_field( $_POST['quincem-form-contact-copy'] ) == true ) {
+		$to = $sender_mail;
+		$headers[] = 'From: Formulario de contacto de Ciudad Escuela <no-reply@ciudad-escuela.org>' . "\r\n";
+		$headers[] = 'Sender: Formulario de contacto de Ciudad Escuela <no-reply@ciudad-escuela.org>' . "\r\n";
+		$subject = "Copia del mensaje enviado al emisor ".$issuer_name;
+		$message =
+'Hola ' .$sender_name.','
+. "\r\n\r\n" .
+'el siguiente mensaje ha sido enviado al emisor '.$issuer_name.':'
+. "\r\n\r\n" .
+$sender_message;
+		wp_mail( $to, $subject, $message, $headers);
+	}
+
+	wp_redirect( $location );
+	exit;
+
+} // contact issuer
+
 ?>
