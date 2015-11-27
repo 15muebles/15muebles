@@ -1434,10 +1434,10 @@ function quincem_api_post_type_support() {
 	global $wp_post_types;
 
 	$pt = 'earner';
-	if( isset( $wp_post_types[ $post_type_name ] ) ) {
-		$wp_post_types[$post_type_name]->show_in_rest = true;
-		$wp_post_types[$post_type_name]->rest_base = $post_type_name;
-		$wp_post_types[$post_type_name]->rest_controller_class = 'WP_REST_Posts_Controller';
+	if( isset( $wp_post_types[ $pt ] ) ) {
+		$wp_post_types[$pt]->show_in_rest = true;
+		$wp_post_types[$pt]->rest_base = $pt;
+		$wp_post_types[$pt]->rest_controller_class = 'WP_REST_Posts_Controller';
 	}
 }
 
@@ -1464,7 +1464,8 @@ function quincem_api_badge_earners( $data ) {
 	$earners_filtered = array();
 	foreach ( $earners as $e ) {
 		if ( has_post_thumbnail( $e->ID ) ) {
-			$earners_filtered[$e->ID]['avatar'] = wp_get_attachment_image_src( get_post_thumbnail_id($e->ID), 'bigicon' )[0];
+			$avatar = wp_get_attachment_image_src( get_post_thumbnail_id($e->ID), 'bigicon' );
+			$earners_filtered[$e->ID]['avatar'] = $avatar[0];
 		} else { $earners_filtered[$e->ID]['avatar'] = QUINCEM_BLOGTHEME. "/images/quincem-earner-avatar.png"; }
 		$earners_filtered[$e->ID]['name'] = get_post_meta( $e->ID, '_quincem_earner_name', true );
 		$earners_filtered[$e->ID]['date'] = $e->post_date;
