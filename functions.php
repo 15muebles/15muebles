@@ -58,8 +58,11 @@ function quincem_theme_setup() {
 
 	// register and init widget bars
 	add_action( 'widgets_init', 'quincem_widgets_init' );
-
+	
+	// Add post types to api
+	add_action( 'init', 'quincem_api_post_type_support', 25 );
 } // end quincem theme setup function
+
 
 // register and init widget bars
 function quincem_widgets_init() {
@@ -1420,5 +1423,68 @@ $sender_message;
 	exit;
 
 } // contact issuer
+
+// /////////////////////////
+// Rest API
+// works with wp-json plugin
+// /////////////////////////
+
+// Add earners post type to api
+function quincem_api_post_type_support() {
+	global $wp_post_types;
+
+	$pt = 'earner';
+	if( isset( $wp_post_types[ $post_type_name ] ) ) {
+		$wp_post_types[$post_type_name]->show_in_rest = true;
+		$wp_post_types[$post_type_name]->rest_base = $post_type_name;
+		$wp_post_types[$post_type_name]->rest_controller_class = 'WP_REST_Posts_Controller';
+	}
+}
+
+// Grab badge earners 
+function quincem_api_badge_earners( $data ) {
+	$earners = get_posts( array(
+		'posts_per_page' => -1,
+		'post_type' => 'earner',
+//		'post_type' => 'badge',
+//		'p' => $data['id']
+		'meta_query' => array(
+			array(
+				'key' => '_quincem_earner_badge',
+				'value' => $data['id'],
+				'compare' => '='
+			)
+		)
+	));
+
+	if ( empty( $earners ) ) {
+		return new WP_Error( 'no_badge', 'Invalid badge',array('status' => 404 ) );
+	}
+
+	$earners_filtered = array();
+	foreach ( $earners as $e ) {
+		if ( has_post_thumbnail( $e->ID ) ) {
+			$earners_filtered[$e->ID]['avatar'] = wp_get_attachment_image_src( get_post_thumbnail_id($e->ID), 'bigicon' )[0];
+		} else { $earners_filtered[$e->ID]['avatar'] = QUINCEM_BLOGTHEME. "/images/quincem-earner-avatar.png"; }
+		$earners_filtered[$e->ID]['name'] = get_post_meta( $e->ID, '_quincem_earner_name', true );
+		$earners_filtered[$e->ID]['date'] = $e->post_date;
+		$earners_filtered[$e->ID]['material'] = get_post_meta( $e->ID, '_quincem_earner_material', true );
+		$earners_filtered[$e->ID]['actividad'] = get_post_meta( $e->ID, '_quincem_earner_actividad', true );
+
+	}
+
+	return $earners_filtered;
+}
+add_action( 'rest_api_init', function () {
+	register_rest_route( 'quincem/v1', '/badge/(?P<id>\d+)/earners', array(
+		'methods' => 'GET',
+		'callback' => 'quincem_api_badge_earners',
+//		'args' => array(
+//			'id' => array(
+//			'validate_callback' => 'is_numeric'
+//			),
+//		),
+	));
+} );
 
 ?>
