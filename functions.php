@@ -1488,4 +1488,31 @@ add_action( 'rest_api_init', function () {
 	));
 } );
 
+// Grab badge earners 
+function quincem_api_earner_mail_list( $data ) {
+	$earners = get_posts( array(
+		'posts_per_page' => -1,
+		'post_type' => 'earner',
+		'post_status' => 'publish',
+	));
+
+	if ( empty( $earners ) ) {
+		return new WP_Error( 'no_earners', 'Invalid badge',array('status' => 404 ) );
+	}
+
+	$earners_filtered = array();
+	foreach ( $earners as $e ) {
+		$earners_filtered[$e->ID]['name'] = get_post_meta( $e->ID, '_quincem_earner_name', true );
+		$earners_filtered[$e->ID]['email'] = get_post_meta( $e->ID, '_quincem_earner_mail', true );
+
+	}
+
+	return $earners_filtered;
+}
+add_action( 'rest_api_init', function () {
+	register_rest_route( 'quincem/v1', '/earner/mail-list', array(
+		'methods' => 'GET',
+		'callback' => 'quincem_api_earner_mail_list',
+	));
+} );
 ?>
