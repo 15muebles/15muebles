@@ -782,7 +782,7 @@ function quincem_write_issuer_metadata() {
 "name": "' .$post->post_title. '",
 "url": "' .$issuer_url. '",
 "description": "' .$post->post_excerpt. '",
-"url": "' .$issuer_email. '"
+"email": "' .$issuer_email. '"
 }';
 
 		// json metadata file
@@ -1502,7 +1502,7 @@ function quincem_api_earner_mail_list( $data ) {
 
 	$earners_filtered = array();
 	foreach ( $earners as $e ) {
-		$earners_filtered[$e->ID]['name'] = get_post_meta( $e->ID, '_quincem_earner_name', true );
+//		$earners_filtered[$e->ID]['name'] = get_post_meta( $e->ID, '_quincem_earner_name', true );
 		$earners_filtered[$e->ID]['email'] = get_post_meta( $e->ID, '_quincem_earner_mail', true );
 
 	}
