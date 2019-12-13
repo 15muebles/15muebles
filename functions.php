@@ -1186,7 +1186,7 @@ function quincem_insert_earner() {
 		$file = $_FILES['quincem-form-badge-avatar'];
 		$filename = basename($file['name']); // file name in client machine
 		$filename = trim($filename); // removing spaces at the begining and end
-		$filename = ereg_replace(" ", "-", $filename); // removing spaces inside the name
+		$filename = preg_replace(" ", "-", $filename); // removing spaces inside the name
 
 		$typefile = $file['type']; // file type
 		$uploadfile = $uploaddir.'/'.$filename;
